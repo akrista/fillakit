@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+if (config('filamenter.only_filament')) {
+    Route::get('/', function () {
+        return view('welcome');
+    });
+}

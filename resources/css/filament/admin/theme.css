@@ -1,0 +1,82 @@
+/* ! DO NOT EDIT THIS SECTION */
+@import "../../../../vendor/filament/filament/resources/css/theme.css";
+
+@source '../../../../app/Filament/**/*';
+@source '../../../../resources/views/filament/**/*';
+/* ! ------------------------ */
+
+/* Sidebar */
+.fi-sidebar.fi-sidebar-open {
+    @apply lg:!w-1/5 2xl:!w-1/5;
+}
+
+.fi-sidebar-nav-groups {
+    @apply gap-y-4;
+}
+
+.fi-sidebar-header {
+    @apply py-2 !ring-0;
+}
+
+.fi-sidebar-group > .fi-sidebar-group-items {
+    @apply gap-y-2;
+}
+
+.fi-topbar nav {
+    @apply !border-none py-2 !ring-0;
+}
+
+/* Sidebar Item */
+.fi-sidebar-item a {
+    @apply rounded-xl px-4 py-2;
+}
+
+.fi-sidebar-item a > span,
+.fi-sidebar-item a > svg {
+    @apply font-semibold dark:font-bold dark:text-gray-100;
+}
+
+.fi-sidebar-item a:focus,
+.fi-sidebar-item a:hover {
+    @apply bg-primary-100 dark:bg-primary-900 shadow-md transition-all duration-100 ease-in-out dark:shadow-lg;
+}
+
+.fi-sidebar-item a:hover svg,
+.fi-sidebar-item a:focus span,
+.fi-sidebar-item a:hover span {
+    @apply text-primary-600 transition-all duration-100 ease-in-out dark:text-gray-100;
+}
+
+.fi-sidebar-item-active a {
+    @apply bg-primary-100 dark:bg-primary-900 shadow-md dark:shadow-lg;
+}
+
+.fi-sidebar-item a:hover svg,
+.fi-sidebar-item a:focus svg {
+    @apply !text-primary-600 dark:!text-primary-400 transition-all duration-300 ease-in-out;
+}
+
+.fi-sidebar.fi-sidebar-open {
+    .fi-sidebar-item a:hover svg,
+    .fi-sidebar-item a:focus svg,
+    .fi-sidebar-item-active svg {
+        @apply !ml-1;
+    }
+}
+
+/* Content */
+.fi-main {
+    @apply lg:!pl-12;
+}
+
+.fi-ta-ctn {
+    @apply shadow-xl;
+}
+
+.fi-header-heading {
+    @apply text-primary-600 dark:text-primary-400 !text-2xl;
+}
+
+.fi-header-subheading {
+    @apply !text-sm;
+}
