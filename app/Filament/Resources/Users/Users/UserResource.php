@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Resources\Users;
+namespace App\Filament\Resources\Users\Users;
 
 use App\Filament\Resources\Users\Pages\ManageUsers;
 use App\Models\User;

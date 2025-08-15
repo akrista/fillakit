@@ -24,8 +24,8 @@ class About extends Command
 ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚══════╝╚═╝  ╚═╝
 EOT;
 
-        $banner = preg_replace_callback('/█/u', fn($matches): string => $this->blue($matches[0]), $banner);
-        $banner = preg_replace_callback('/[╔╗╚╝║═]/u', fn($matches): string => $this->dim($this->blue($matches[0])), $banner);
+        $banner = preg_replace_callback('/█/u', fn($matches): string => $this->red($matches[0]), $banner);
+        $banner = preg_replace_callback('/[╔╗╚╝║═]/u', fn($matches): string => $this->dim($this->red($matches[0])), $banner);
 
         echo $banner . PHP_EOL;
 
@@ -43,8 +43,6 @@ Filamenter was developed by Jorge Thomas (akrista). If you like it, please let m
 • Twitter: https://twitter.com/notakrista
 • Website: https://notakrista.com
 • GitHub: https://github.com/akrista/filamenter
-
-
 EOT;
 
         echo wordwrap($message);

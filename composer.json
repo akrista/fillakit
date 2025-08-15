@@ -25,6 +25,7 @@
         "barryvdh/laravel-ide-helper": "^3.5",
         "driftingly/rector-laravel": "^2.0",
         "fakerphp/faker": "^1.24.1",
+        "laravel/boost": "^1.0",
         "laravel/pail": "^1.2.2",
         "laravel/pint": "^1.22.1",
         "mockery/mockery": "^1.6.12",
