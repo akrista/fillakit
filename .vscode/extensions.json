@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "biomejs.biome",
+        "mikestead.dotenv",
+        "EditorConfig.EditorConfig",
+        "laravel.vscode-laravel",
+        "bmewburn.vscode-intelephense-client"
+    ]
+}
