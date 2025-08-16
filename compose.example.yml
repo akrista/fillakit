@@ -22,7 +22,7 @@ x-base: &base
       APP_ENV: '${APP_ENV:-production}'
       WWWUSER: ${HOST_UID:-1000}
       WWWGROUP: ${HOST_GID:-1000}
-      TZ: ${APP_TIMEZONE:-UTC}
+      TZ: ${APP_TIMEZONE:-America/New_York}
   image: ${DOCKER_IMAGE:-akrista/filamenter:latest}
   user: '${HOST_UID:-1000}:${HOST_GID:-1000}'
   ulimits:

@@ -14,7 +14,7 @@ LABEL org.opencontainers.image.source=https://github.com/akrista/filamenter
 
 ARG WWWUSER=1000
 ARG WWWGROUP=1000
-ARG TZ=UTC
+ARG TZ=America/New_York
 ARG APP_ENV
 
 ENV TERM=xterm-color \

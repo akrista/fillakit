@@ -30,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id(config('filamenter.panel_route'))
-            ->path(config('filamenter.only_filament') ? '/' . config('filamenter.panel_route') : '/')
+            ->path(config('filamenter.only_filament') ?  '/' : '/' . config('filamenter.panel_route'))
             ->login(Login::class)
             ->loginRouteSlug('login')
             ->registration()
