@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "akrista/filamenter",
+    "name": "akrista/filamentry",
     "type": "project",
     "description": "A laravel starter kit built with filament 4",
     "keywords": ["laravel", "framework","filamentphp"],

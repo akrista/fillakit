@@ -1,9 +1,9 @@
-# Docker Compose template for filamenter
+# Docker Compose template for filamentry
 # Usage instructions:
 # 1. Copy this file to "compose.yml"
 # 2. Adjust the variables according to your environment in the .env file
 # 3. Customize the services as needed (use profiles for groups of services)
-# 4. Deploy with: docker compose up -d filamenter
+# 4. Deploy with: docker compose up -d filamentry
 
 # Common logging configuration for all services
 x-logging: &default-logging
@@ -14,7 +14,7 @@ x-logging: &default-logging
 
 # Base configuration for application services
 x-base: &base
-  profiles: [filamenter]
+  profiles: [filamentry]
   build:
     context: .
     dockerfile: Dockerfile
@@ -23,7 +23,7 @@ x-base: &base
       WWWUSER: ${HOST_UID:-1000}
       WWWGROUP: ${HOST_GID:-1000}
       TZ: ${APP_TIMEZONE:-America/New_York}
-  image: ${DOCKER_IMAGE:-akrista/filamenter:latest}
+  image: ${DOCKER_IMAGE:-akrista/filamentry:latest}
   user: '${HOST_UID:-1000}:${HOST_GID:-1000}'
   ulimits:
     nofile:
@@ -48,9 +48,9 @@ networks:
     driver: bridge
 
 services:
-  filamenter:
+  filamentry:
     <<: *base
-    container_name: filamenter
+    container_name: filamentry
     environment:
       WITH_SCHEDULER: '${WITH_SCHEDULER:-true}'
       # WITH_WORKER: "${WITH_WORKER:-true}"

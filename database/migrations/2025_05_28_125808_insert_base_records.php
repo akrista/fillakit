@@ -12,11 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         $user = User::create([
-            'name' => config('filamenter.admin_user'),
-            'email' => config('filamenter.admin_email'),
+            'name' => config('filamentry.admin_user'),
+            'email' => config('filamentry.admin_email'),
             'email_verified_at' => now(),
             'avatar_url' => null,
-            'password' => Hash::make(config('filamenter.admin_password')),
+            'password' => Hash::make(config('filamentry.admin_password')),
         ]);
         $user->update([
             'created_by' => $user->id,

@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Filamenter'),
+    'name' => env('APP_NAME', 'Filamentry'),
 
     /*
     |--------------------------------------------------------------------------

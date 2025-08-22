@@ -2,7 +2,7 @@
 
 namespace App\Filament\Pages;
 
-use App\Filament\Widgets\FilamenterInfo;
+use App\Filament\Widgets\FilamentryInfo;
 use Filament\Pages\Dashboard as PagesDashboard;
 use Filament\Support\Icons\Heroicon;
 use Filament\Widgets\AccountWidget;
@@ -18,7 +18,7 @@ class Dashboard extends PagesDashboard
     public function getWidgets(): array
     {
         return [
-            FilamenterInfo::class,
+            FilamentryInfo::class,
             AccountWidget::class,
         ];
     }

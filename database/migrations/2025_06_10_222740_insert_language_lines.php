@@ -10,7 +10,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $languageLines = config('filamenter-translations');
+        $languageLines = config('filamentry-translations');
         foreach ($languageLines as $languageLine) {
             LanguageLine::create($languageLine);
         }

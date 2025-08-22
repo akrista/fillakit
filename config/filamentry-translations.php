@@ -9,12 +9,12 @@ return [
     [
         'group' => 'page',
         'key' => 'general_settings.title',
-        'text' => ['en' => 'General Settings'],
+        'text' => ['en' => 'Preferences'],
     ],
     [
         'group' => 'page',
         'key' => 'general_settings.heading',
-        'text' => ['en' => 'General Settings'],
+        'text' => ['en' => 'Preferences'],
     ],
     [
         'group' => 'page',
@@ -30,11 +30,6 @@ return [
         'group' => 'page',
         'key' => 'general_settings.sections.site.title',
         'text' => ['en' => 'Site'],
-    ],
-    [
-        'group' => 'page',
-        'key' => 'general_settings.sections.site.description',
-        'text' => ['en' => 'Manage basic settings.'],
     ],
     [
         'group' => 'page',

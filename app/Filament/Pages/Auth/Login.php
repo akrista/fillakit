@@ -12,8 +12,8 @@ class Login extends \Filament\Auth\Pages\Login
 
         if (config('app.env') !== 'production') {
             $this->form->fill([
-                'email' => config('filamenter.admin_email'),
-                'password' => config('filamenter.admin_password'),
+                'email' => config('filamentry.admin_email'),
+                'password' => config('filamentry.admin_password'),
             ]);
         }
     }

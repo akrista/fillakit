@@ -29,8 +29,8 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id(config('filamenter.panel_route'))
-            ->path(config('filamenter.only_filament') ?  '/' : '/' . config('filamenter.panel_route'))
+            ->id(config('filamentry.panel_route'))
+            ->path(config('filamentry.only_filament') ? '/' : '/' . config('filamentry.panel_route'))
             ->login(Login::class)
             ->loginRouteSlug('login')
             ->registration()
@@ -52,7 +52,7 @@ class AdminPanelProvider extends PanelProvider
                 array_filter($settings->site_theme)
             )))
             ->brandName(fn(GeneralSettings $settings): string => $settings->brand_name ?? config('app.name'))
-            ->brandLogo(fn(GeneralSettings $settings) => Storage::url($settings->brand_logo) ?? null)
+            ->brandLogo(fn(GeneralSettings $settings) => Storage::disk('public')->exists($settings->brand_logo) ? Storage::url($settings->brand_logo) : false)
             ->favicon(fn(GeneralSettings $settings) => Storage::url($settings->site_favicon) ?? null)
             ->brandLogoHeight(
                 fn(GeneralSettings $settings): string => ($settings->brand_logo_height && $settings->brand_logo_height_unit)
@@ -69,8 +69,8 @@ class AdminPanelProvider extends PanelProvider
                     default => 'Ctrl+Shift+F',
                 }
             )
-            ->topNavigation(config('filamenter.top_nav_enabled'))
-            ->sidebarCollapsibleOnDesktop(!config('filamenter.top_nav_enabled'))
+            ->topNavigation(config('filamentry.top_nav_enabled'))
+            ->sidebarCollapsibleOnDesktop(!config('filamentry.top_nav_enabled'))
             ->unsavedChangesAlerts()
             ->databaseNotifications()
             ->databaseNotificationsPolling('60s')
