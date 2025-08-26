@@ -22,6 +22,7 @@ return new class extends Migration
             'created_by' => $user->id,
             'updated_by' => $user->id,
         ]);
+        $user->assignRole('admin');
     }
 
     /**

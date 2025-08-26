@@ -10,12 +10,14 @@ class Login extends \Filament\Auth\Pages\Login
     {
         parent::mount();
 
+        $defaults = ['remember' => true];
+
         if (config('app.env') !== 'production') {
-            $this->form->fill([
-                'email' => config('filamentry.admin_email'),
-                'password' => config('filamentry.admin_password'),
-            ]);
+            $defaults['email'] = config('filamentry.admin_email');
+            $defaults['password'] = config('filamentry.admin_password');
         }
+
+        $this->form->fill($defaults);
     }
 
     public function form(Schema $schema): Schema

@@ -40,7 +40,7 @@ class AppServiceProvider extends ServiceProvider
                 ->striped()
                 ->poll('10s')
                 ->defaultPaginationPageOption(10)
-                ->paginated([10, 25, 50, 100])
+                ->paginated([10, 25, 50, 100, 'all'])
                 ->extremePaginationLinks()
                 ->deferLoading()
                 ->persistFiltersInSession()

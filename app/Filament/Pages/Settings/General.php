@@ -39,6 +39,20 @@ class General extends SettingsPage
 
     public string $theme = '';
 
+    public static function canAccess(): bool
+    {
+        $user = request()->user();
+
+        return $user?->can('settings.view') ?? false;
+    }
+
+    public function canEdit(): bool
+    {
+        $user = request()->user();
+
+        return $user?->can('settings.edit') ?? false;
+    }
+
     public function mount(): void
     {
         $this->theme = resource_path('css/filament/admin/theme.css');
