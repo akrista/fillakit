@@ -16,7 +16,6 @@ use Filament\Actions\ViewAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
-use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
@@ -129,9 +128,9 @@ class UserResource extends Resource
                                         DatePicker::make('deleted_at')
                                             ->displayFormat('d/m/Y h:i A')
                                             ->hidden(fn(string $operation): bool => $operation !== 'view'),
-                                    ])
+                                    ]),
                             ]),
-                    ])
+                    ]),
 
             ]);
     }
