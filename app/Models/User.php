@@ -22,6 +22,8 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     use Notifiable;
     use SoftDeletes;
 
+    protected $table = 'users';
+
     protected $primaryKey = 'id';
 
     protected $keyType = 'string';
@@ -37,9 +39,33 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
                 $model->{$model->getKeyName()} = (string) Str::uuid();
             }
 
-            $model->created_by = auth()->id() ?? null;
-            $model->updated_by = auth()->id() ?? null;
+            $model->created_by = self::getCurrentUserId();
+            $model->updated_by = self::getCurrentUserId();
         });
+
+        static::updating(function ($model): void {
+            $model->updated_by = self::getCurrentUserId();
+        });
+
+        static::deleting(function ($model): void {
+            $model->deleted_by = self::getCurrentUserId();
+            $model->save();
+        });
+    }
+
+    protected static function getCurrentUserId(): ?string
+    {
+        /** @var \Illuminate\Contracts\Auth\Guard $guard */
+        $guard = app('auth');
+
+        if ($guard->check()) {
+            /** @var \App\Models\User $user */
+            $user = $guard->user();
+
+            return $user ? $user->id : null;
+        }
+
+        return null;
     }
 
     /**
@@ -109,5 +135,20 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     public function deletedBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(self::class, 'deleted_by');
+    }
+
+    public function createdUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(self::class, 'created_by');
+    }
+
+    public function updatedUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(self::class, 'updated_by');
+    }
+
+    public function deletedUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(self::class, 'deleted_by');
     }
 }
