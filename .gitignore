@@ -43,6 +43,4 @@ _ide_helper_models.php
 .DS_Store
 compose.yml
 
-repomix-output.txt
-repomix-output.xml
-repomix-output.md
+.mcp.json
