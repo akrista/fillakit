@@ -51,13 +51,8 @@ services:
   filamentry:
     <<: *base
     container_name: filamentry
-    environment:
-      WITH_SCHEDULER: '${WITH_SCHEDULER:-true}'
-      # WITH_WORKER: "${WITH_WORKER:-true}"
-      # WITH_HORIZON: "${WITH_HORIZON:-true}" #! Needs Redis
-      # WITH_REVERB: "${WITH_REVERB:-true}"
-      APP_KEY: '${APP_KEY}'
-      DB_CONNECTION: '${DB_CONNECTION:-sqlite}'
+    env_file:
+      - .env
     healthcheck:
       test: ['CMD', 'curl', '--fail', 'localhost:8000/up']
       interval: 3s

@@ -218,9 +218,16 @@ return [
             'http_compression_level' => 6, // 1 - 9
             'compression_min_length' => 20,
             'package_max_length' => 20 * 1024 * 1024, // 20MB
+            'buffer_output_size' => 32 * 1024 * 1024,  // 32MB
+            'socket_buffer_size' => 128 * 1024 * 1024, // 128MB
             'open_http2_protocol' => true,
             'document_root' => public_path(),
             'enable_static_handler' => true,
+            'enable_reuse_port' => true,
+            'reload_async' => true,
+            'worker_num' => 7,
+            'max_request' => 5000,
+            'max_wait_time' => 60,
         ],
     ],
 ];

@@ -11,17 +11,18 @@ LABEL maintainer="Jorge Thomas <info@notakrista.com>"
 LABEL org.opencontainers.image.title="Filamentry"
 LABEL org.opencontainers.image.description="Laravel Starter Kit with Filament"
 LABEL org.opencontainers.image.source=https://github.com/akrista/filamentry
+LABEL org.opencontainers.image.licenses=MIT
 
 ARG WWWUSER=1000
 ARG WWWGROUP=1000
-ARG TZ=America/New_York
+ARG TZ=UTC
 ARG APP_ENV
 
 ENV TERM=xterm-color \
     WITH_HORIZON=false \
     WITH_SCHEDULER=false \
     WITH_WORKER=false \
-    WITH_REVERB=false \
+    WORKER_COMMAND="php artisan queue:work" \
     OCTANE_SERVER=swoole \
     TZ=${TZ} \
     USER=octane \
@@ -56,21 +57,21 @@ RUN apk update; \
     # brotli \
     # Install PHP extensions
     && install-php-extensions \
-    bz2 \
     pcntl \
+    intl \
+    zip \
+    openswoole \
+    # bz2 \
     # mbstring \
     # bcmath \
-    zip \
     # uv \
-    intl \
     # vips \
     # gd \
     # rdkafka \
     # memcached \
     # igbinary \
-    openswoole \
     # swoole \
-    redis \
+    # redis \
     # pgsql \
     # pdo_pgsql \
     # pdo_mysql \
@@ -164,7 +165,6 @@ USER ${USER}
 
 ENV WITH_HORIZON=false \
     WITH_SCHEDULER=false \
-    WITH_WORKER=false \
     WITH_REVERB=false
 
 COPY --link --chown=${WWWUSER}:${WWWUSER} . .
@@ -178,7 +178,7 @@ RUN mkdir -p \
     storage/logs \
     bootstrap/cache && chmod -R a+rw storage
 
-RUN composer install \
+RUN composer dump-autoload \
     --classmap-authoritative \
     --no-interaction \
     --no-ansi \
@@ -186,6 +186,7 @@ RUN composer install \
     && composer clear-cache
 
 EXPOSE 8000
+EXPOSE 8080
 
 ENTRYPOINT ["start-container"]
 

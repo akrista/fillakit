@@ -16,6 +16,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Sleep;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
+use Laravel\Octane\Facades\Octane;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -64,6 +65,8 @@ class AppServiceProvider extends ServiceProvider
         if (config('app.env') === 'production') {
             URL::forceHttps();
             DB::prohibitDestructiveCommands();
+            DB::reconnect();
+            Octane::tick('reconnect-database', fn() => DB::reconnect(), 300);
         }
 
         Http::preventStrayRequests();
