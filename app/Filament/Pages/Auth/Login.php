@@ -1,10 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Pages\Auth;
 
 use Filament\Schemas\Schema;
 
-class Login extends \Filament\Auth\Pages\Login
+final class Login extends \Filament\Auth\Pages\Login
 {
     public function mount(): void
     {

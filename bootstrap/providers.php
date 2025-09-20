@@ -1,9 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
+use App\Providers\AppServiceProvider;
+use App\Providers\Filament\AdminPanelProvider;
+use App\Providers\HorizonServiceProvider;
+use App\Providers\MemoryMonitorServiceProvider;
+use App\Providers\PolicyServiceProvider;
+
 return [
-    App\Providers\AppServiceProvider::class,
-    App\Providers\Filament\AdminPanelProvider::class,
-    App\Providers\HorizonServiceProvider::class,
-    App\Providers\PolicyServiceProvider::class,
-    App\Providers\MemoryMonitorServiceProvider::class,
+    AppServiceProvider::class,
+    AdminPanelProvider::class,
+    HorizonServiceProvider::class,
+    PolicyServiceProvider::class,
+    MemoryMonitorServiceProvider::class,
 ];

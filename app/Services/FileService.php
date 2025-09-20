@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Services;
 
 use Illuminate\Support\Facades\Config;
@@ -8,9 +10,9 @@ use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-class FileService
+final class FileService
 {
-    protected $allowedPaths;
+    private array $allowedPaths;
 
     public function __construct(?array $allowedPaths = null)
     {
@@ -21,7 +23,7 @@ class FileService
         ]);
     }
 
-    public function readFile(string $path)
+    public function readFile(string $path): string
     {
         $this->validatePath($path);
 
@@ -45,15 +47,15 @@ class FileService
         return true;
     }
 
-    protected function validatePath(string &$path)
+    private function validatePath(string &$path): void
     {
         $realPath = realpath($path);
         if ($realPath === '' || $realPath === '0' || $realPath === false) {
             throw new InvalidArgumentException('Invalid path provided.');
         }
 
-        $isAllowed = array_reduce($this->allowedPaths, function ($carry, $allowedPath) use ($realPath): bool {
-            return $carry || strpos($realPath, $allowedPath) === 0;
+        $isAllowed = array_reduce($this->allowedPaths, function (bool $carry, string $allowedPath) use ($realPath): bool {
+            return $carry || mb_strpos($realPath, $allowedPath) === 0;
         }, false);
 
         if (!$isAllowed) {

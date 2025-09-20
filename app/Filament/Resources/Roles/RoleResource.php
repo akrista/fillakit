@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Roles;
 
 use App\Filament\Resources\Roles\Pages\ManageRoles;
@@ -26,7 +28,7 @@ use Illuminate\Support\Str;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
-class RoleResource extends Resource
+final class RoleResource extends Resource
 {
     protected static ?string $model = Role::class;
 

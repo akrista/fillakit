@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Pages\Settings;
 
 use App\Services\FileService;
 use App\Settings\GeneralSettings;
+use BackedEnum;
 use Filament\Forms\Components\CodeEditor;
 use Filament\Forms\Components\CodeEditor\Enums\Language;
 use Filament\Forms\Components\ColorPicker;
@@ -16,22 +19,16 @@ use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Facades\FilamentView;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Facades\URL;
 use Throwable;
 
-class General extends SettingsPage
+final class General extends SettingsPage
 {
-    protected static string $settings = GeneralSettings::class;
-
-    protected static ?int $navigationSort = 10;
-
-    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
-
     /**
      * @var array<string, mixed> | null
      */
@@ -39,11 +36,27 @@ class General extends SettingsPage
 
     public string $theme = '';
 
+    protected static string $settings = GeneralSettings::class;
+
+    protected static ?int $navigationSort = 10;
+
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
+
     public static function canAccess(): bool
     {
         $user = request()->user();
 
         return $user?->can('settings.view') ?? false;
+    }
+
+    public static function getNavigationGroup(): ?string
+    {
+        return __('menu.nav_group.settings');
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return __('page.general_settings.navigationLabel');
     }
 
     public function canEdit(): bool
@@ -60,40 +73,17 @@ class General extends SettingsPage
         $this->fillForm();
     }
 
-    protected function fillForm(): void
-    {
-        $settings = app(static::getSettings());
-
-        $data = $this->mutateFormDataBeforeFill($settings->toArray());
-
-        $fileService = new FileService;
-
-        $data['theme-editor'] = $fileService->readfile($this->theme);
-
-        $this->form->fill($data);
-    }
-
-    public static function getNavigationGroup(): ?string
-    {
-        return __('menu.nav_group.settings');
-    }
-
-    public static function getNavigationLabel(): string
-    {
-        return __('page.general_settings.navigationLabel');
-    }
-
-    public function getTitle(): string|Htmlable
+    public function getTitle(): string
     {
         return __('page.general_settings.title');
     }
 
-    public function getHeading(): string|Htmlable
+    public function getHeading(): string
     {
         return __('page.general_settings.heading');
     }
 
-    public function getSubheading(): string|Htmlable|null
+    public function getSubheading(): ?string
     {
         return __('page.general_settings.subheading');
     }
@@ -105,12 +95,12 @@ class General extends SettingsPage
                 Tabs::make('Settings')
                     ->columnSpanFull()
                     ->tabs([
-                        Tabs\Tab::make('Site')
+                        Tab::make('Site')
                             ->icon(Heroicon::OutlinedGlobeAlt)
                             ->schema([
                                 Grid::make()->schema([
                                     TextInput::make('brand_name')
-                                        ->label(fn() => __('page.general_settings.fields.brand_name'))
+                                        ->label(fn(): string|array|null => __('page.general_settings.fields.brand_name'))
                                         ->required(),
                                     Toggle::make('search_engine_indexing')
                                         ->label('App Indexing')
@@ -119,12 +109,12 @@ class General extends SettingsPage
                                 ]),
                             ]),
 
-                        Tabs\Tab::make('Branding')
+                        Tab::make('Branding')
                             ->icon(Heroicon::OutlinedPhoto)
                             ->schema([
                                 Grid::make()->schema([
                                     TextInput::make('brand_logo_height')
-                                        ->label(fn() => __('page.general_settings.fields.brand_logo_height'))
+                                        ->label(fn(): string|array|null => __('page.general_settings.fields.brand_logo_height'))
                                         ->numeric()
                                         ->suffix(fn(Get $get): mixed => $get('brand_logo_height_unit'))
                                         ->required(),
@@ -154,7 +144,7 @@ class General extends SettingsPage
 
                                 Grid::make()->schema([
                                     FileUpload::make('brand_logo')
-                                        ->label(fn() => __('page.general_settings.fields.brand_logo'))
+                                        ->label(fn(): string|array|null => __('page.general_settings.fields.brand_logo'))
                                         ->helperText('Upload your site logo (optional)')
                                         ->image()
                                         ->disk('public')
@@ -174,7 +164,7 @@ class General extends SettingsPage
                                         ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml']),
 
                                     FileUpload::make('site_favicon')
-                                        ->label(fn() => __('page.general_settings.fields.site_favicon'))
+                                        ->label(fn(): string|array|null => __('page.general_settings.fields.site_favicon'))
                                         ->helperText('Supports .ico, .png, .jpg, and .svg formats (optional)')
                                         ->image()
                                         ->disk('public')
@@ -195,7 +185,7 @@ class General extends SettingsPage
                                 ])->columns(2)->columnSpan(3),
                             ])->columns(3),
 
-                        Tabs\Tab::make('Theme')
+                        Tab::make('Theme')
                             ->icon(Heroicon::OutlinedSwatch)
                             ->schema([
                                 Section::make('Theme Colors')
@@ -205,13 +195,13 @@ class General extends SettingsPage
                                     ->collapsible()
                                     ->schema([
                                         ColorPicker::make('site_theme.primary')
-                                            ->label(fn() => __('page.general_settings.fields.primary'))
+                                            ->label(fn(): string|array|null => __('page.general_settings.fields.primary'))
                                             ->helperText('Used for primary buttons and links'),
                                         ColorPicker::make('site_theme.secondary')
-                                            ->label(fn() => __('page.general_settings.fields.secondary'))
+                                            ->label(fn(): string|array|null => __('page.general_settings.fields.secondary'))
                                             ->helperText('Used for secondary elements'),
                                         ColorPicker::make('site_theme.gray')
-                                            ->label(fn() => __('page.general_settings.fields.gray'))
+                                            ->label(fn(): string|array|null => __('page.general_settings.fields.gray'))
                                             ->helperText('Used for neutral backgrounds and text'),
                                     ])->columns(3),
                                 Section::make('Status Colors')
@@ -221,19 +211,19 @@ class General extends SettingsPage
                                     ->collapsible()
                                     ->schema([
                                         ColorPicker::make('site_theme.success')
-                                            ->label(fn() => __('page.general_settings.fields.success'))
+                                            ->label(fn(): string|array|null => __('page.general_settings.fields.success'))
                                             ->regex('/^#([A-F0-9]{6}|[A-F0-9]{3})\b$/')
                                             ->helperText('Used for success states and confirmations'),
                                         ColorPicker::make('site_theme.danger')
-                                            ->label(fn() => __('page.general_settings.fields.danger'))
+                                            ->label(fn(): string|array|null => __('page.general_settings.fields.danger'))
                                             ->regex('/^#([A-F0-9]{6}|[A-F0-9]{3})\b$/')
                                             ->helperText('Used for errors and dangerous actions'),
                                         ColorPicker::make('site_theme.info')
-                                            ->label(fn() => __('page.general_settings.fields.info'))
+                                            ->label(fn(): string|array|null => __('page.general_settings.fields.info'))
                                             ->regex('/^#([A-F0-9]{6}|[A-F0-9]{3})\b$/')
                                             ->helperText('Used for informational notifications'),
                                         ColorPicker::make('site_theme.warning')
-                                            ->label(fn() => __('page.general_settings.fields.warning'))
+                                            ->label(fn(): string|array|null => __('page.general_settings.fields.warning'))
                                             ->regex('/^#([A-F0-9]{6}|[A-F0-9]{3})\b$/')
                                             ->helperText('Used for warnings and cautions'),
                                     ])->columns(2),
@@ -260,7 +250,7 @@ class General extends SettingsPage
         try {
             $data = $this->mutateFormDataBeforeSave($this->form->getState());
 
-            $settings = app(static::getSettings());
+            $settings = app(self::getSettings());
 
             $settings->fill($data);
             $settings->save();
@@ -274,7 +264,7 @@ class General extends SettingsPage
                 ->success()
                 ->send();
 
-            $this->redirect(static::getUrl(), navigate: FilamentView::hasSpaMode() && URL::isAppUrl(static::getUrl()));
+            $this->redirect(self::getUrl(), navigate: FilamentView::hasSpaMode() && URL::isAppUrl(self::getUrl()));
         } catch (Throwable $throwable) {
             Notification::make()
                 ->title('Error saving settings')
@@ -284,5 +274,18 @@ class General extends SettingsPage
 
             throw $throwable;
         }
+    }
+
+    public function fillForm(): void
+    {
+        $settings = app(self::getSettings());
+
+        $data = $this->mutateFormDataBeforeFill($settings->toArray());
+
+        $fileService = new FileService;
+
+        $data['theme-editor'] = $fileService->readfile($this->theme);
+
+        $this->form->fill($data);
     }
 }

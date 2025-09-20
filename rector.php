@@ -2,26 +2,38 @@
 
 declare(strict_types=1);
 
-return Rector\Config\RectorConfig::configure()
+use Rector\Caching\ValueObject\Storage\FileCacheStorage;
+use Rector\Config\RectorConfig;
+use Rector\ValueObject\PhpVersion;
+use RectorLaravel\Set\LaravelLevelSetList;
+use RectorLaravel\Set\LaravelSetList;
+use RectorLaravel\Set\LaravelSetProvider;
+
+return RectorConfig::configure()
+    ->withPhpVersion(PhpVersion::PHP_84)
+    ->withCache(
+        cacheDirectory: '/tmp/rector',
+        cacheClass: FileCacheStorage::class,
+    )
     ->withPaths([
         __DIR__ . '/app',
-        __DIR__ . '/tests',
+        __DIR__ . '/bootstrap/app.php',
+        __DIR__ . '/database',
+        __DIR__ . '/public',
     ])
-    ->withPhpVersion(
-        Rector\ValueObject\PhpVersion::PHP_84
+    ->withPreparedSets(
+        deadCode: true,
+        codeQuality: true,
+        typeDeclarations: true,
+        privatization: true,
+        earlyReturn: true,
+        strictBooleans: true,
     )
     ->withSets([
-        Rector\Set\ValueObject\SetList::DEAD_CODE,
-        Rector\Set\ValueObject\SetList::EARLY_RETURN,
-        Rector\Set\ValueObject\SetList::TYPE_DECLARATION,
-        Rector\Set\ValueObject\SetList::CODE_QUALITY,
-        Rector\Set\ValueObject\SetList::CODING_STYLE,
-        Rector\Set\ValueObject\SetList::STRICT_BOOLEANS,
-        Rector\Set\ValueObject\SetList::PRIVATIZATION,
-        RectorLaravel\Set\LaravelLevelSetList::UP_TO_LARAVEL_120,
-        RectorLaravel\Set\LaravelSetList::LARAVEL_CODE_QUALITY,
-        RectorLaravel\Set\LaravelSetList::LARAVEL_COLLECTION,
+        LaravelLevelSetList::UP_TO_LARAVEL_120,
+        LaravelSetList::LARAVEL_CODE_QUALITY,
+        LaravelSetList::LARAVEL_COLLECTION,
     ])
-    ->withRules([
-        Rector\Php84\Rector\Param\ExplicitNullableParamTypeRector::class,
-    ]);
+    ->withSetProviders(LaravelSetProvider::class)
+    ->withComposerBased(laravel: true)
+    ->withParallel(timeoutSeconds: 60);

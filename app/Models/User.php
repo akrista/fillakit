@@ -1,20 +1,25 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Panel;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable implements FilamentUser, HasAvatar
+final class User extends Authenticatable implements FilamentUser, HasAvatar
 {
     use HasFactory;
     use HasRoles;
@@ -22,51 +27,13 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
     use Notifiable;
     use SoftDeletes;
 
+    public $incrementing = false;
+
     protected $table = 'users';
 
     protected $primaryKey = 'id';
 
     protected $keyType = 'string';
-
-    public $incrementing = false;
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::creating(function ($model): void {
-            if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = (string) Str::uuid();
-            }
-
-            $model->created_by = self::getCurrentUserId();
-            $model->updated_by = self::getCurrentUserId();
-        });
-
-        static::updating(function ($model): void {
-            $model->updated_by = self::getCurrentUserId();
-        });
-
-        static::deleting(function ($model): void {
-            $model->deleted_by = self::getCurrentUserId();
-            $model->save();
-        });
-    }
-
-    protected static function getCurrentUserId(): ?string
-    {
-        /** @var \Illuminate\Contracts\Auth\Guard $guard */
-        $guard = app('auth');
-
-        if ($guard->check()) {
-            /** @var \App\Models\User $user */
-            $user = $guard->user();
-
-            return $user ? $user->id : null;
-        }
-
-        return null;
-    }
 
     /**
      * The attributes that are mass assignable.
@@ -98,18 +65,27 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         'remember_token',
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public static function boot(): void
     {
-        return [
-            'id' => 'string',
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        parent::boot();
+
+        self::creating(function (User $model): void {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+
+            $model->created_by = self::getCurrentUserId();
+            $model->updated_by = self::getCurrentUserId();
+        });
+
+        self::updating(function (User $model): void {
+            $model->updated_by = self::getCurrentUserId();
+        });
+
+        self::deleting(function (User $model): void {
+            $model->deleted_by = self::getCurrentUserId();
+            $model->save();
+        });
     }
 
     public function canAccessPanel(Panel $panel): bool
@@ -122,33 +98,62 @@ class User extends Authenticatable implements FilamentUser, HasAvatar
         return $this->avatar_url;
     }
 
-    public function createdBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function createdBy(): BelongsTo
     {
         return $this->belongsTo(self::class, 'created_by');
     }
 
-    public function updatedBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(self::class, 'updated_by');
     }
 
-    public function deletedBy(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function deletedBy(): BelongsTo
     {
         return $this->belongsTo(self::class, 'deleted_by');
     }
 
-    public function createdUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function createdUsers(): HasMany
     {
         return $this->hasMany(self::class, 'created_by');
     }
 
-    public function updatedUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function updatedUsers(): HasMany
     {
         return $this->hasMany(self::class, 'updated_by');
     }
 
-    public function deletedUsers(): \Illuminate\Database\Eloquent\Relations\HasMany
+    public function deletedUsers(): HasMany
     {
         return $this->hasMany(self::class, 'deleted_by');
+    }
+
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    public function casts(): array
+    {
+        return [
+            'id' => 'string',
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
+    private static function getCurrentUserId(): ?string
+    {
+        /** @var Guard $guard */
+        $guard = app('auth');
+
+        if ($guard->check()) {
+            /** @var User $user */
+            $user = $guard->user();
+
+            return $user ? $user->id : null;
+        }
+
+        return null;
     }
 }

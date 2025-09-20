@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Permissions;
 
 use App\Filament\Resources\Permissions\Pages\ManagePermissions;
@@ -23,7 +25,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Spatie\Permission\Models\Permission;
 
-class PermissionResource extends Resource
+final class PermissionResource extends Resource
 {
     protected static ?string $model = Permission::class;
 

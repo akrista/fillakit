@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use App\Settings\GeneralSettings;
 use Spatie\LaravelSettings\SettingsCasts\DataCast;
 use Spatie\LaravelSettings\SettingsCasts\DateTimeInterfaceCast;

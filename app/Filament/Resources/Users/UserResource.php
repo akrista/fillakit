@@ -1,9 +1,12 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Filament\Resources\Users;
 
 use App\Filament\Resources\Users\Pages\ManageUsers;
 use App\Models\User;
+use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -19,6 +22,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
@@ -27,11 +31,11 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class UserResource extends Resource
+final class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static string|\BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?int $navigationSort = 11;
 
@@ -47,7 +51,7 @@ class UserResource extends Resource
                 Tabs::make('User')
                     ->columnSpanFull()
                     ->tabs([
-                        Tabs\Tab::make('Personal Information')
+                        Tab::make('Personal Information')
                             ->icon(Heroicon::OutlinedUser)
                             ->schema([
                                 Section::make('')
@@ -98,7 +102,7 @@ class UserResource extends Resource
                                             ->helperText('Select the roles this user will have'),
                                     ]),
                             ]),
-                        Tabs\Tab::make('Audit Information')
+                        Tab::make('Audit Information')
                             ->icon(Heroicon::OutlinedClock)
                             ->hidden(fn(string $operation): bool => $operation !== 'view')
                             ->schema([

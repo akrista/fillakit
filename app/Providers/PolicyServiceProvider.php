@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
+use App\Policies\PermissionPolicy;
+use App\Policies\RolePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider;
+use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
-class PolicyServiceProvider extends AuthServiceProvider
+final class PolicyServiceProvider extends AuthServiceProvider
 {
     /**
      * The model to policy mappings for the application.
@@ -12,7 +18,7 @@ class PolicyServiceProvider extends AuthServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
-        \Spatie\Permission\Models\Role::class => \App\Policies\RolePolicy::class,
-        \Spatie\Permission\Models\Permission::class => \App\Policies\PermissionPolicy::class,
+        Role::class => RolePolicy::class,
+        Permission::class => PermissionPolicy::class,
     ];
 }

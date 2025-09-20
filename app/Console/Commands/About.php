@@ -1,11 +1,13 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Laravel\Prompts\Concerns\Colors;
 
-class About extends Command
+final class About extends Command
 {
     use Colors;
 
@@ -24,8 +26,8 @@ class About extends Command
 ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═╝  ╚═══╝   ╚═╝   ╚═╝  ╚═╝   ╚═╝
 EOT;
 
-        $banner = preg_replace_callback('/█/u', fn($matches): string => $this->red($matches[0]), $banner);
-        $banner = preg_replace_callback('/[╔╗╚╝║═]/u', fn($matches): string => $this->dim($this->red($matches[0])), $banner);
+        $banner = preg_replace_callback('/█/u', fn(array $matches): string => $this->red($matches[0]), $banner);
+        $banner = preg_replace_callback('/[╔╗╚╝║═]/u', fn(array $matches): string => $this->dim($this->red($matches[0])), $banner);
 
         echo $banner . PHP_EOL;
 

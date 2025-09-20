@@ -4,9 +4,13 @@ declare(strict_types=1);
 
 namespace App\Filament\Widgets;
 
+use Composer\InstalledVersions;
 use Filament\Widgets\Widget;
+use Illuminate\Foundation\Application;
+use Illuminate\Support\Facades\DB;
+use PDO;
 
-class FilamentryInfo extends Widget
+final class FilamentryInfo extends Widget
 {
     protected static ?int $sort = -2;
 
@@ -20,15 +24,15 @@ class FilamentryInfo extends Widget
     /**
      * @return array<string, mixed>
      */
-    protected function getViewData(): array
+    public function getViewData(): array
     {
         return [
             'app_name' => config('app.name', 'Filamentry'),
             'app_version' => config('filamentry.version', '1.0.0'),
-            'filament_version' => \Composer\InstalledVersions::getPrettyVersion('filament/filament'),
-            'laravel_version' => \Illuminate\Foundation\Application::VERSION,
+            'filament_version' => InstalledVersions::getPrettyVersion('filament/filament'),
+            'laravel_version' => Application::VERSION,
             'php_version' => PHP_VERSION,
-            'db_version' => ucfirst(\Illuminate\Support\Facades\DB::connection()->getDriverName()) . ' ' . \Illuminate\Support\Facades\DB::connection()->getPdo()->getAttribute(\PDO::ATTR_SERVER_VERSION),
+            'db_version' => ucfirst(DB::connection()->getDriverName()) . ' ' . DB::connection()->getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION),
             'github_url' => config('filamentry.github_url', 'https://github.com/akrista/filamentry'),
         ];
     }

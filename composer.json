@@ -7,34 +7,37 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
-        "filament/filament": "^4.0",
-        "filament/spatie-laravel-settings-plugin": "^4.0",
+        "filament/filament": "^4.0.18",
+        "filament/spatie-laravel-settings-plugin": "^4.0.18",
         "flowframe/laravel-trend": "^0.4.0",
-        "inertiajs/inertia-laravel": "^2.0.2",
-        "laravel/framework": "^12.16.0",
-        "laravel/horizon": "^5.32",
-        "laravel/octane": "^2.9",
-        "laravel/reverb": "^1.0",
+        "inertiajs/inertia-laravel": "^2.0.6",
+        "laravel/framework": "^12.30.1",
+        "laravel/horizon": "^5.34",
+        "laravel/octane": "^2.12.2",
+        "laravel/reverb": "^1.6",
         "laravel/tinker": "^2.10.1",
         "spatie/laravel-permission": "^6.21",
-        "spatie/laravel-settings": "^3.4",
-        "spatie/laravel-translation-loader": "^2.8",
-        "tightenco/ziggy": "^2.5.3"
+        "spatie/laravel-settings": "^3.4.4",
+        "spatie/laravel-translation-loader": "^2.8.2",
+        "tightenco/ziggy": "^2.6.0"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.15",
-        "barryvdh/laravel-ide-helper": "^3.5",
-        "driftingly/rector-laravel": "^2.0",
+        "barryvdh/laravel-debugbar": "^3.16",
+        "barryvdh/laravel-ide-helper": "^3.6",
+        "driftingly/rector-laravel": "^2.0.7",
         "fakerphp/faker": "^1.24.1",
-        "laravel/boost": "^1.0",
-        "laravel/pail": "^1.2.2",
-        "laravel/pint": "^1.22.1",
+        "larastan/larastan": "^3.7.2",
+        "laravel/boost": "^1.2",
+        "laravel/pail": "^1.2.3",
+        "laravel/pint": "^1.25.1",
         "mockery/mockery": "^1.6.12",
-        "nunomaduro/collision": "^8.8.0",
-        "pestphp/pest": "^3.8",
-        "pestphp/pest-plugin-laravel": "^3.2",
-        "phpunit/phpunit": "^11.5.3",
-        "rector/rector": "^2.0",
+        "nunomaduro/collision": "^8.8.2",
+        "pestphp/pest": "^4.1",
+        "pestphp/pest-plugin-browser": "^4.1",
+        "pestphp/pest-plugin-laravel": "^4.0",
+        "pestphp/pest-plugin-type-coverage": "^4.0.2",
+        "phpunit/phpunit": "^12.3.8",
+        "rector/rector": "^2.1.7",
         "soloterm/solo": "^0.5.0"
     },
     "autoload": {
@@ -50,6 +53,15 @@
         }
     },
     "scripts": {
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan serve --host=0.0.0.0\" \"php artisan queue:listen --queue=default --tries=1\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" \"bun run dev\" --names=server,queue,broadcast,logs,vite --kill-others"
+        ],
+        "prod": [
+            "Composer\\Config::disableProcessTimeout",
+            "bun run build",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs,vite --kill-others"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
@@ -62,16 +74,6 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "dev": [
-            "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan serve --host=0.0.0.0\" \"php artisan queue:listen --queue=default --tries=1\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" \"bun run dev\" --names=server,queue,broadcast,logs,vite"
-        ],
-        "prod": [
-            "Composer\\Config::disableProcessTimeout",
-            "bun run build",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs,vite"
-        ],
-        "test": ["@php artisan config:clear --ansi", "@php artisan test"],
         "migrate": ["@php artisan migrate --ansi --graceful"],
         "migrate:fresh": ["@php artisan migrate:fresh --seed --force --ansi"],
         "build": [
@@ -82,8 +84,8 @@
             "@php artisan storage:link",
             "@php artisan filament:upgrade",
             "bun run build",
-            "vendor/bin/rector",
-            "vendor/bin/pint --ansi",
+            "pint --ansi",
+            "rector",
             "@php artisan optimize:clear"
         ],
         "ide-helper": [
@@ -92,8 +94,24 @@
             "@php artisan ide-helper:models -NR",
             "@php artisan ide-helper:meta"
         ],
-        "rector": ["vendor/bin/rector"],
-        "pint": ["vendor/bin/pint"]
+        "format": ["pint --ansi"],
+        "lint": [
+            "pint --ansi",
+            "rector"
+        ],
+        "test:type-coverage": "php -d memory_limit=512M vendor/bin/pest --type-coverage --min=100",
+        "test:unit": "pest --parallel --coverage --exactly=100.0",
+        "test:lint": [
+            "pint --test --ansi",
+            "rector --dry-run"
+        ],
+        "test:types": "phpstan --memory-limit=512M",
+        "test": [
+            "@test:type-coverage",
+            "@test:unit",
+            "@test:lint",
+            "@test:types"
+        ]
     },
     "extra": {
         "laravel": {
@@ -101,6 +119,7 @@
         }
     },
     "config": {
+        "bump-after-update": true,
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,

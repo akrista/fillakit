@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 return [
     'panel_route' => env('PANEL_ROUTE', 'admin'),
     'only_filament' => env('ONLY_FILAMENT', true),

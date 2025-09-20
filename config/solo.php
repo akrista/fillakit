@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use SoloTerm\Solo\Commands\Command;
 use SoloTerm\Solo\Commands\EnhancedTailCommand;
 use SoloTerm\Solo\Commands\MakeCommand;

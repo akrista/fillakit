@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers\Filament;
 
 use App\Filament\Pages\Auth\Login;
@@ -23,7 +25,7 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
-class AdminPanelProvider extends PanelProvider
+final class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
@@ -48,7 +50,7 @@ class AdminPanelProvider extends PanelProvider
             ->revealablePasswords(true)
             ->profile(isSimple: false)
             ->colors(fn(GeneralSettings $settings): array => array_filter(array_map(
-                fn($color): array => Color::generateV3Palette($color),
+                fn(string $color): array => Color::generateV3Palette($color),
                 array_filter($settings->site_theme)
             )))
             ->brandName(fn(GeneralSettings $settings): string => $settings->brand_name ?? config('app.name'))
@@ -62,7 +64,7 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->globalSearchKeyBindings(['command+shift+f', 'ctrl+shift+f'])
             ->globalSearchFieldSuffix(
-                fn(): ?string => match (Platform::detect()) {
+                fn(): string => match (Platform::detect()) {
                     Platform::Windows,
                     Platform::Linux => 'Ctrl+Shift+F',
                     Platform::Mac => '⌘+⇧+F',
