@@ -4,6 +4,10 @@ set -e
 initialStuff() {
     php artisan migrate --force --no-ansi -q; \
     php artisan storage:link; \
+    php artisan view:clear; \
+    php artisan config:clear; \
+    php artisan cache:clear; \
+    php artisan route:clear; \
     php artisan icons:cache; \
     php artisan event:cache; \
     php artisan config:cache; \
