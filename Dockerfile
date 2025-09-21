@@ -126,7 +126,7 @@ USER ${USER}
 
 COPY --link --chown=${WWWUSER}:${WWWUSER} . .
 
-RUN composer install \
+RUN composer i \
     --no-dev \
     --no-interaction \
     --no-autoloader \
@@ -150,7 +150,7 @@ WORKDIR ${ROOT}
 
 COPY --link package.json bun.lock* ./
 
-RUN bun install --frozen-lockfile
+RUN bun i --frozen-lockfile
 
 COPY --link . .
 COPY --link --from=common ${ROOT}/vendor vendor
