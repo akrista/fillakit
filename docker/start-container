@@ -4,7 +4,7 @@ set -e
 initialStuff() {
     if [ -z "$APP_KEY" ]; then
         echo "APP_KEY not found, generating application key..."
-        php artisan key:generate --force --no-ansi -q
+        export APP_KEY=$(php artisan key:generate --force --no-ansi --show)
     fi
     php artisan migrate --force --no-ansi -q; \
     php artisan storage:link; \
