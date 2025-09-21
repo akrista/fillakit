@@ -15,6 +15,7 @@ use Laravel\Octane\Events\WorkerErrorOccurred;
 use Laravel\Octane\Events\WorkerStarting;
 use Laravel\Octane\Events\WorkerStopping;
 use Laravel\Octane\Listeners\CloseMonologHandlers;
+use Laravel\Octane\Listeners\DisconnectFromDatabases;
 use Laravel\Octane\Listeners\EnsureUploadedFilesAreValid;
 use Laravel\Octane\Listeners\EnsureUploadedFilesCanBeMoved;
 use Laravel\Octane\Listeners\FlushOnce;
@@ -104,7 +105,7 @@ return [
         OperationTerminated::class => [
             FlushOnce::class,
             FlushTemporaryContainerInstances::class,
-            // DisconnectFromDatabases::class,
+            DisconnectFromDatabases::class,
             // CollectGarbage::class,
         ],
 
@@ -227,7 +228,7 @@ return [
             'enable_static_handler' => true,
             'enable_reuse_port' => true,
             'reload_async' => true,
-            'worker_num' => 7,
+            'worker_num' => env('SWOOLE_WORKERS', 7),
             'max_request' => 5000,
             'max_wait_time' => 60,
         ],
