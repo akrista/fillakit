@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d39f192bff8507f394de44c78de4a55",
+    "content-hash": "4289ee7703465c3e191196c4f2250b88",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -642,17 +642,11 @@
         },
         {
             "name": "convergephp/converge",
-            "version": "v1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/convergephp/converge.git",
-                "reference": "ac7ea6b4d2a92943c7f4af9a840bc1a62adf1c1c"
-            },
+            "version": "dev-master",
             "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/convergephp/converge/zipball/ac7ea6b4d2a92943c7f4af9a840bc1a62adf1c1c",
-                "reference": "ac7ea6b4d2a92943c7f4af9a840bc1a62adf1c1c",
-                "shasum": ""
+                "type": "path",
+                "url": "packages/converge",
+                "reference": "86aa348f73ebda8601d403cd5a87c167d05b4695"
             },
             "require": {
                 "symfony/yaml": "^7.2",
@@ -681,7 +675,40 @@
                     "Converge\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "autoload-dev": {
+                "psr-4": {
+                    "Converge\\Tests\\": "tests/",
+                    "Workbench\\App\\": "workbench/app/"
+                }
+            },
+            "scripts": {
+                "post-autoload-dump": [
+                    "@clear",
+                    "@prepare"
+                ],
+                "clear": [
+                    "@php vendor/bin/testbench package:purge-skeleton --ansi"
+                ],
+                "prepare": [
+                    "@php vendor/bin/testbench package:discover --ansi"
+                ],
+                "build": [
+                    "@php vendor/bin/testbench workbench:build --ansi"
+                ],
+                "serve": [
+                    "Composer\\Config::disableProcessTimeout",
+                    "@build",
+                    "@php vendor/bin/testbench serve --ansi"
+                ],
+                "lint": [
+                    "@php vendor/bin/pint --ansi",
+                    "@php vendor/bin/phpstan analyse --verbose --ansi"
+                ],
+                "test": [
+                    "@clear",
+                    "@php vendor/bin/pest"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -692,21 +719,9 @@
                 }
             ],
             "description": "static site generator for web artisans",
-            "support": {
-                "issues": "https://github.com/convergephp/converge/issues",
-                "source": "https://github.com/convergephp/converge/tree/v1.0.1"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/Ayoubhj866",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/charrafimed",
-                    "type": "github"
-                }
-            ],
-            "time": "2025-08-20T17:53:03+00:00"
+            "transport-options": {
+                "relative": true
+            }
         },
         {
             "name": "danharrin/date-format-converter",
@@ -16303,7 +16318,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "convergephp/converge": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
