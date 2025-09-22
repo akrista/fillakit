@@ -46,6 +46,9 @@ final class General extends SettingsPage
     {
         $user = request()->user();
 
+        if (!$user instanceof \App\Models\User) {
+            return true;
+        }
         return $user?->can('settings.view') ?? false;
     }
 
