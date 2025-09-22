@@ -4,10 +4,8 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
-use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Dashboard;
 use App\Settings\GeneralSettings;
-use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -15,8 +13,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Platform;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -33,29 +29,14 @@ final class AdminPanelProvider extends PanelProvider
             ->default()
             ->id(config('filamentry.panel_route'))
             ->path(config('filamentry.only_filament') ? '/' : '/' . config('filamentry.panel_route'))
-            ->login(Login::class)
-            ->loginRouteSlug('login')
-            ->registration()
-            ->registrationRouteSlug('register')
-            ->passwordReset()
-            // ->passwordResetRoutePrefix('password-reset')
-            // ->passwordResetRequestRouteSlug('request')
-            // ->passwordResetRouteSlug('reset')
-            // ->emailVerification()
-            // ->emailVerificationRoutePrefix('email-verification')
-            // ->emailVerificationPromptRouteSlug('prompt')
-            // ->emailVerificationRouteSlug('verify')
-            // ->emailChangeVerificationRoutePrefix('email-change-verification')
-            // ->emailChangeVerificationRouteSlug('verify')
             ->revealablePasswords(true)
-            ->profile(isSimple: false)
             ->colors(fn(GeneralSettings $settings): array => array_filter(array_map(
                 fn(string $color): array => Color::generateV3Palette($color),
                 array_filter($settings->site_theme)
             )))
             ->brandName(fn(GeneralSettings $settings): string => $settings->brand_name ?? config('app.name'))
             ->brandLogo(fn(GeneralSettings $settings) => $settings->brand_logo && Storage::disk('public')->exists($settings->brand_logo) ? Storage::url($settings->brand_logo) : false)
-            ->favicon(fn(GeneralSettings $settings) => $settings->site_favicon ? Storage::url($settings->site_favicon) : null)
+            ->favicon(fn(GeneralSettings $settings) => $settings->site_favicon !== null && $settings->site_favicon !== '' && $settings->site_favicon !== '0' ? Storage::url($settings->site_favicon) : null)
             ->brandLogoHeight(
                 fn(GeneralSettings $settings): string => ($settings->brand_logo_height && $settings->brand_logo_height_unit)
                     ? $settings->brand_logo_height . $settings->brand_logo_height_unit
@@ -87,8 +68,6 @@ final class AdminPanelProvider extends PanelProvider
             // ->clusters([])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
             ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
             ])
             ->middleware([
                 EncryptCookies::class,
@@ -102,7 +81,6 @@ final class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
             ])
             ->plugins([]);
     }

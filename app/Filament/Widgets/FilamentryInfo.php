@@ -21,6 +21,8 @@ final class FilamentryInfo extends Widget
      */
     protected string $view = 'filament.widgets.filamentry-info-widget';
 
+    protected int|string|array $columnSpan = 'full';
+
     /**
      * @return array<string, mixed>
      */

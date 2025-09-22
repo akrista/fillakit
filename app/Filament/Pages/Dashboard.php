@@ -8,7 +8,6 @@ use App\Filament\Widgets\FilamentryInfo;
 use BackedEnum;
 use Filament\Pages\Dashboard as PagesDashboard;
 use Filament\Support\Icons\Heroicon;
-use Filament\Widgets\AccountWidget;
 
 final class Dashboard extends PagesDashboard
 {
@@ -22,7 +21,6 @@ final class Dashboard extends PagesDashboard
     {
         return [
             FilamentryInfo::class,
-            AccountWidget::class,
         ];
     }
 }
