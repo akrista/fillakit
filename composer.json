@@ -5,17 +5,11 @@
     "description": "A laravel starter kit built with filament 4",
     "keywords": ["laravel", "framework","filamentphp"],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "packages/*"
-        }
-    ],
     "require": {
         "php": "^8.4",
-        "convergephp/converge": "dev-master",
-        "filament/filament": "^4.0.18",
-        "filament/spatie-laravel-settings-plugin": "^4.0.18",
+        "convergephp/converge": "^1.0.2",
+        "filament/filament": "^4.0.19",
+        "filament/spatie-laravel-settings-plugin": "^4.0.19",
         "flowframe/laravel-trend": "^0.4.0",
         "inertiajs/inertia-laravel": "^2.0.6",
         "laravel/framework": "^12.30.1",
