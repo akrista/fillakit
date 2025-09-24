@@ -15,8 +15,8 @@ final class Login extends \Filament\Auth\Pages\Login
         $defaults = ['remember' => true];
 
         if (config('app.env') !== 'production') {
-            $defaults['email'] = config('filamentry.admin_email');
-            $defaults['password'] = config('filamentry.admin_password');
+            $defaults['email'] = config('fillakit.admin_email');
+            $defaults['password'] = config('fillakit.admin_password');
         }
 
         $this->form->fill($defaults);

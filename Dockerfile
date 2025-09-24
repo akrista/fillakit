@@ -8,9 +8,9 @@ FROM composer:${COMPOSER_VERSION} AS vendor
 FROM php:${PHP_VERSION}-cli-alpine AS base
 
 LABEL maintainer="Jorge Thomas <info@notakrista.com>"
-LABEL org.opencontainers.image.title="Filamentry"
+LABEL org.opencontainers.image.title="Fillakit"
 LABEL org.opencontainers.image.description="Laravel Starter Kit with Filament"
-LABEL org.opencontainers.image.source=https://github.com/akrista/filamentry
+LABEL org.opencontainers.image.source=https://github.com/akrista/fillakit
 LABEL org.opencontainers.image.licenses=MIT
 
 ARG WWWUSER=1000

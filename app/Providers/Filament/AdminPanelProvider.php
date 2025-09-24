@@ -27,8 +27,8 @@ final class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id(config('filamentry.panel_route'))
-            ->path(config('filamentry.only_filament') ? '/' : '/' . config('filamentry.panel_route'))
+            ->id(config('fillakit.panel_route'))
+            ->path(config('fillakit.only_filament') ? '/' : '/' . config('fillakit.panel_route'))
             ->revealablePasswords(true)
             ->colors(fn(GeneralSettings $settings): array => array_filter(array_map(
                 fn(string $color): array => Color::generateV3Palette($color),
@@ -52,8 +52,8 @@ final class AdminPanelProvider extends PanelProvider
                     default => 'Ctrl+Shift+F',
                 }
             )
-            ->topNavigation(config('filamentry.top_nav_enabled'))
-            ->sidebarCollapsibleOnDesktop(!config('filamentry.top_nav_enabled'))
+            ->topNavigation(config('fillakit.top_nav_enabled'))
+            ->sidebarCollapsibleOnDesktop(!config('fillakit.top_nav_enabled'))
             ->unsavedChangesAlerts()
             ->databaseNotifications()
             ->databaseNotificationsPolling('60s')

@@ -11,9 +11,9 @@ final class About extends Command
 {
     use Colors;
 
-    protected $signature = 'filamentry:about';
+    protected $signature = 'fillakit:about';
 
-    protected $description = 'Display information about Filamentry.';
+    protected $description = 'Display information about Fillakit.';
 
     public function handle(): void
     {
@@ -32,7 +32,7 @@ EOT;
         echo $banner . PHP_EOL;
 
         $message = <<<'EOT'
-Filamentry is a Laravel starter kit that includes Filament as an admin panel and uses Solo to enhance the local development experience.
+Fillakit is a Laravel starter kit that includes Filament as an admin panel and uses Solo to enhance the local development experience.
 
 After installing, you can run all the commands needed for your application with a single command:
 
@@ -40,11 +40,11 @@ After installing, you can run all the commands needed for your application with 
 
 Each command runs in its own tab in Solo. Use the left/right arrow keys to navigate between them. (See the hotkeys at the bottom of the screen.)
 
-Filamentry was developed by Jorge Thomas (akrista). If you like it, please let me know!
+Fillakit was developed by Jorge Thomas (akrista). If you like it, please let me know!
 
 • Twitter: https://twitter.com/notakrista
 • Website: https://notakrista.com
-• GitHub: https://github.com/akrista/filamentry
+• GitHub: https://github.com/akrista/fillakit
 EOT;
 
         echo wordwrap($message);

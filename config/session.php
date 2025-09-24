@@ -131,7 +131,7 @@ return [
 
     'cookie' => env(
         'SESSION_COOKIE',
-        Str::slug(env('APP_NAME', 'filamentry'), '_') . '_session'
+        Str::slug(env('APP_NAME', 'Fillakit'), '_') . '_session'
     ),
 
     /*
