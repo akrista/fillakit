@@ -7,6 +7,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.4",
+        "convergephp/converge": "^1.0.2",
         "filament/filament": "^4.0.20",
         "filament/spatie-laravel-settings-plugin": "^4.0.20",
         "inertiajs/inertia-laravel": "^2.0.7",
