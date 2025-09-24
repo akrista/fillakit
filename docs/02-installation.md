@@ -2,9 +2,9 @@
 title: Installation
 ---
 
-# Filamentry Installation
+# Fillakit Installation
 
-This guide will help you set up Filamentry in your local development environment.
+This guide will help you set up Fillakit in your local development environment.
 
 ## System Requirements
 
@@ -19,7 +19,7 @@ Before starting, make sure you have installed:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/akrista/filamentry.git my-project
+git clone https://github.com/akrista/fillakit.git my-project
 cd my-project
 ```
 
@@ -75,7 +75,7 @@ npm build
 
 ## Next Steps
 
-Once you have Filamentry running:
+Once you have Fillakit running:
 
 1. **[Explore Features](./03-features)** - Discover all included functionality
 2. **[Configure Application](./04-configuration)** - Learn to configure the starter kit

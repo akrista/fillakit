@@ -51,7 +51,7 @@ return [
     |
     */
     'commands' => [
-        'About' => 'php artisan filamentry:about',
+        'About' => 'php artisan fillakit:about',
         'Logs' => EnhancedTailCommand::file(storage_path('logs/laravel.log')),
         'Make' => new MakeCommand,
         'HTTP' => 'php artisan serve --host=0.0.0.0',

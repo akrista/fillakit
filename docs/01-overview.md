@@ -2,13 +2,13 @@
 title: Overview
 ---
 
-# Filamentry - Laravel Starter Kit
+# Fillakit - Laravel Starter Kit
 
-**Filamentry** is a Laravel starter kit designed to accelerate the development of modern applications using **Filament** as the main framework for web applications.
+**Fillakit** is a Laravel starter kit designed to accelerate the development of modern applications using **Filament** as the main framework for web applications.
 
-## What is Filamentry?
+## What is Fillakit?
 
-Filamentry is a base project that combines the best technologies from the Laravel ecosystem to create robust and scalable applications from day one. It's built with the latest versions of Laravel, and Filament, providing a solid foundation for any type of web application.
+Fillakit is a base project that combines the best technologies from the Laravel ecosystem to create robust and scalable applications from day one. It's built with the latest versions of Laravel, and Filament, providing a solid foundation for any type of web application.
 
 ### Key Features
 
@@ -23,11 +23,11 @@ Filamentry is a base project that combines the best technologies from the Larave
 - **Laravel Octane** - Production-optimized performance
 - **Laravel Reverb** - Real-time WebSockets
 
-## Why Choose Filamentry?
+## Why Choose Fillakit?
 
 ### Rapid Development
 
-Filamentry eliminates tedious initial configuration and allows you to focus on the unique features of your application. With all dependencies pre-configured and optimized, you can start developing immediately.
+Fillakit eliminates tedious initial configuration and allows you to focus on the unique features of your application. With all dependencies pre-configured and optimized, you can start developing immediately.
 
 ### Modern Architecture
 
@@ -52,7 +52,7 @@ Filament provides a modern and fully customizable administrative panel that incl
 
 ## Use Cases
 
-Filamentry is perfect for:
+Fillakit is perfect for:
 
 - **SaaS Applications** - With complete user and permissions system
 - **Enterprise Dashboards** - With customizable widgets and metrics
@@ -69,9 +69,9 @@ Filamentry is perfect for:
 
 ## Community and Support
 
-- **GitHub**: [Official repository](https://github.com/akrista/filamentry)
+- **GitHub**: [Official repository](https://github.com/akrista/fillakit)
 - **Issues**: Report problems or request features
 
 ---
 
-*Filamentry - Build modern Laravel applications with Filament PHP*
+*Fillakit - Build modern Laravel applications with Filament PHP*

@@ -58,7 +58,7 @@ return [
 
     'prefix' => env(
         'HORIZON_PREFIX',
-        Str::slug(env('APP_NAME', 'filamentry'), '_') . '_horizon:'
+        Str::slug(env('APP_NAME', 'Fillakit'), '_') . '_horizon:'
     ),
 
     /*

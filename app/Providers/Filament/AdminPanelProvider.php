@@ -31,8 +31,8 @@ final class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->id(config('filamentry.panel_route'))
-            ->path(config('filamentry.only_filament') ? '/' : '/' . config('filamentry.panel_route'))
+            ->id(config('fillakit.panel_route'))
+            ->path(config('fillakit.only_filament') ? '/' : '/' . config('fillakit.panel_route'))
             ->login(Login::class)
             ->loginRouteSlug('login')
             ->registration()
@@ -55,7 +55,7 @@ final class AdminPanelProvider extends PanelProvider
             )))
             ->brandName(fn(GeneralSettings $settings): string => $settings->brand_name ?? config('app.name'))
             ->brandLogo(fn(GeneralSettings $settings) => $settings->brand_logo && Storage::disk('public')->exists($settings->brand_logo) ? Storage::url($settings->brand_logo) : false)
-            ->favicon(fn(GeneralSettings $settings) => $settings->site_favicon ? Storage::url($settings->site_favicon) : null)
+            ->favicon(fn(GeneralSettings $settings) => $settings->site_favicon !== null && $settings->site_favicon !== '' && $settings->site_favicon !== '0' ? Storage::url($settings->site_favicon) : null)
             ->brandLogoHeight(
                 fn(GeneralSettings $settings): string => ($settings->brand_logo_height && $settings->brand_logo_height_unit)
                     ? $settings->brand_logo_height . $settings->brand_logo_height_unit
@@ -71,8 +71,8 @@ final class AdminPanelProvider extends PanelProvider
                     default => 'Ctrl+Shift+F',
                 }
             )
-            ->topNavigation(config('filamentry.top_nav_enabled'))
-            ->sidebarCollapsibleOnDesktop(!config('filamentry.top_nav_enabled'))
+            ->topNavigation(config('fillakit.top_nav_enabled'))
+            ->sidebarCollapsibleOnDesktop(!config('fillakit.top_nav_enabled'))
             ->unsavedChangesAlerts()
             ->databaseNotifications()
             ->databaseNotificationsPolling('60s')
