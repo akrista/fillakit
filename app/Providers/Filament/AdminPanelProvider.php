@@ -54,6 +54,11 @@ final class AdminPanelProvider extends PanelProvider
             )
             ->topNavigation(config('fillakit.top_nav_enabled'))
             ->sidebarCollapsibleOnDesktop(!config('fillakit.top_nav_enabled'))
+            ->spa(condition: true, hasPrefetching: true)
+            ->renderHook(
+                'panels::head.start',
+                fn (): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory => view('components.seo.meta'),
+            )
             ->unsavedChangesAlerts()
             ->databaseNotifications()
             ->databaseNotificationsPolling('60s')
@@ -64,11 +69,10 @@ final class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
-            // ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             // ->clusters([])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
-            ->widgets([
-            ])
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->widgets([])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

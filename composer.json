@@ -5,6 +5,12 @@
     "description": "A laravel starter kit built with filament",
     "keywords": ["laravel", "framework","filamentphp"],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Jorge Thomas (akrista)",
+            "email": "info@notakrista.com"
+        }
+    ],
     "require": {
         "php": "^8.4",
         "convergephp/converge": "^1.0.2",
@@ -16,6 +22,7 @@
         "laravel/octane": "^2.12.3",
         "laravel/reverb": "^1.6",
         "laravel/tinker": "^2.10.1",
+        "silviolleite/laravelpwa": "^2.0.3",
         "spatie/laravel-permission": "^6.21",
         "spatie/laravel-settings": "^3.4.4",
         "spatie/laravel-translation-loader": "^2.8.2",

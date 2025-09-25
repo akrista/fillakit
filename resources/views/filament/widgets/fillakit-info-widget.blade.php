@@ -18,13 +18,13 @@
         </div>
 
         <div class="fi-filament-info-widget-links">
-            <x-filament::link color="gray" href="https://fillakit.notakrista.com/docs" :icon="\Filament\Support\Icons\Heroicon::BookOpen"
+            <x-filament::link color="gray" href="{{ $viewData['docs_url'] }}" :icon="\Filament\Support\Icons\Heroicon::BookOpen"
                 icon-alias="panels::widgets.filament-info.open-documentation-button" rel="noopener noreferrer"
                 target="_blank">
                 {{ __('filament-panels::widgets/filament-info-widget.actions.open_documentation.label') }}
             </x-filament::link>
 
-            <x-filament::link color="gray" href="https://github.com/akrista/fillakit"
+            <x-filament::link color="gray" href="{{ $viewData['github_url'] }}"
                 icon-alias="panels::widgets.filament-info.open-github-button" rel="noopener noreferrer" target="_blank">
                 <x-slot name="icon">
                     <svg viewBox="0 0 98 96" xmlns="http://www.w3.org/2000/svg">

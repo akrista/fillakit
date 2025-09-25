@@ -16,7 +16,7 @@ final class PermissionPolicy
      */
     public function viewAny(?User $user): bool
     {
-        if (!$user instanceof \App\Models\User) {
+        if (!$user instanceof User) {
             return true;
         }
 
@@ -28,7 +28,7 @@ final class PermissionPolicy
      */
     public function view(?User $user): bool
     {
-        if (!$user instanceof \App\Models\User) {
+        if (!$user instanceof User) {
             return false;
         }
 
