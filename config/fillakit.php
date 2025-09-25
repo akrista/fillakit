@@ -9,5 +9,6 @@ return [
     'admin_password' => env('ADMIN_PASSWORD', 'password'),
     'admin_user' => env('ADMIN_USER', 'admin'),
     'top_nav_enabled' => env('TOP_NAV_ENABLED', true),
-    'github_url' => 'https://github.com/akrista/fillakit',
+    'github_url' => env('GITHUB_URL', 'https://github.com/akrista/fillakit'),
+    'docs_url' => env('DOCS_URL', 'https://fillakit.notakrista.com/docs'),
 ];
