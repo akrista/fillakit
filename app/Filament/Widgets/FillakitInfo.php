@@ -52,8 +52,8 @@ final class FillakitInfo extends Widget
             'laravel_version' => Application::VERSION,
             'php_version' => PHP_VERSION,
             'db_version' => $databaseVersion,
-            'github_url' => config('fillakit.github_url', 'https://github.com/akrista/fillakit'),
-            'docs_url' => config('fillakit.docs_url', 'https://fillakit.notakrista.com/docs'),
+            'github_url' => config('fillakit.github_url'),
+            'docs_url' => config('fillakit.docs_url'),
         ];
     }
 }
