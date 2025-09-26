@@ -15,8 +15,6 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Platform;
-use Filament\Widgets\AccountWidget;
-use Filament\Widgets\FilamentInfoWidget;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -73,6 +71,11 @@ final class AdminPanelProvider extends PanelProvider
             )
             ->topNavigation(config('fillakit.top_nav_enabled'))
             ->sidebarCollapsibleOnDesktop(!config('fillakit.top_nav_enabled'))
+            ->spa(condition: true, hasPrefetching: true)
+            ->renderHook(
+                'panels::head.start',
+                fn (): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory => view('components.seo.meta'),
+            )
             ->unsavedChangesAlerts()
             ->databaseNotifications()
             ->databaseNotificationsPolling('60s')
@@ -83,13 +86,10 @@ final class AdminPanelProvider extends PanelProvider
             ->pages([
                 Dashboard::class,
             ])
-            // ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
+            ->discoverClusters(in: app_path('Filament/Clusters'), for: 'App\\Filament\\Clusters')
             // ->clusters([])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\Filament\Widgets')
-            ->widgets([
-                AccountWidget::class,
-                FilamentInfoWidget::class,
-            ])
+            ->widgets([])
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
