@@ -13,6 +13,7 @@ use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Platform;
+use Filament\View\PanelsRenderHook;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -56,8 +57,12 @@ final class AdminPanelProvider extends PanelProvider
             ->sidebarCollapsibleOnDesktop(!config('fillakit.top_nav_enabled'))
             ->spa(condition: true, hasPrefetching: true)
             ->renderHook(
-                'panels::head.start',
+                PanelsRenderHook::HEAD_START,
                 fn (): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory => view('components.seo.meta'),
+            )
+            ->renderHook(
+                PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
+                fn (): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory => view('filament.topbar.get-started'),
             )
             ->unsavedChangesAlerts()
             ->databaseNotifications()
