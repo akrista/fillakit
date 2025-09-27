@@ -259,7 +259,7 @@
 
     "jiti": ["jiti@2.5.1", "", { "bin": { "jiti": "lib/jiti-cli.mjs" } }, "sha512-twQoecYPiVA5K/h6SxtORw/Bs3ar+mLUtoPSc7iMXzQzK8d7eJ/R09wmTwAjiamETn1cXYPGfNnu7DMoHgu12w=="],
 
-    "laravel-echo": ["laravel-echo@2.2.3", "", { "peerDependencies": { "pusher-js": "*", "socket.io-client": "*" } }, "sha512-LCxvART92eHiBaFnm4XBy9Av088VyJaXoH8Oj/wT3nriNNBimIG237zbrwgtmg2cnGPjGFOWDcd87ZerRrhlvQ=="],
+    "laravel-echo": ["laravel-echo@2.2.4", "", { "peerDependencies": { "pusher-js": "*", "socket.io-client": "*" } }, "sha512-CagAL5AlG6W0WhClcIYBSU6fm5Bt7msgJ3fqu+Y6VQ+UxLPWhSllWkWoV7mteKhvV660T5cwUeFNUc1zTVwDBg=="],
 
     "laravel-vite-plugin": ["laravel-vite-plugin@2.0.1", "", { "dependencies": { "picocolors": "^1.0.0", "vite-plugin-full-reload": "^1.1.0" }, "peerDependencies": { "vite": "^7.0.0" }, "bin": { "clean-orphaned-assets": "bin/clean.js" } }, "sha512-zQuvzWfUKQu9oNVi1o0RZAJCwhGsdhx4NEOyrVQwJHaWDseGP9tl7XUPLY2T8Cj6+IrZ6lmyxlR1KC8unf3RLA=="],
 
