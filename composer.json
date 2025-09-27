@@ -15,7 +15,6 @@
         "php": "^8.4",
         "filament/filament": "^4.0.20",
         "filament/spatie-laravel-settings-plugin": "^4.0.20",
-        "inertiajs/inertia-laravel": "^2.0.7",
         "laravel/framework": "^12.31.1",
         "laravel/horizon": "^5.34",
         "laravel/octane": "^2.12.3",
