@@ -70,7 +70,7 @@ final class AdminPanelProvider extends PanelProvider
             )
             ->renderHook(
                 PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
-                fn (): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory => view('filament.topbar.get-started'),
+                fn (): View => view('filament.topbar.get-started'),
             )
             ->unsavedChangesAlerts()
             ->databaseNotifications()
