@@ -1,10 +1,19 @@
 @php
     $alignment = 'top-right';
+        $currentRoute = request()->route()?->getName();
+    $enabledRoutes = [
+        'filament.admin.auth.login',
+        'filament.admin.auth.register',
+        'filament.admin.auth.password-reset.request',
+        'filament.admin.auth.password-reset.reset',
+    ];
+    $shouldShow = $currentRoute && collect($enabledRoutes)->contains(fn($route) => str_contains($currentRoute, $route));
 @endphp
 
 @if (
     filament()->hasDarkMode() &&
-    (! filament()->hasDarkModeForced())
+    (! filament()->hasDarkModeForced()) &&
+    $shouldShow
 )
     <div @class([
         'fixed w-full flex p-4 z-40 auth-theme-switcher',
@@ -29,8 +38,7 @@
                         })
                     },
                 }"
-                class="fi-theme-switcher grid grid-flow-col gap-x-1"
-            >
+                class="fi-theme-switcher grid grid-flow-col gap-x-1">
                 @include('filament.switcher.button', ['icon' => 'heroicon-m-sun', 'theme' => 'light'])
                 @include('filament.switcher.button', ['icon' => 'heroicon-m-moon', 'theme' => 'dark'])
                 @include('filament.switcher.button', ['icon' => 'heroicon-m-computer-desktop', 'theme' => 'system'])
