@@ -16,6 +16,7 @@ use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
 use Filament\Support\Enums\Platform;
 use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -48,6 +49,8 @@ final class AdminPanelProvider extends PanelProvider
             // ->emailChangeVerificationRouteSlug('verify')
             ->revealablePasswords(true)
             ->profile(isSimple: false)
+            // brisk theme
+            // ->font('Kumbh Sans')
             ->colors(fn(GeneralSettings $settings): array => array_filter(array_map(
                 fn(string $color): array => Color::generateV3Palette($color),
                 array_filter($settings->site_theme)
@@ -75,7 +78,11 @@ final class AdminPanelProvider extends PanelProvider
             ->spa(condition: true, hasPrefetching: true)
             ->renderHook(
                 PanelsRenderHook::HEAD_START,
-                fn (): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory => view('components.seo.meta'),
+                fn (): View => view('components.seo.meta'),
+            )
+            ->renderHook(
+                name: PanelsRenderHook::BODY_END,
+                hook: fn (): View => view('filament.switcher.switcher'),
             )
             ->unsavedChangesAlerts()
             ->databaseNotifications()
