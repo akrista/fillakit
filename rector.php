@@ -20,6 +20,7 @@ return RectorConfig::configure()
         __DIR__ . '/bootstrap/app.php',
         __DIR__ . '/database',
         __DIR__ . '/public',
+        __DIR__ . '/resources/views',
     ])
     ->withPreparedSets(
         deadCode: true,
