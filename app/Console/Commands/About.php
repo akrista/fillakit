@@ -32,13 +32,11 @@ EOT;
         echo $banner . PHP_EOL;
 
         $message = <<<'EOT'
-Fillakit is a Laravel starter kit that includes Filament as an admin panel and uses Solo to enhance the local development experience.
+Fillakit is a Laravel starter kit that includes Filament as an admin panel.
 
 After installing, you can run all the commands needed for your application with a single command:
 
-> php artisan solo
-
-Each command runs in its own tab in Solo. Use the left/right arrow keys to navigate between them. (See the hotkeys at the bottom of the screen.)
+> composer run dev
 
 Fillakit was developed by Jorge Thomas (akrista). If you like it, please let me know!
 
