@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers\Filament;
 
+use App\Filament\Pages\Auth\EditProfile;
+use App\Filament\Pages\Auth\Login;
+use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
 use App\Settings\GeneralSettings;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -31,10 +34,26 @@ final class AdminPanelProvider extends PanelProvider
             ->default()
             ->id(config('fillakit.panel_route'))
             ->path(config('fillakit.only_filament') ? '/' : '/' . config('fillakit.panel_route'))
+            ->login(Login::class)
+            ->loginRouteSlug('login')
+            ->registration(action: Register::class)
+            ->registrationRouteSlug('register')
+            ->passwordReset()
+            // ->passwordResetRoutePrefix('password-reset')
+            // ->passwordResetRequestRouteSlug('request')
+            // ->passwordResetRouteSlug('reset')
+            ->emailVerification()
+            ->emailVerificationRouteSlug('verify')
+            ->emailVerificationRoutePrefix('email-verification')
+            ->emailVerificationPromptRouteSlug('prompt')
+            // ->emailChangeVerification()
+            // ->emailChangeVerificationRoutePrefix('email-change-verification')
+            // ->emailChangeVerificationRouteSlug('verify')
             ->revealablePasswords(true)
-            ->profile(isSimple: false)
+            ->profile(page: EditProfile::class, isSimple: false)
             // brisk theme
             // ->font('Kumbh Sans')
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors(fn(GeneralSettings $settings): array => array_filter(array_map(
                 fn(string $color): array => Color::generateV3Palette($color),
                 array_filter($settings->site_theme)
@@ -47,7 +66,6 @@ final class AdminPanelProvider extends PanelProvider
                     ? $settings->brand_logo_height . $settings->brand_logo_height_unit
                     : '2rem'
             )
-            ->viteTheme('resources/css/filament/admin/theme.css')
             ->globalSearchKeyBindings(['command+shift+f', 'ctrl+shift+f'])
             ->globalSearchFieldSuffix(
                 fn(): string => match (Platform::detect()) {
