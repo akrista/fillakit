@@ -7,6 +7,7 @@ namespace App\Filament\Resources\Users;
 use App\Filament\Resources\Users\Pages\ManageUsers;
 use App\Models\User;
 use BackedEnum;
+use Filament\Actions\Action;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -16,9 +17,11 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
+use Filament\Auth\Notifications\VerifyEmail;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
+use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Tabs;
@@ -81,8 +84,8 @@ final class UserResource extends Resource
                                         DatePicker::make('email_verified_at')
                                             ->label('Verified at')
                                             ->displayFormat('d/m/Y h:i A')
-                                            ->native(false)
-                                            ->hidden(fn(string $operation): bool => $operation !== 'view'),
+                                            ->readOnly(fn(string $operation, $state): bool => $operation === 'edit' && !is_null($state))
+                                            ->native(false),
                                         TextInput::make('password')
                                             ->label('Password')
                                             ->password()
@@ -182,6 +185,19 @@ final class UserResource extends Resource
                 ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
+                Action::make('resend_verification_email')
+                    ->label('Resend Email')
+                    ->icon(Heroicon::OutlinedEnvelope)
+                    ->authorize(fn(User $record): bool => !$record->hasVerifiedEmail())
+                    ->action(function (User $record): void {
+                        $notification = new VerifyEmail();
+                        $notification->url = filament()->getVerifyEmailUrl($record);
+                        $record->notify($notification);
+                        Notification::make()
+                            ->title('Verification email has been resent.')
+                            ->send();
+                    })
+                    ->requiresConfirmation(),
                 ForceDeleteAction::make(),
                 RestoreAction::make(),
             ])
