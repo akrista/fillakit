@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f1460d5c2bdc05f06704dd0cc8aac30",
+    "content-hash": "bbcdb1ac3fcea1192032b9682cb4c4f9",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -770,6 +770,123 @@
                 }
             ],
             "time": "2025-08-20T19:15:30+00:00"
+        },
+        {
+            "name": "convergephp/blade-components",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/convergephp/blade-components.git",
+                "reference": "78edc0353c43daea27a5d6dccf6960a491846933"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/convergephp/blade-components/zipball/78edc0353c43daea27a5d6dccf6960a491846933",
+                "reference": "78edc0353c43daea27a5d6dccf6960a491846933",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/support": "*",
+                "php": "^8.1",
+                "wendelladriel/laravel-validated-dto": "^4.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Converge\\BladeComponents\\ConvergeComponentsServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Converge\\BladeComponents\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ayoub EL HAJJI",
+                    "email": "ayoubelhajji866@gmail.com"
+                }
+            ],
+            "description": "a collection of laravel blade components for building a modern documentations interfaces",
+            "support": {
+                "issues": "https://github.com/convergephp/blade-components/issues",
+                "source": "https://github.com/convergephp/blade-components/tree/v1.0.0"
+            },
+            "time": "2025-05-12T17:48:05+00:00"
+        },
+        {
+            "name": "convergephp/converge",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/convergephp/converge.git",
+                "reference": "32dfc20488d0f4e39f3a2000da6ea02fec249f75"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/convergephp/converge/zipball/32dfc20488d0f4e39f3a2000da6ea02fec249f75",
+                "reference": "32dfc20488d0f4e39f3a2000da6ea02fec249f75",
+                "shasum": ""
+            },
+            "require": {
+                "symfony/yaml": "^7.2",
+                "tempest/highlight": "^2.11"
+            },
+            "require-dev": {
+                "larastan/larastan": "3.0",
+                "laravel/pint": "dev-main",
+                "orchestra/testbench": "^9.13",
+                "pestphp/pest": "^3.8",
+                "phpstan/phpstan": "^2.1"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Converge\\Providers\\ConvergeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "files": [
+                    "src/helpers.php"
+                ],
+                "psr-4": {
+                    "Converge\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "charrafi mohamed",
+                    "email": "charrafimohamed27@gmail.com"
+                }
+            ],
+            "description": "static site generator for web artisans",
+            "support": {
+                "issues": "https://github.com/convergephp/converge/issues",
+                "source": "https://github.com/convergephp/converge/tree/v1.0.2"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/Ayoubhj866",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/charrafimed",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-09-21T17:33:36+00:00"
         },
         {
             "name": "danharrin/date-format-converter",
