@@ -1,3 +1,6 @@
+---
+applyTo: "**"
+---
 <laravel-boost-guidelines>
 === foundation rules ===
 
@@ -15,6 +18,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - laravel/octane (OCTANE) - v2
 - laravel/prompts (PROMPTS) - v0
 - laravel/reverb (REVERB) - v1
+- laravel/sanctum (SANCTUM) - v4
 - livewire/livewire (LIVEWIRE) - v3
 - tightenco/ziggy (ZIGGY) - v2
 - larastan/larastan (LARASTAN) - v3
@@ -547,3 +551,4 @@ $pages->assertNoJavascriptErrors()->assertNoConsoleLogs();
 - Every change must be programmatically tested. Write a new test or update an existing test, then run the affected tests to make sure they pass.
 - Run the minimum number of tests needed to ensure code quality and speed. Use `php artisan test` with a specific filename or filter.
 </laravel-boost-guidelines>
+

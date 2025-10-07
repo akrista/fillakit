@@ -14,7 +14,9 @@ return new class extends Migration
     public function up(): void
     {
         $user = User::create([
-            'name' => config('fillakit.admin_user'),
+            'username' => config('fillakit.admin_user'),
+            'firstname' => config('fillakit.admin_firstname'),
+            'lastname' => config('fillakit.admin_lastname'),
             'email' => config('fillakit.admin_email'),
             'email_verified_at' => now(),
             'avatar_url' => null,
