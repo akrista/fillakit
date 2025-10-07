@@ -50,7 +50,7 @@ final class FileService
     private function validatePath(string &$path): void
     {
         $realPath = realpath($path);
-        if ($realPath === '' || $realPath === '0' || $realPath === false) {
+        if (in_array($realPath, ['', '0', false], true)) {
             throw new InvalidArgumentException('Invalid path provided.');
         }
 

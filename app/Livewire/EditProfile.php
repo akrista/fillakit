@@ -37,15 +37,19 @@ final class EditProfile extends MyProfileComponent
                 SpatieMediaLibraryFileUpload::make('media')->label('Avatar')
                     ->collection('avatars')
                     ->disk('public')
-                    ->avatar()
-                    ->required(),
+                    ->avatar(),
                 Grid::make()->schema([
                     TextInput::make('username')
-                        ->disabled()
-                        ->required(),
+                        ->required()
+                        ->unique('users', 'username', ignoreRecord: true)
+                        ->minLength(3)
+                        ->maxLength(50)
+                        ->regex('/^w+$/'),
                     TextInput::make('email')
-                        ->disabled()
-                        ->required(),
+                        ->email()
+                        ->required()
+                        ->unique('users', 'email', ignoreRecord: true)
+                        ->maxLength(255),
                 ]),
                 Grid::make()->schema([
                     TextInput::make('firstname')
@@ -98,7 +102,7 @@ final class EditProfile extends MyProfileComponent
 
     public function render(): View
     {
-        return view('livewire.edit-profile');
+        return view('livewire.auth.edit-profile');
     }
 
     private function fillForm(): void

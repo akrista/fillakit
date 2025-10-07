@@ -20,6 +20,7 @@ use Filament\Actions\ViewAction;
 use Filament\Auth\Notifications\VerifyEmail;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Resource;
@@ -28,6 +29,7 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -64,23 +66,34 @@ final class UserResource extends Resource
                                     ->columnSpanFull()
                                     ->columns(2)
                                     ->schema([
-                                        TextInput::make('avatar_url')
+                                        SpatieMediaLibraryFileUpload::make('avatar_url')
                                             ->label('Avatar URL')
-                                            ->url()
-                                            ->columnSpanFull()
-                                            ->maxLength(255),
-                                        TextInput::make('name')
-                                            ->label('Name')
+                                            ->collection('avatars')
+                                            ->disk('public')
+                                            ->avatar()
                                             ->required()
-                                            ->maxLength(255),
+                                            ->columnSpanFull(),
                                         TextInput::make('id')
                                             ->hidden(fn(string $operation): bool => $operation !== 'view'),
+                                        TextInput::make('firstname')
+                                            ->label('Firstname')
+                                            ->required()
+                                            ->maxLength(255),
+                                        TextInput::make('lastname')
+                                            ->label('Lastname')
+                                            ->required()
+                                            ->maxLength(255),
+                                        TextInput::make('username')
+                                            ->label('Username')
+                                            ->required()
+                                            ->maxLength(255)
+                                            ->unique(User::class, 'username', ignoreRecord: true),
                                         TextInput::make('email')
                                             ->label('Email')
                                             ->email()
                                             ->required()
                                             ->maxLength(255)
-                                            ->unique(),
+                                            ->unique(User::class, 'email', ignoreRecord: true),
                                         DatePicker::make('email_verified_at')
                                             ->label('Verified at')
                                             ->displayFormat('d/m/Y h:i A')
@@ -150,13 +163,28 @@ final class UserResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('name')
+                SpatieMediaLibraryImageColumn::make('avatar_url')
+                    ->circular()
+                    ->label('Avatar')
+                    ->collection('avatars')
+                    ->disk('public')
+                    ->toggleable(isToggledHiddenByDefault: false),
+                TextColumn::make('username')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->searchable()
                     ->sortable(),
+                TextColumn::make('firstname')
+                    ->label('Name')
+                    ->formatStateUsing(fn($record): string => $record->firstname . ' ' . $record->lastname)
+                    ->searchable(['firstname', 'lastname'])
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: false),
                 TextColumn::make('email')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('roles.name')
+                    ->toggleable(isToggledHiddenByDefault: false)
                     ->badge()
                     ->separator(',')
                     ->limitList(3),

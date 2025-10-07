@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
+use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -17,15 +18,22 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
+use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
+use Laravel\Sanctum\HasApiTokens;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-final class User extends Authenticatable implements FilamentUser, HasAvatar, MustVerifyEmail
+final class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia, HasName, MustVerifyEmail
 {
+    use HasApiTokens;
     use HasFactory;
     use HasRoles;
     use HasUuids;
+    use InteractsWithMedia;
     use Notifiable;
     use SoftDeletes;
+    use TwoFactorAuthenticatable;
 
     public $incrementing = false;
 
@@ -42,7 +50,9 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Mus
      */
     protected $fillable = [
         'id',
-        'name',
+        'username',
+        'firstname',
+        'lastname',
         'email',
         'email_verified_at',
         'password',
@@ -95,7 +105,38 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Mus
 
     public function getFilamentAvatarUrl(): ?string
     {
-        return $this->avatar_url;
+        $media = $this->getFirstMedia('avatars');
+
+        return $media?->getUrl() ?? $this->avatar_url;
+    }
+
+    public function getFilamentName(): string
+    {
+        $firstName = $this->firstname ?? '';
+        $lastName = $this->lastname ?? '';
+
+        $fullName = mb_trim($firstName . ' ' . $lastName);
+
+        if ($fullName !== '') {
+            return $fullName;
+        }
+
+        if (! empty($this->username)) {
+            return (string) $this->username;
+        }
+
+        if (! empty($this->email)) {
+            return (string) $this->email;
+        }
+
+        return (string) $this->getAttribute($this->getKeyName());
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('avatars')
+            ->singleFile()
+            ->useDisk('public');
     }
 
     public function createdBy(): BelongsTo
