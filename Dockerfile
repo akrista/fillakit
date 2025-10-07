@@ -57,10 +57,11 @@ RUN apk update; \
     # brotli \
     # Install PHP extensions
     && install-php-extensions \
+    openswoole \
     pcntl \
     intl \
     zip \
-    openswoole \
+    exif \
     # bz2 \
     # mbstring \
     # bcmath \
@@ -78,7 +79,6 @@ RUN apk update; \
     # pdo_sqlsrv \
     # sockets \
     # opcache \
-    # exif \
     # ldap \
     && docker-php-source delete \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
