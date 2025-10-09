@@ -28,8 +28,8 @@ return new class extends Migration
             $table->timestamps();
             $table->uuid('deleted_by')->nullable();
             $table->softDeletes();
-
             $table->index(['email'], 'users_email_index');
+            $table->index(['username'], 'users_username_index');
         });
 
         Schema::table('users', function (Blueprint $table): void {

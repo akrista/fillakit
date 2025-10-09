@@ -13,5 +13,4 @@ return [
     AdminPanelProvider::class,
     HorizonServiceProvider::class,
     PolicyServiceProvider::class,
-    MemoryMonitorServiceProvider::class,
 ];

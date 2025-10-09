@@ -60,15 +60,6 @@
         }
     },
     "scripts": {
-        "dev": [
-            "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan serve --host=0.0.0.0\" \"php artisan queue:listen --queue=default --tries=1\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" \"bun run dev\" --names=server,queue,broadcast,logs,vite --kill-others"
-        ],
-        "prod": [
-            "Composer\\Config::disableProcessTimeout",
-            "bun run build",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs,vite --kill-others"
-        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi",
@@ -80,6 +71,15 @@
             "@php artisan key:generate --ansi",
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan serve --host=0.0.0.0\" \"php artisan queue:listen --queue=default --tries=1\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" \"bun run dev\" --names=server,queue,broadcast,logs,vite --kill-others"
+        ],
+        "prod": [
+            "Composer\\Config::disableProcessTimeout",
+            "bun run build",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs,vite --kill-others"
         ],
         "migrate": ["@php artisan migrate --ansi --graceful"],
         "migrate:fresh": ["@php artisan migrate:fresh --seed --force --ansi"],
@@ -112,6 +112,7 @@
         ],
         "test:types": "phpstan --memory-limit=512M",
         "test": [
+            "@php artisan config:clear --ansi",
             "@test:type-coverage",
             "@test:unit",
             "@test:lint",
