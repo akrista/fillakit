@@ -28,8 +28,6 @@ final class HorizonServiceProvider extends HorizonApplicationServiceProvider
      */
     public function gate(): void
     {
-        Gate::define('viewHorizon', function (mixed $user): bool {
-            return false;
-        });
+        Gate::define('viewHorizon', fn(mixed $user): bool => false);
     }
 }

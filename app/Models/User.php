@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Jeffgreco13\FilamentBreezy\Traits\TwoFactorAuthenticatable;
+use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -26,14 +26,8 @@ use Spatie\Permission\Traits\HasRoles;
 
 final class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia, HasName, MustVerifyEmail
 {
-    use HasApiTokens;
-    use HasFactory;
-    use HasRoles;
-    use HasUuids;
-    use InteractsWithMedia;
-    use Notifiable;
-    use SoftDeletes;
-    use TwoFactorAuthenticatable;
+    /** @use HasFactory<\Database\Factories\UserFactory> */
+    use HasApiTokens, HasFactory, HasRoles, HasUuids, InteractsWithMedia, Notifiable, SoftDeletes, TwoFactorAuthenticatable;
 
     public $incrementing = false;
 
@@ -72,6 +66,8 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
      */
     protected $hidden = [
         'password',
+        'two_factor_secret',
+        'two_factory_recovery_codes',
         'remember_token',
     ];
 
@@ -186,7 +182,7 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
     private static function getCurrentUserId(): ?string
     {
         /** @var Guard $guard */
-        $guard = app('auth');
+        $guard = app(\Illuminate\Contracts\Auth\Factory::class);
 
         if ($guard->check()) {
             /** @var User $user */

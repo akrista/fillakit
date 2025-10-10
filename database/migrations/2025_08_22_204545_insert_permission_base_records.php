@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
         $permissions = [
             'users.view',
             'users.create',
@@ -61,12 +61,12 @@ return new class extends Migration
         ];
 
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web', 'description' => $descriptions[$permission]]);
+            Permission::query()->firstOrCreate(['name' => $permission, 'guard_name' => 'web', 'description' => $descriptions[$permission]]);
         }
 
-        $admin = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web', 'description' => 'Admin']);
-        $manager = Role::firstOrCreate(['name' => 'manager', 'guard_name' => 'web', 'description' => 'Manager']);
-        $user = Role::firstOrCreate(['name' => 'user', 'guard_name' => 'web', 'description' => 'User']);
+        $admin = Role::query()->firstOrCreate(['name' => 'admin', 'guard_name' => 'web', 'description' => 'Admin']);
+        $manager = Role::query()->firstOrCreate(['name' => 'manager', 'guard_name' => 'web', 'description' => 'Manager']);
+        $user = Role::query()->firstOrCreate(['name' => 'user', 'guard_name' => 'web', 'description' => 'User']);
 
         $admin->givePermissionTo(Permission::all());
 
@@ -88,11 +88,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-        app()[PermissionRegistrar::class]->forgetCachedPermissions();
+        app()->make(PermissionRegistrar::class)->forgetCachedPermissions();
         $tableNames = config('permission.table_names');
-        if (empty($tableNames)) {
-            throw new Exception('Error: config/permission.php not found and defaults could not be merged. Please publish the package configuration before proceeding, or drop the tables manually.');
-        }
+        throw_if(empty($tableNames), new Exception('Error: config/permission.php not found and defaults could not be merged. Please publish the package configuration before proceeding, or drop the tables manually.'));
         Schema::drop($tableNames['role_has_permissions']);
         Schema::drop($tableNames['model_has_roles']);
         Schema::drop($tableNames['model_has_permissions']);

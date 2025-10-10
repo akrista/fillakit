@@ -7,9 +7,7 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
-use App\Livewire\EditProfile;
 use App\Settings\GeneralSettings;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -28,7 +26,6 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Jeffgreco13\FilamentBreezy\BreezyCore;
 
 final class AdminPanelProvider extends PanelProvider
 {
@@ -117,36 +114,6 @@ final class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
-            ->plugins([
-                BreezyCore::make()
-                    ->enableBrowserSessions(condition: true)
-                    ->enableSanctumTokens(permissions: ['create', 'update', 'delete'])
-                    ->avatarUploadComponent(fn(): SpatieMediaLibraryFileUpload => SpatieMediaLibraryFileUpload::make('avatar')
-                        ->collection('avatars')
-                        ->disk('public')
-                        ->avatar())
-                    ->myProfile(
-                        shouldRegisterUserMenu: true,
-                        shouldRegisterNavigation: false,
-                        hasAvatars: true,
-                        slug: 'profile'
-                    )
-                    ->withoutMyProfileComponents([
-                        'personal_info',
-                    ])
-                    ->myProfileComponents([
-                        'edit_profile' => EditProfile::class,
-                    ])
-                    ->passwordUpdateRules(
-                        rules: [
-                            Password::min(12)->max(21)->uncompromised(3)->mixedCase()->letters()->numbers()->symbols(),
-                        ],
-                        requiresCurrentPassword: true,
-                    )
-                    ->enableTwoFactorAuthentication(
-                        force: false,
-                        scopeToPanel: true,
-                    ),
-            ]);
+            ->plugins([]);
     }
 }

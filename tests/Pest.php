@@ -17,10 +17,10 @@ use Illuminate\Support\Sleep;
 
 pest()->extend(Tests\TestCase::class)
     ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->beforeEach(function () {
-        Str::createRandomStringsNormally();
-        Str::createUuidsNormally();
-        Http::preventStrayRequests();
+    ->beforeEach(function (): void {
+        Illuminate\Support\Str::createRandomStringsNormally();
+        Illuminate\Support\Str::createUuidsNormally();
+        Illuminate\Support\Facades\Http::preventStrayRequests();
         Sleep::fake();
 
         $this->freezeTime();
@@ -38,9 +38,7 @@ pest()->extend(Tests\TestCase::class)
 |
 */
 
-expect()->extend('toBeOne', function () {
-    return $this->toBe(1);
-});
+expect()->extend('toBeOne', fn() => $this->toBe(1));
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +51,7 @@ expect()->extend('toBeOne', function () {
 |
 */
 
-function something()
+function something(): void
 {
     // ..
 }

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 use App\Models\User;
 
-test('to array includes all fillable fields', function () {
+test('to array includes all fillable fields', function (): void {
     $user = User::factory()->create()->refresh();
 
     expect(array_keys($user->toArray()))

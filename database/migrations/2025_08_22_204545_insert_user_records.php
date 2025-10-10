@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        $user = User::create([
+        $user = User::query()->create([
             'username' => config('fillakit.admin_user'),
             'firstname' => config('fillakit.admin_firstname'),
             'lastname' => config('fillakit.admin_lastname'),
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        User::truncate();
+        User::query()->truncate();
     }
 };

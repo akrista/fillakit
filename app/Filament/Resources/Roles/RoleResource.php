@@ -86,12 +86,12 @@ final class RoleResource extends Resource
                             ->searchable()
                             ->required()
                             ->bulkToggleable()
-                            ->columns(max(1, ceil(Permission::count() / 8)))
+                            ->columns(max(1, ceil(Permission::query()->count() / 8)))
                             ->label('')
                             ->gridDirection('row')
                             ->relationship('permissions', 'name')
-                            ->options(Permission::pluck('description', 'id'))
-                            ->descriptions(Permission::pluck('name', 'id')),
+                            ->options(Permission::query()->pluck('description', 'id'))
+                            ->descriptions(Permission::query()->pluck('name', 'id')),
                     ]),
             ]);
     }
