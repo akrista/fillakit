@@ -7,6 +7,6 @@ parameters:
     paths:
         - app/
 
-    level: 6
+    level: max
 
     tmpDir: /tmp/phpstan
