@@ -35,7 +35,7 @@ final class AdminPanelProvider extends PanelProvider
             ->default()
             ->id(config('fillakit.panel_route'))
             ->path(config('fillakit.only_filament') ? '/' : '/' . config('fillakit.panel_route'))
-            ->login(Login::class)
+            ->login(action: Login::class)
             ->loginRouteSlug('login')
             ->registration(action: Register::class)
             ->registrationRouteSlug('register')

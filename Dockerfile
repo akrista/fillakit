@@ -1,6 +1,6 @@
 ARG PHP_VERSION=8.4
 ARG COMPOSER_VERSION=latest
-ARG BUN_VERSION="latest"
+ARG NODE_VERSION="22-alpine"
 ARG APP_ENV
 
 FROM composer:${COMPOSER_VERSION} AS vendor
@@ -135,10 +135,10 @@ RUN composer i \
     --audit
 
 ###########################################
-# Build frontend assets with Bun
+# Build frontend assets with Node.js
 ###########################################
 
-FROM oven/bun:${BUN_VERSION} AS build
+FROM node:${NODE_VERSION} AS build
 
 ARG APP_ENV
 
@@ -148,14 +148,14 @@ ENV ROOT=/var/www/html \
 
 WORKDIR ${ROOT}
 
-COPY --link package.json bun.lock* ./
+COPY --link package.json package-lock.json* ./
 
-RUN bun i --frozen-lockfile
+RUN npm ci
 
 COPY --link . .
 COPY --link --from=common ${ROOT}/vendor vendor
 
-RUN bun run build
+RUN npm run build
 
 ###########################################
 

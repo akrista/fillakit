@@ -4,17 +4,18 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Gate;
-use Laravel\Horizon\HorizonApplicationServiceProvider;
+// use Illuminate\Support\Facades\Gate;
+// use Laravel\Horizon\HorizonApplicationServiceProvider;
 
-final class HorizonServiceProvider extends HorizonApplicationServiceProvider
+final class HorizonServiceProvider
+// extends HorizonApplicationServiceProvider
 {
     /**
      * Bootstrap any application services.
      */
     public function boot(): void
     {
-        parent::boot();
+        // parent::boot();
 
         // Horizon::routeSmsNotificationsTo('15556667777');
         // Horizon::routeMailNotificationsTo('example@example.com');
@@ -28,6 +29,6 @@ final class HorizonServiceProvider extends HorizonApplicationServiceProvider
      */
     public function gate(): void
     {
-        Gate::define('viewHorizon', fn(mixed $user): bool => false);
+        // Gate::define('viewHorizon', fn(mixed $user): bool => false);
     }
 }

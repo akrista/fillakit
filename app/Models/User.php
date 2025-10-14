@@ -67,7 +67,7 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
     protected $hidden = [
         'password',
         'two_factor_secret',
-        'two_factory_recovery_codes',
+        'two_factor_recovery_codes',
         'remember_token',
     ];
 
@@ -170,12 +170,13 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
      *
      * @return array<string, string>
      */
-    public function casts(): array
+    protected function casts(): array
     {
         return [
             'id' => 'string',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'two_factor_confirmed_at' => 'datetime',
         ];
     }
 
