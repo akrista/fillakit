@@ -2,6 +2,7 @@
 applyTo: "**"
 ---
 <laravel-boost-guidelines>
+<laravel-boost-guidelines>
 === foundation rules ===
 
 # Laravel Boost Guidelines
@@ -16,7 +17,6 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - inertiajs/inertia-laravel (INERTIA) - v2
 - laravel/fortify (FORTIFY) - v1
 - laravel/framework (LARAVEL) - v12
-- laravel/horizon (HORIZON) - v5
 - laravel/octane (OCTANE) - v2
 - laravel/prompts (PROMPTS) - v0
 - laravel/reverb (REVERB) - v1
