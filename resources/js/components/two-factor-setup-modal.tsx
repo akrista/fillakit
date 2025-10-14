@@ -12,13 +12,15 @@ import {
     InputOTPGroup,
     InputOTPSlot,
 } from '@/components/ui/input-otp';
+import { useClipboard } from '@/hooks/use-clipboard';
 import { OTP_MAX_LENGTH } from '@/hooks/use-two-factor-auth';
 import { confirm } from '@/routes/two-factor';
 import { Form } from '@inertiajs/react';
 import { REGEXP_ONLY_DIGITS } from 'input-otp';
-import { Loader2, ScanLine } from 'lucide-react';
+import { Check, Copy, ScanLine } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import AlertError from './alert-error';
+import { Spinner } from './ui/spinner';
 
 function GridScanIcon() {
     return (
@@ -59,6 +61,9 @@ function TwoFactorSetupStep({
     onNextStep: () => void;
     errors: string[];
 }) {
+    const [copiedText, copy] = useClipboard();
+    const IconComponent = copiedText === manualSetupKey ? Check : Copy;
+
     return (
         <>
             {errors?.length ? (
@@ -75,7 +80,7 @@ function TwoFactorSetupStep({
                                         }}
                                     />
                                 ) : (
-                                    <Loader2 className="flex size-4 animate-spin" />
+                                    <Spinner />
                                 )}
                             </div>
                         </div>
@@ -98,16 +103,23 @@ function TwoFactorSetupStep({
                         <div className="flex w-full items-stretch overflow-hidden rounded-xl border border-border">
                             {!manualSetupKey ? (
                                 <div className="flex h-full w-full items-center justify-center bg-muted p-3">
-                                    <Loader2 className="size-4 animate-spin" />
+                                    <Spinner />
                                 </div>
                             ) : (
-                                <input
-                                    type="text"
-                                    readOnly
-                                    value={manualSetupKey}
-                                    className="h-full w-full bg-background p-3 text-foreground outline-none select-all"
-                                    onClick={(e) => e.currentTarget.select()}
-                                />
+                                <>
+                                    <input
+                                        type="text"
+                                        readOnly
+                                        value={manualSetupKey}
+                                        className="h-full w-full bg-background p-3 text-foreground outline-none"
+                                    />
+                                    <button
+                                        onClick={() => copy(manualSetupKey)}
+                                        className="border-l border-border px-3 hover:bg-muted"
+                                    >
+                                        <IconComponent className="w-4" />
+                                    </button>
+                                </>
                             )}
                         </div>
                     </div>

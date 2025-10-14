@@ -30,7 +30,12 @@ import { UserMenuContent } from '@/components/user-menu-content';
 import { useInitials } from '@/hooks/use-initials';
 import { cn } from '@/lib/utils';
 import { dashboard } from '@/routes';
-import { type BreadcrumbItem, type NavItem, type SharedData, type User } from '@/types';
+import {
+    type BreadcrumbItem,
+    type NavItem,
+    type SharedData,
+    type User,
+} from '@/types';
 import { Link, usePage } from '@inertiajs/react';
 import { BookOpen, Folder, LayoutGrid, Menu, Search } from 'lucide-react';
 import AppLogo from './app-logo';
@@ -144,7 +149,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                                     key={item.title}
                                                     href={
                                                         typeof item.href ===
-                                                            'string'
+                                                        'string'
                                                             ? item.href
                                                             : item.href.url
                                                     }
@@ -190,11 +195,11 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                             className={cn(
                                                 navigationMenuTriggerStyle(),
                                                 page.url ===
-                                                (typeof item.href ===
+                                                    (typeof item.href ===
                                                     'string'
-                                                    ? item.href
-                                                    : item.href.url) &&
-                                                activeItemStyles,
+                                                        ? item.href
+                                                        : item.href.url) &&
+                                                    activeItemStyles,
                                                 'h-9 cursor-pointer px-3',
                                             )}
                                         >
@@ -235,7 +240,7 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                                 <a
                                                     href={
                                                         typeof item.href ===
-                                                            'string'
+                                                        'string'
                                                             ? item.href
                                                             : item.href.url
                                                     }
@@ -274,7 +279,9 @@ export function AppHeader({ breadcrumbs = [] }: AppHeaderProps) {
                                             alt={getFullName(auth.user)}
                                         />
                                         <AvatarFallback className="rounded-lg bg-neutral-200 text-black dark:bg-neutral-700 dark:text-white">
-                                            {getInitials(getFullName(auth.user))}
+                                            {getInitials(
+                                                getFullName(auth.user),
+                                            )}
                                         </AvatarFallback>
                                     </Avatar>
                                 </Button>

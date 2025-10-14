@@ -50,7 +50,7 @@ final readonly class FileService
     private function validatePath(string &$path): void
     {
         $realPath = realpath($path);
-        throw_if(in_array($realPath, ['', '0', false], true), new InvalidArgumentException('Invalid path provided.'));
+        throw_if(in_array($realPath, ['', '0', false], true), InvalidArgumentException::class, 'Invalid path provided.');
 
         $isAllowed = array_reduce($this->allowedPaths, fn(bool $carry, string $allowedPath): bool => $carry || mb_strpos($realPath, $allowedPath) === 0, false);
 

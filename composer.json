@@ -18,8 +18,8 @@
         "filament/spatie-laravel-settings-plugin": "^4.1.7",
         "inertiajs/inertia-laravel": "^2.0.10",
         "laravel/fortify": "^1.31.1",
-        "laravel/framework": "^12.33",
-        "laravel/octane": "^2.12.3",
+        "laravel/framework": "^12.34",
+        "laravel/octane": "^2.13.0",
         "laravel/reverb": "^1.6",
         "laravel/sanctum": "^4.2",
         "laravel/tinker": "^2.10.1",
@@ -87,15 +87,19 @@
         "migrate:fresh": ["@php artisan migrate:fresh --seed --force --ansi"],
         "build": [
             "Composer\\Config::disableProcessTimeout",
-            "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:models -NR",
-            "@php artisan ide-helper:meta",
             "@php artisan storage:link",
+            "@php artisan icons:cache",
+            "@php artisan event:cache",
+            "@php artisan config:cache",
+            "@php artisan view:cache",
+            "@php artisan route:cache",
+            "@php artisan filament:cache-components",
             "@php artisan filament:upgrade",
-            "bun run build",
-            "@php artisan optimize:clear"
+            "@php artisan optimize:clear",
+            "@php artisan optimize",
+            "npm run build"
         ],
-        "ide-helper": [
+        "ide": [
             "Composer\\Config::disableProcessTimeout",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -NR",

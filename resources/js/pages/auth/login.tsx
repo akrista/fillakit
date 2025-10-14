@@ -5,12 +5,12 @@ import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Spinner } from '@/components/ui/spinner';
 import AuthLayout from '@/layouts/auth-layout';
 import { register } from '@/routes';
 import { request } from '@/routes/password';
 import { type SharedData } from '@/types';
 import { Form, Head, usePage } from '@inertiajs/react';
-import { LoaderCircle } from 'lucide-react';
 
 interface LoginProps {
     status?: string;
@@ -94,9 +94,7 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                 disabled={processing}
                                 data-test="login-button"
                             >
-                                {processing && (
-                                    <LoaderCircle className="h-4 w-4 animate-spin" />
-                                )}
+                                {processing && <Spinner />}
                                 Log in
                             </Button>
                         </div>

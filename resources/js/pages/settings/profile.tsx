@@ -51,7 +51,9 @@ export default function Profile({
                         {({ processing, recentlySuccessful, errors }) => (
                             <>
                                 <div className="grid gap-2">
-                                    <Label htmlFor="firstname">First Name</Label>
+                                    <Label htmlFor="firstname">
+                                        First Name
+                                    </Label>
 
                                     <Input
                                         id="firstname"
@@ -126,12 +128,12 @@ export default function Profile({
 
                                             {status ===
                                                 'verification-link-sent' && (
-                                                    <div className="mt-2 text-sm font-medium text-green-600">
-                                                        A new verification link has
-                                                        been sent to your email
-                                                        address.
-                                                    </div>
-                                                )}
+                                                <div className="mt-2 text-sm font-medium text-green-600">
+                                                    A new verification link has
+                                                    been sent to your email
+                                                    address.
+                                                </div>
+                                            )}
                                         </div>
                                     )}
 
