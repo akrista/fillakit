@@ -9,7 +9,7 @@ use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
 use Filament\Panel;
 use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -24,10 +24,17 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-final class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia, HasName, MustVerifyEmail
+final class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia, HasName
+    // , MustVerifyEmail
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasApiTokens, HasFactory, HasRoles, HasUuids, InteractsWithMedia, Notifiable, SoftDeletes, TwoFactorAuthenticatable;
+    use HasApiTokens;
+    use HasFactory;
+    use HasRoles;
+    use HasUuids;
+    use InteractsWithMedia;
+    use Notifiable;
+    use SoftDeletes;
+    use TwoFactorAuthenticatable;
 
     public $incrementing = false;
 
@@ -70,29 +77,6 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
         'two_factor_recovery_codes',
         'remember_token',
     ];
-
-    public static function boot(): void
-    {
-        parent::boot();
-
-        self::creating(function (User $model): void {
-            if (empty($model->{$model->getKeyName()})) {
-                $model->{$model->getKeyName()} = (string) Str::uuid();
-            }
-
-            $model->created_by = self::getCurrentUserId();
-            $model->updated_by = self::getCurrentUserId();
-        });
-
-        self::updating(function (User $model): void {
-            $model->updated_by = self::getCurrentUserId();
-        });
-
-        self::deleting(function (User $model): void {
-            $model->deleted_by = self::getCurrentUserId();
-            $model->save();
-        });
-    }
 
     public function canAccessPanel(Panel $panel): bool
     {
@@ -163,6 +147,29 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
     public function deletedUsers(): HasMany
     {
         return $this->hasMany(self::class, 'deleted_by');
+    }
+
+    protected static function boot(): void
+    {
+        parent::boot();
+
+        self::creating(function (User $model): void {
+            if (empty($model->{$model->getKeyName()})) {
+                $model->{$model->getKeyName()} = (string) Str::uuid();
+            }
+
+            $model->created_by = self::getCurrentUserId();
+            $model->updated_by = self::getCurrentUserId();
+        });
+
+        self::updating(function (User $model): void {
+            $model->updated_by = self::getCurrentUserId();
+        });
+
+        self::deleting(function (User $model): void {
+            $model->deleted_by = self::getCurrentUserId();
+            $model->save();
+        });
     }
 
     /**

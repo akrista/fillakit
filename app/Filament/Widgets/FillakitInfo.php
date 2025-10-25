@@ -25,7 +25,7 @@ final class FillakitInfo extends Widget
     /**
      * @return array<string, mixed>
      */
-    public function getViewData(): array
+    protected function getViewData(): array
     {
         $databaseVersion = 'No database';
 

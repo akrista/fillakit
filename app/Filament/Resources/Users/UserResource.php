@@ -104,7 +104,7 @@ final class UserResource extends Resource
                                             ->password()
                                             ->revealable()
                                             ->minLength(8)
-                                            ->dehydrated(fn(?string $state): bool => filled($state))
+                                            ->dehydrated(filled(...))
                                             ->required(fn(string $operation): bool => $operation === 'create')
                                             ->hidden(fn(string $operation): bool => $operation === 'view'),
                                         Select::make('roles')
@@ -220,6 +220,7 @@ final class UserResource extends Resource
                     ->action(function (User $record): void {
                         $notification = new VerifyEmail();
                         $notification->url = filament()->getVerifyEmailUrl($record);
+
                         $record->notify($notification);
                         Notification::make()
                             ->title('Verification email has been resent.')

@@ -12,7 +12,7 @@ final class ManageRoles extends ManageRecords
 {
     protected static string $resource = RoleResource::class;
 
-    public function getHeaderActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             CreateAction::make()

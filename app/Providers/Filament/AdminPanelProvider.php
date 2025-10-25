@@ -55,12 +55,12 @@ final class AdminPanelProvider extends PanelProvider
             // ->font('Kumbh Sans')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors(fn(GeneralSettings $settings): array => array_filter(array_map(
-                fn(string $color): array => Color::generateV3Palette($color),
+                Color::generateV3Palette(...),
                 array_filter($settings->site_theme)
             )))
             ->brandName(fn(GeneralSettings $settings): string => $settings->brand_name ?? config('app.name'))
             ->brandLogo(fn(GeneralSettings $settings) => $settings->brand_logo && Storage::disk('public')->exists($settings->brand_logo) ? Storage::url($settings->brand_logo) : false)
-            ->favicon(fn(GeneralSettings $settings) => $settings->site_favicon !== null && $settings->site_favicon !== '' && $settings->site_favicon !== '0' ? Storage::url($settings->site_favicon) : null)
+            ->favicon(fn(GeneralSettings $settings) => in_array($settings->site_favicon, [null, '', '0'], true) ? null : Storage::url($settings->site_favicon))
             ->brandLogoHeight(
                 fn(GeneralSettings $settings): string => ($settings->brand_logo_height && $settings->brand_logo_height_unit)
                     ? $settings->brand_logo_height . $settings->brand_logo_height_unit

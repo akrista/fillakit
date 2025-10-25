@@ -276,7 +276,7 @@ final class General extends SettingsPage
         }
     }
 
-    public function fillForm(): void
+    protected function fillForm(): void
     {
         $settings = app(self::getSettings());
 

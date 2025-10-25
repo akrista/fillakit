@@ -108,7 +108,7 @@ final class RoleResource extends Resource
                 TextColumn::make('name')
                     ->label('Role')
                     ->weight('font-medium')
-                    ->formatStateUsing(fn(string $state): string => Str::headline($state))
+                    ->formatStateUsing(Str::headline(...))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('description')

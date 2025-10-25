@@ -12,7 +12,7 @@ final class ManageUsers extends ManageRecords
 {
     protected static string $resource = UserResource::class;
 
-    public function getHeaderActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             CreateAction::make()
