@@ -22,4 +22,12 @@ title: Roadmap
 - [ ] Documentation
     - [ ] Converge
         - [ ] Fix Mobile Menu Items
-
+- [ ] Features
+    - [ ] Authentication
+        - [ ] Edit Profile Page
+- [ ] Examples
+    - [ ] Fillapoll
+    - [ ] Fillacal
+    - [ ] Fillapost
+    - [ ] Fillasess
+    - [ ] Fillabud

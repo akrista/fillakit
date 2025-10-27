@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthentication;
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthenticationRecovery;
+use Filament\Auth\MultiFactor\Email\Contracts\HasEmailAuthentication;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasName;
@@ -18,13 +21,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
-use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
 
-final class User extends Authenticatable implements FilamentUser, HasAvatar, HasMedia, HasName
+final class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery, HasAvatar, HasEmailAuthentication, HasMedia, HasName
     // , MustVerifyEmail
 {
     use HasApiTokens;
@@ -34,7 +36,6 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
     use InteractsWithMedia;
     use Notifiable;
     use SoftDeletes;
-    use TwoFactorAuthenticatable;
 
     public $incrementing = false;
 
@@ -73,14 +74,67 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
      */
     protected $hidden = [
         'password',
-        'two_factor_secret',
-        'two_factor_recovery_codes',
-        'remember_token',
+        'filament_authentication_secret',
+        'filament_authentication_recovery_codes',
     ];
 
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
+    }
+
+    public function getAppAuthenticationSecret(): ?string
+    {
+        // This method should return the user's saved app authentication secret.
+        return $this->filament_authentication_secret;
+    }
+
+    public function saveAppAuthenticationSecret(?string $secret): void
+    {
+        // This method should save the user's app authentication secret.
+        $this->filament_authentication_secret = $secret;
+        $this->save();
+    }
+
+    public function getAppAuthenticationHolderName(): string
+    {
+        // In a user's authentication app, each account can be represented by a "holder name".
+        // If the user has multiple accounts in your app, it might be a good idea to use
+        // their email address as then they are still uniquely identifiable.
+
+        return $this->email;
+    }
+
+    /**
+     * @return ?array<string>
+     */
+    public function getAppAuthenticationRecoveryCodes(): ?array
+    {
+        // This method should return the user's saved app authentication recovery codes.
+        return $this->filament_authentication_recovery_codes;
+    }
+
+    /**
+     * @param  array<string> | null  $codes
+     */
+    public function saveAppAuthenticationRecoveryCodes(?array $codes): void
+    {
+        // This method should save the user's app authentication recovery codes.
+        $this->filament_authentication_recovery_codes = $codes;
+        $this->save();
+    }
+
+    public function hasEmailAuthentication(): bool
+    {
+        // This method should return true if the user has enabled email authentication.
+        return $this->has_email_authentication;
+    }
+
+    public function toggleEmailAuthentication(bool $condition): void
+    {
+        // This method should save whether or not the user has enabled email authentication.
+        $this->has_email_authentication = $condition;
+        $this->save();
     }
 
     public function getFilamentAvatarUrl(): ?string
@@ -183,7 +237,9 @@ final class User extends Authenticatable implements FilamentUser, HasAvatar, Has
             'id' => 'string',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'two_factor_confirmed_at' => 'datetime',
+            'filament_authentication_secret' => 'encrypted',
+            'filament_authentication_recovery_codes' => 'encrypted:array',
+            'has_email_authentication' => 'boolean',
         ];
     }
 
