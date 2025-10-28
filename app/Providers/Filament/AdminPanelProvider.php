@@ -7,9 +7,10 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
-use App\Livewire\EditProfile;
 use App\Settings\GeneralSettings;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Auth\MultiFactor\App\AppAuthentication;
+use Filament\Auth\MultiFactor\Email\EmailAuthentication;
+use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -25,9 +26,7 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
-use Jeffgreco13\FilamentBreezy\BreezyCore;
 
 final class AdminPanelProvider extends PanelProvider
 {
@@ -37,7 +36,20 @@ final class AdminPanelProvider extends PanelProvider
             ->default()
             ->id(config('fillakit.panel_route'))
             ->path(config('fillakit.only_filament') ? '/' : '/' . config('fillakit.panel_route'))
-            ->login(Login::class)
+            ->profile(
+                // page: EditProfile::class,
+                isSimple: false
+            )
+            ->multiFactorAuthentication([
+                AppAuthentication::make()
+                    ->brandName(app(GeneralSettings::class)->brand_name ?? config('app.name'))
+                    ->codeWindow(6)
+                    ->recoverable()
+                    ->regenerableRecoveryCodes(),
+                EmailAuthentication::make()
+                    ->codeExpiryMinutes(4),
+            ], isRequired: false)
+            ->login(action: Login::class)
             ->loginRouteSlug('login')
             ->registration(action: Register::class)
             ->registrationRouteSlug('register')
@@ -57,12 +69,12 @@ final class AdminPanelProvider extends PanelProvider
             // ->font('Kumbh Sans')
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->colors(fn(GeneralSettings $settings): array => array_filter(array_map(
-                fn(string $color): array => Color::generateV3Palette($color),
+                Color::generateV3Palette(...),
                 array_filter($settings->site_theme)
             )))
             ->brandName(fn(GeneralSettings $settings): string => $settings->brand_name ?? config('app.name'))
             ->brandLogo(fn(GeneralSettings $settings) => $settings->brand_logo && Storage::disk('public')->exists($settings->brand_logo) ? Storage::url($settings->brand_logo) : false)
-            ->favicon(fn(GeneralSettings $settings) => $settings->site_favicon !== null && $settings->site_favicon !== '' && $settings->site_favicon !== '0' ? Storage::url($settings->site_favicon) : null)
+            ->favicon(fn(GeneralSettings $settings) => in_array($settings->site_favicon, [null, '', '0'], true) ? null : Storage::url($settings->site_favicon))
             ->brandLogoHeight(
                 fn(GeneralSettings $settings): string => ($settings->brand_logo_height && $settings->brand_logo_height_unit)
                     ? $settings->brand_logo_height . $settings->brand_logo_height_unit
@@ -77,6 +89,7 @@ final class AdminPanelProvider extends PanelProvider
                     default => 'Ctrl+Shift+F',
                 }
             )
+            ->topbar(true)
             ->topNavigation(config('fillakit.top_nav_enabled'))
             ->sidebarCollapsibleOnDesktop(!config('fillakit.top_nav_enabled'))
             ->spa(condition: true, hasPrefetching: true)
@@ -117,37 +130,9 @@ final class AdminPanelProvider extends PanelProvider
                 DisableBladeIconComponents::class,
                 DispatchServingFilamentEvent::class,
             ])
-            ->authMiddleware([])
-            ->plugins([
-                BreezyCore::make()
-                    ->enableBrowserSessions(condition: true)
-                    ->enableSanctumTokens(permissions: ['create', 'update', 'delete'])
-                    ->avatarUploadComponent(fn(): SpatieMediaLibraryFileUpload => SpatieMediaLibraryFileUpload::make('avatar')
-                        ->collection('avatars')
-                        ->disk('public')
-                        ->avatar())
-                    ->myProfile(
-                        shouldRegisterUserMenu: true,
-                        shouldRegisterNavigation: false,
-                        hasAvatars: true,
-                        slug: 'profile'
-                    )
-                    ->withoutMyProfileComponents([
-                        'personal_info',
-                    ])
-                    ->myProfileComponents([
-                        'edit_profile' => EditProfile::class,
-                    ])
-                    ->passwordUpdateRules(
-                        rules: [
-                            Password::min(12)->max(21)->uncompromised(3)->mixedCase()->letters()->numbers()->symbols(),
-                        ],
-                        requiresCurrentPassword: true,
-                    )
-                    ->enableTwoFactorAuthentication(
-                        force: false,
-                        scopeToPanel: true,
-                    ),
-            ]);
+            ->authMiddleware([
+                Authenticate::class,
+            ])
+            ->plugins([]);
     }
 }

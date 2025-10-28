@@ -27,7 +27,7 @@ final class About extends Command
 EOT;
 
         $banner = preg_replace_callback('/█/u', fn(array $matches): string => $this->red($matches[0]), $banner);
-        $banner = preg_replace_callback('/[╔╗╚╝║═]/u', fn(array $matches): string => $this->dim($this->red($matches[0])), $banner);
+        $banner = preg_replace_callback('/[╔╗╚╝║═]/u', fn(array $matches): string => $this->dim($this->red($matches[0])), (string) $banner);
 
         echo $banner . PHP_EOL;
 

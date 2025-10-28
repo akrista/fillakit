@@ -12,7 +12,7 @@ final class ManagePermissions extends ManageRecords
 {
     protected static string $resource = PermissionResource::class;
 
-    public function getHeaderActions(): array
+    protected function getHeaderActions(): array
     {
         return [
             CreateAction::make()

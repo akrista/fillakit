@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Log;
 use InvalidArgumentException;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
-final class FileService
+final readonly class FileService
 {
     private array $allowedPaths;
 
@@ -50,13 +50,9 @@ final class FileService
     private function validatePath(string &$path): void
     {
         $realPath = realpath($path);
-        if (in_array($realPath, ['', '0', false], true)) {
-            throw new InvalidArgumentException('Invalid path provided.');
-        }
+        throw_if(in_array($realPath, ['', '0', false], true), InvalidArgumentException::class, 'Invalid path provided.');
 
-        $isAllowed = array_reduce($this->allowedPaths, function (bool $carry, string $allowedPath) use ($realPath): bool {
-            return $carry || mb_strpos($realPath, $allowedPath) === 0;
-        }, false);
+        $isAllowed = array_reduce($this->allowedPaths, fn(bool $carry, string $allowedPath): bool => $carry || mb_strpos($realPath, $allowedPath) === 0, false);
 
         if (!$isAllowed) {
             Log::warning('Attempt to access a path not allowed: ' . $path);

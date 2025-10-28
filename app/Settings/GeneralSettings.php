@@ -10,13 +10,13 @@ final class GeneralSettings extends Settings
 {
     public string $brand_name;
 
-    public ?string $brand_logo;
+    public ?string $brand_logo = null;
 
     public string $brand_logo_height;
 
     public string $brand_logo_height_unit;
 
-    public ?string $site_favicon;
+    public ?string $site_favicon = null;
 
     public array $site_theme;
 

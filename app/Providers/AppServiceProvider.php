@@ -63,12 +63,13 @@ final class AppServiceProvider extends ServiceProvider
         Model::shouldBeStrict();
         Model::automaticallyEagerLoadRelationships();
         Date::use(CarbonImmutable::class);
-        Password::defaults(fn(): ?Password => app()->isProduction() ? Password::min(12)->max(21)->uncompromised(3)->mixedCase()->letters()->numbers()->symbols() : null);
+        Password::defaults(Password::min(12)->max(21)->uncompromised(3)->mixedCase()->letters()->numbers()->symbols());
+
         if (config('app.env') === 'production') {
             URL::forceHttps();
             DB::prohibitDestructiveCommands();
             DB::reconnect();
-            Octane::tick('reconnect-database', fn() => DB::reconnect(), 300);
+            Octane::tick('reconnect-database', DB::reconnect(...), 300);
         }
 
         Http::preventStrayRequests();

@@ -3,7 +3,7 @@
 }
 
 div.fi-fo-toggle-buttons-btn-ctn > input:checked + label {
-    @apply text-(--text) dark:text-(--dark-text) bg-(--bg);
+    @apply bg-(--bg) text-(--text) dark:text-(--dark-text);
 }
 
 div.fi-fo-toggle-buttons-btn-ctn > input:checked + label,

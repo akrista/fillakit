@@ -15,29 +15,27 @@
         "php": "^8.4",
         "convergephp/blade-components": "^1.0",
         "convergephp/converge": "^1.0.2",
-        "filament/filament": "^4.1.3",
-        "filament/spatie-laravel-media-library-plugin": "^4.1.3",
-        "filament/spatie-laravel-settings-plugin": "^4.1.3",
-        "jeffgreco13/filament-breezy": "^3.0.2",
-        "laravel/framework": "^12.32.5",
-        "laravel/horizon": "^5.34",
-        "laravel/octane": "^2.12.3",
+        "filament/filament": "^4.1.10",
+        "filament/spatie-laravel-media-library-plugin": "^4.1.10",
+        "filament/spatie-laravel-settings-plugin": "^4.1.10",
+        "laravel/framework": "^12.35.1",
+        "laravel/octane": "^2.13.0",
         "laravel/reverb": "^1.6",
         "laravel/sanctum": "^4.2",
         "laravel/tinker": "^2.10.1",
+        "livewire/livewire": "^3.6.4",
         "silviolleite/laravelpwa": "^2.0.3",
         "spatie/laravel-permission": "^6.21",
-        "spatie/laravel-settings": "^3.4.4",
-        "spatie/laravel-translation-loader": "^2.8.2",
-        "tightenco/ziggy": "^2.6.0"
+        "spatie/laravel-settings": "^3.5.0",
+        "spatie/laravel-translation-loader": "^2.8.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.16",
         "barryvdh/laravel-ide-helper": "^3.6",
-        "driftingly/rector-laravel": "^2.0.7",
+        "driftingly/rector-laravel": "^2.1.1",
         "fakerphp/faker": "^1.24.1",
         "larastan/larastan": "^3.7.2",
-        "laravel/boost": "^1.3.0",
+        "laravel/boost": "^1.5.1",
         "laravel/pail": "^1.2.3",
         "laravel/pint": "^1.25.1",
         "mockery/mockery": "^1.6.12",
@@ -47,7 +45,7 @@
         "pestphp/pest-plugin-laravel": "^4.0",
         "pestphp/pest-plugin-type-coverage": "^4.0.2",
         "phpunit/phpunit": "^12.4.0",
-        "rector/rector": "^2.2.1"
+        "rector/rector": "^2.2.5"
     },
     "autoload": {
         "psr-4": {
@@ -62,42 +60,40 @@
         }
     },
     "scripts": {
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install",
+            "npm run build"
+        ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan serve --host=0.0.0.0\" \"php artisan queue:listen --queue=default --tries=1\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" \"bun run dev\" --names=server,queue,broadcast,logs,vite --kill-others"
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
         ],
         "prod": [
             "Composer\\Config::disableProcessTimeout",
-            "bun run build",
+            "npm run build",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs,vite --kill-others"
-        ],
-        "post-autoload-dump": [
-            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi",
-            "@php artisan filament:upgrade"
-        ],
-        "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",  "@php artisan boost:update --ansi","@php artisan vendor:publish --tag=converge-components-assets --force"
-        ],
-        "post-root-package-install": ["@php -r \"file_exists('.env') || copy('.env.example', '.env');\""],
-        "post-create-project-cmd": [
-            "@php artisan key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
-            "@php artisan migrate --graceful --ansi"
         ],
         "migrate": ["@php artisan migrate --ansi --graceful"],
         "migrate:fresh": ["@php artisan migrate:fresh --seed --force --ansi"],
         "build": [
             "Composer\\Config::disableProcessTimeout",
-            "@php artisan ide-helper:generate",
-            "@php artisan ide-helper:models -NR",
-            "@php artisan ide-helper:meta",
             "@php artisan storage:link",
+            "@php artisan icons:cache",
+            "@php artisan event:cache",
+            "@php artisan config:cache",
+            "@php artisan view:cache",
+            "@php artisan route:cache",
+            "@php artisan filament:cache-components",
             "@php artisan filament:upgrade",
-            "bun run build",
-            "@php artisan optimize:clear"
+            "@php artisan optimize:clear",
+            "@php artisan optimize",
+            "npm run build"
         ],
-        "ide-helper": [
+        "ide": [
             "Composer\\Config::disableProcessTimeout",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -NR",
@@ -105,7 +101,6 @@
         ],
         "format": ["pint --ansi"],
         "lint": [
-            "pint --ansi",
             "rector"
         ],
         "test:type-coverage": "php -d memory_limit=512M vendor/bin/pest --type-coverage --min=100",
@@ -116,10 +111,34 @@
         ],
         "test:types": "phpstan --memory-limit=512M",
         "test": [
+            "@php artisan config:clear --ansi",
             "@test:type-coverage",
             "@test:unit",
             "@test:lint",
             "@test:types"
+        ],
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
+        ],
+        "post-update-cmd": [
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",  "@php artisan boost:update --ansi",
+            "@php artisan ide-helper:generate",
+            "@php artisan ide-helper:models -NR",
+            "@php artisan ide-helper:meta",
+            "@php artisan vendor:publish --tag=converge-components-assets --force"
+        ],
+        "post-root-package-install": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
+        ],
+        "post-create-project-cmd": [
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ]
     },
     "extra": {

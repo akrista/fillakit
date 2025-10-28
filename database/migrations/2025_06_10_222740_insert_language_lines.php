@@ -14,7 +14,7 @@ return new class extends Migration
     {
         $languageLines = config('fillakit-translations');
         foreach ($languageLines as $languageLine) {
-            LanguageLine::create($languageLine);
+            LanguageLine::query()->create($languageLine);
         }
     }
 
@@ -23,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        LanguageLine::truncate();
+        LanguageLine::query()->truncate();
     }
 };
