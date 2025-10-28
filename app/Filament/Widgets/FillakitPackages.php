@@ -27,7 +27,6 @@ final class FillakitPackages extends Widget
             'laravel/framework' => 'Laravel',
             'filament/filament' => 'Filament',
             'inertiajs/inertia-laravel' => 'Inertia',
-            'livewire/livewire' => 'Livewire',
             'tightenco/ziggy' => 'Ziggy',
             'laravel/horizon' => 'Horizon',
             'laravel/octane' => 'Octane',
