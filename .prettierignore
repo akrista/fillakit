@@ -1,8 +1,0 @@
-resources/js/components/ui/*
-resources/views/mail/*
-vendor/
-node_modules/
-public/js/
-public/css/
-storage/
-bootstrap/cache/

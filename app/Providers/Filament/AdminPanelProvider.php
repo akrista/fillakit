@@ -8,6 +8,8 @@ use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
 use App\Settings\GeneralSettings;
+use Filament\Auth\MultiFactor\App\AppAuthentication;
+use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -24,7 +26,6 @@ use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 final class AdminPanelProvider extends PanelProvider
@@ -35,6 +36,19 @@ final class AdminPanelProvider extends PanelProvider
             ->default()
             ->id(config('fillakit.panel_route'))
             ->path(config('fillakit.only_filament') ? '/' : '/' . config('fillakit.panel_route'))
+            ->profile(
+                // page: EditProfile::class,
+                isSimple: false
+            )
+            ->multiFactorAuthentication([
+                AppAuthentication::make()
+                    ->brandName(app(GeneralSettings::class)->brand_name ?? config('app.name'))
+                    ->codeWindow(6)
+                    ->recoverable()
+                    ->regenerableRecoveryCodes(),
+                EmailAuthentication::make()
+                    ->codeExpiryMinutes(4),
+            ], isRequired: false)
             ->login(action: Login::class)
             ->loginRouteSlug('login')
             ->registration(action: Register::class)
@@ -75,6 +89,7 @@ final class AdminPanelProvider extends PanelProvider
                     default => 'Ctrl+Shift+F',
                 }
             )
+            ->topbar(true)
             ->topNavigation(config('fillakit.top_nav_enabled'))
             ->sidebarCollapsibleOnDesktop(!config('fillakit.top_nav_enabled'))
             ->spa(condition: true, hasPrefetching: true)

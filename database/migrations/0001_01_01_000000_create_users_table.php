@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('email', 255)->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 255);
+            $table->text('filament_authentication_secret')->nullable();
+            $table->text('filament_authentication_recovery_codes')->nullable();
+            $table->boolean('has_email_authentication')->default(false);
             $table->string('avatar_url')->nullable();
             $table->rememberToken();
             $table->uuid('created_by')->nullable();

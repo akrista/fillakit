@@ -13,19 +13,9 @@ declare(strict_types=1);
 |
 */
 
-use Illuminate\Support\Sleep;
-
 pest()->extend(Tests\TestCase::class)
-    ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
-    ->beforeEach(function (): void {
-        Illuminate\Support\Str::createRandomStringsNormally();
-        Illuminate\Support\Str::createUuidsNormally();
-        Illuminate\Support\Facades\Http::preventStrayRequests();
-        Sleep::fake();
-
-        $this->freezeTime();
-    })
-    ->in('Browser', 'Feature', 'Unit');
+ // ->use(Illuminate\Foundation\Testing\RefreshDatabase::class)
+    ->in('Feature');
 
 /*
 |--------------------------------------------------------------------------
