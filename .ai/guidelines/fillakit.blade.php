@@ -1,9 +1,6 @@
----
-alwaysApply: false
----
-# AI Rules for {{project-name}}
+# AI Rules for @{{project-name}}
 
-{{project-description}}
+@{{project-description}}
 
 ## CODING_PRACTICES
 
@@ -40,7 +37,7 @@ alwaysApply: false
 #### GIT
 
 - Use conventional commits to create meaningful commit messages
-- Use feature branches with descriptive names following {{branch_naming_convention}}
+- Use feature branches with descriptive names following @{{branch_naming_convention}}
 - Write meaningful commit messages that explain why changes were made, not just what
 - Keep commits focused on single logical changes to facilitate code review and bisection
 - Use interactive rebase to clean up history before merging feature branches
@@ -74,7 +71,7 @@ alwaysApply: false
 #### POSTGRES
 
 - Use connection pooling to manage database connections efficiently
-- Implement JSONB columns for semi-structured data instead of creating many tables for {{flexible_data}}
+- Implement JSONB columns for semi-structured data instead of creating many tables for @{{flexible_data}}
 - Use materialized views for complex, frequently accessed read-only data
 
 
@@ -86,7 +83,7 @@ alwaysApply: false
 #### MYSQL
 
 - Use InnoDB storage engine for transactions and foreign key constraints
-- Implement proper indexing strategies based on {{query_patterns}}
+- Implement proper indexing strategies based on @{{query_patterns}}
 - Use connection pooling for better performance
 
 
@@ -99,7 +96,7 @@ alwaysApply: false
 
 - Use parameterized queries to prevent SQL injection
 - Implement proper indexing strategies based on query patterns
-- Use stored procedures for complex business logic that requires database access to {{business_entities}}
+- Use stored procedures for complex business logic that requires database access to @{{business_entities}}
 
 
 
@@ -110,6 +107,6 @@ alwaysApply: false
 #### DOCKER
 
 - Use multi-stage builds to create smaller production images
-- Implement layer caching strategies to speed up builds for {{dependency_types}}
+- Implement layer caching strategies to speed up builds for @{{dependency_types}}
 - Use non-root users in containers for better security
 
