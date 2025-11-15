@@ -33,7 +33,9 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 final class UserResource extends Resource
@@ -43,6 +45,28 @@ final class UserResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     protected static ?int $navigationSort = 11;
+
+    protected static int $globalSearchResultsLimit = 3;
+
+    protected static ?string $recordTitleAttribute = 'email';
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return $record->email;
+    }
+
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['firstname', 'lastname', 'email', 'username'];
+    }
+
+    public static function getGlobalSearchResultDetails(Model $record): array
+    {
+        return [
+            'Username' => $record->username,
+            'Name' => $record->firstname . ' ' . $record->lastname,
+        ];
+    }
 
     public static function getNavigationGroup(): ?string
     {

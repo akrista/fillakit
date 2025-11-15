@@ -11,6 +11,7 @@ return [
     'admin_firstname' => env('ADMIN_FIRSTNAME', 'Super'),
     'admin_lastname' => env('ADMIN_LASTNAME', 'Admin'),
     'top_nav_enabled' => env('TOP_NAV_ENABLED', true),
+    'topbar_enabled' => env('TOPBAR_ENABLED', true),
     'github_url' => env('GITHUB_URL', 'https://github.com/akrista/fillakit'),
     'docs_url' => env('DOCS_URL', 'https://fillakit.notakrista.com/docs'),
 ];

@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Pages\Auth;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
 use Illuminate\Validation\ValidationException;
 use SensitiveParameter;
@@ -58,7 +57,7 @@ final class Login extends \Filament\Auth\Pages\Login
         ]);
     }
 
-    private function getLoginFormComponent(): Component
+    private function getLoginFormComponent(): TextInput
     {
         return TextInput::make('login')
             ->label(__('Email or Username'))
