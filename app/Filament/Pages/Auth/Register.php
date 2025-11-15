@@ -36,7 +36,7 @@ final class Register extends \Filament\Auth\Pages\Register
             ]);
     }
 
-    private function getUsernameFormComponent(): Component
+    private function getUsernameFormComponent(): TextInput
     {
         return TextInput::make('username')
             ->label(__('Username'))
@@ -50,7 +50,7 @@ final class Register extends \Filament\Auth\Pages\Register
             ->autocomplete(false);
     }
 
-    private function getFirstnameFormComponent(): Component
+    private function getFirstnameFormComponent(): TextInput
     {
         return TextInput::make('firstname')
             ->label(__('First Name'))
@@ -58,7 +58,7 @@ final class Register extends \Filament\Auth\Pages\Register
             ->maxLength(255);
     }
 
-    private function getLastnameFormComponent(): Component
+    private function getLastnameFormComponent(): TextInput
     {
         return TextInput::make('lastname')
             ->label(__('Last Name'))
