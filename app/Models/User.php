@@ -76,6 +76,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         'password',
         'filament_authentication_secret',
         'filament_authentication_recovery_codes',
+        'remember_token',
     ];
 
     public function canAccessPanel(Panel $panel): bool
