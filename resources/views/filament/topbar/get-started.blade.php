@@ -1,9 +1,7 @@
 <div class="flex items-center">
     <x-filament::button
         tag="a"
-        href="{{ config('fillakit.docs_url') }}"
-        target="_blank"
-        rel="noopener noreferrer"
+        href="/docs"
         color="primary"
         size="md"
         class="inline-flex items-center gap-2"

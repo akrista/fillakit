@@ -40,24 +40,24 @@ final class AdminPanelProvider extends PanelProvider
             ->default()
             ->id(config('fillakit.panel_route'))
             ->path(config('fillakit.panel_route'))
-            ->profile(
-                // page: EditProfile::class,
-                isSimple: false
-            )
-            ->multiFactorAuthentication([
-                AppAuthentication::make()
-                    ->brandName($settings?->brand_name ?? config('app.name'))
-                    ->codeWindow(6)
-                    ->recoverable()
-                    ->regenerableRecoveryCodes(),
-                EmailAuthentication::make()
-                    ->codeExpiryMinutes(4),
-            ], isRequired: false)
-            ->login(action: Login::class)
-            ->loginRouteSlug('login')
-            ->registration(action: Register::class)
-            ->registrationRouteSlug('register')
-            ->passwordReset()
+            // ->profile(
+            //     // page: EditProfile::class,
+            //     isSimple: false
+            // )
+            // ->multiFactorAuthentication([
+            //     AppAuthentication::make()
+            //         ->brandName($settings?->brand_name ?? config('app.name'))
+            //         ->codeWindow(6)
+            //         ->recoverable()
+            //         ->regenerableRecoveryCodes(),
+            //     EmailAuthentication::make()
+            //         ->codeExpiryMinutes(4),
+            // ], isRequired: false)
+            // ->login(action: Login::class)
+            // ->loginRouteSlug('login')
+            // ->registration(action: Register::class)
+            // ->registrationRouteSlug('register')
+            // ->passwordReset()
             // ->passwordResetRoutePrefix('password-reset')
             // ->passwordResetRequestRouteSlug('request')
             // ->passwordResetRouteSlug('reset')
@@ -187,7 +187,7 @@ final class AdminPanelProvider extends PanelProvider
                 DispatchServingFilamentEvent::class,
             ])
             ->authMiddleware([
-                Authenticate::class,
+                // Authenticate::class,
             ]);
     }
 
