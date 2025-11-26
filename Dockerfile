@@ -141,6 +141,7 @@ RUN composer i \
 FROM node:${NODE_VERSION} AS build
 
 ARG APP_ENV
+ARG PHP_VERSION=8.4
 
 ENV ROOT=/var/www/html \
     APP_ENV=${APP_ENV} \
@@ -148,12 +149,15 @@ ENV ROOT=/var/www/html \
 
 WORKDIR ${ROOT}
 
+RUN apk add --no-cache php${PHP_VERSION}-cli php-json php-mbstring php-xml php-tokenizer php-openssl
+
 COPY --link package.json package-lock.json* ./
 
 RUN npm ci
 
 COPY --link . .
 COPY --link --from=common ${ROOT}/vendor vendor
+COPY --link --from=common /usr/bin/composer /usr/bin/composer
 
 RUN npm run build
 
