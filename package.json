@@ -52,7 +52,7 @@
         "laravel-vite-plugin": "^2.0.1",
         "layerchart": "^2.0.0-next.27",
         "lucide-svelte": "^0.545.0",
-        "maildev": "^2.2.1",
+        "maildev": "^1.1.1",
         "mode-watcher": "^1.1.0",
         "paneforge": "^1.0.2",
         "playwright": "^1.56.1",

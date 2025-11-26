@@ -242,7 +242,7 @@ final class UserResource extends Resource
                     ->icon(Heroicon::OutlinedEnvelope)
                     ->authorize(fn(User $record): bool => !$record->hasVerifiedEmail())
                     ->action(function (User $record): void {
-                        $notification = new VerifyEmail();
+                        $notification = new VerifyEmail;
                         $notification->url = filament()->getVerifyEmailUrl($record);
 
                         $record->notify($notification);

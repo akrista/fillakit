@@ -21,7 +21,7 @@ final class FillakitPackages extends Widget
     /**
      * @return array<string, mixed>
      */
-    public function getViewData(): array
+    protected function getViewData(): array
     {
         $packages = [
             'laravel/framework' => 'Laravel',

@@ -48,7 +48,7 @@ class ForgotPassword extends Notification implements ShouldQueue
     public function toArray(object $notifiable): array
     {
         return [
-            'message' => "Use this code to reset your password: {$this->passwordResetCode}",
+            'message' => 'Use this code to reset your password: ' . $this->passwordResetCode,
             'title' => 'Reset your password',
         ];
     }
