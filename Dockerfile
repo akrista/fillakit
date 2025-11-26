@@ -132,7 +132,12 @@ RUN composer i \
     --no-autoloader \
     --no-ansi \
     --no-scripts \
-    --audit
+    --audit \
+    && composer dump-autoload \
+    --no-dev \
+    --no-interaction \
+    --no-ansi \
+    --classmap-authoritative
 
 ###########################################
 # Build frontend assets with Node.js
@@ -141,7 +146,6 @@ RUN composer i \
 FROM node:${NODE_VERSION} AS build
 
 ARG APP_ENV
-ARG PHP_VERSION=8.4
 
 ENV ROOT=/var/www/html \
     APP_ENV=${APP_ENV} \
@@ -149,7 +153,7 @@ ENV ROOT=/var/www/html \
 
 WORKDIR ${ROOT}
 
-RUN apk add --no-cache php${PHP_VERSION}-cli php-json php-mbstring php-xml php-tokenizer php-openssl
+RUN apk add --no-cache php php-cli php-json php-mbstring php-xml php-tokenizer php-openssl
 
 COPY --link package.json package-lock.json* ./
 
