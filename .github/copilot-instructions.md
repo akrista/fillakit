@@ -133,12 +133,12 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - pestphp/pest (PEST) - v4
 - phpunit/phpunit (PHPUNIT) - v12
 - rector/rector (RECTOR) - v2
-- @laravel/vite-plugin-wayfinder (WAYFINDER) - v0
 - @inertiajs/svelte (INERTIA) - v2
-- eslint (ESLINT) - v9
+- @laravel/vite-plugin-wayfinder (WAYFINDER) - v0
 - laravel-echo (ECHO) - v2
-- prettier (PRETTIER) - v3
 - tailwindcss (TAILWINDCSS) - v4
+- eslint (ESLINT) - v9
+- prettier (PRETTIER) - v3
 
 ## Conventions
 - You must follow all existing code conventions used in this application. When creating or editing a file, check sibling files for the correct structure, approach, naming.
