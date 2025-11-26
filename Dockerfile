@@ -147,6 +147,7 @@ FROM common AS build
 
 ARG APP_ENV
 ARG NODE_VERSION=24
+ARG WWWUSER=1000
 
 ENV ROOT=/var/www/html \
     APP_ENV=${APP_ENV} \
@@ -154,8 +155,11 @@ ENV ROOT=/var/www/html \
 
 WORKDIR ${ROOT}
 
-# Install Node.js from Alpine repositories
+USER root
+
 RUN apk add --no-cache nodejs npm
+
+USER ${WWWUSER}
 
 RUN npm ci
 
