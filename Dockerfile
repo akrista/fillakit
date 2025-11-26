@@ -28,7 +28,8 @@ ENV TERM=xterm-color \
     APP_ENV=${APP_ENV} \
     ROOT=/var/www/html \
     COMPOSER_FUND=0 \
-    COMPOSER_MAX_PARALLEL_HTTP=48
+    COMPOSER_MAX_PARALLEL_HTTP=48 \
+    NODE_PACKAGE_URL=https://unofficial-builds.nodejs.org/download/release/v24.11.0/node-v24.11.0-linux-x64-musl.tar.gz
 
 WORKDIR ${ROOT}
 
@@ -42,10 +43,8 @@ ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/relea
 RUN apk update; \
     apk upgrade; \
     apk add --no-cache \
-    nodejs \
-    npm \
     supervisor \
-    # curl \
+    curl \
     # wget \
     # vim \
     # tzdata \
@@ -56,6 +55,9 @@ RUN apk update; \
     # ca-certificates \
     # libsodium-dev \
     # brotli \
+    && curl -fsSL ${NODE_PACKAGE_URL} -o /tmp/node.tar.gz \
+    && tar -xzf /tmp/node.tar.gz -C /usr/local --strip-components=1 \
+    && rm -f /tmp/node.tar.gz \
     # Install PHP extensions
     && install-php-extensions \
     openswoole \
