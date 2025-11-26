@@ -1,11 +1,10 @@
 ARG PHP_VERSION=8.4
 ARG COMPOSER_VERSION=latest
-ARG NODE_VERSION="24-alpine"
 ARG APP_ENV
 
 FROM composer:${COMPOSER_VERSION} AS vendor
 
-FROM php:${PHP_VERSION}-cli-alpine AS base
+FROM php:${PHP_VERSION}-cli-alpine
 
 LABEL maintainer="Jorge Thomas <info@notakrista.com>"
 LABEL org.opencontainers.image.title="Fillakit"
@@ -13,8 +12,8 @@ LABEL org.opencontainers.image.description="Laravel Starter Kit with Filament"
 LABEL org.opencontainers.image.source=https://github.com/akrista/fillakit
 LABEL org.opencontainers.image.licenses=MIT
 
-ARG WWWUSER=1000
-ARG WWWGROUP=1000
+ARG USER_ID=1000
+ARG GROUP_ID=1000
 ARG TZ=UTC
 ARG APP_ENV
 
@@ -25,11 +24,11 @@ ENV TERM=xterm-color \
     WORKER_COMMAND="php artisan queue:work" \
     OCTANE_SERVER=swoole \
     TZ=${TZ} \
-    USER=octane \
+    USER=laravel \
     APP_ENV=${APP_ENV} \
     ROOT=/var/www/html \
     COMPOSER_FUND=0 \
-    COMPOSER_MAX_PARALLEL_HTTP=24
+    COMPOSER_MAX_PARALLEL_HTTP=48
 
 WORKDIR ${ROOT}
 
@@ -43,6 +42,8 @@ ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/relea
 RUN apk update; \
     apk upgrade; \
     apk add --no-cache \
+    nodejs \
+    npm \
     supervisor \
     # curl \
     # wget \
@@ -58,6 +59,7 @@ RUN apk update; \
     # Install PHP extensions
     && install-php-extensions \
     openswoole \
+    apcu \
     pcntl \
     intl \
     zip \
@@ -69,7 +71,7 @@ RUN apk update; \
     # vips \
     # gd \
     # rdkafka \
-    # memcached \
+    # ffi \
     # igbinary \
     # swoole \
     # redis \
@@ -91,22 +93,18 @@ RUN arch="$(apk --print-arch)" \
     x86) _cronic_fname='supercronic-linux-386' ;; \
     *) echo >&2 "error: unsupported architecture: $arch"; exit 1 ;; \
     esac \
-    && wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.33/${_cronic_fname}" \
+    && wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.38/${_cronic_fname}" \
     -O /usr/bin/supercronic \
     && chmod +x /usr/bin/supercronic \
     && mkdir -p /etc/supercronic \
     && echo "*/1 * * * * php ${ROOT}/artisan schedule:run --no-interaction" > /etc/supercronic/laravel
 
-RUN addgroup -g ${WWWGROUP} ${USER} \
-    && adduser -D -h ${ROOT} -G ${USER} -u ${WWWUSER} -s /bin/sh ${USER}
-
+RUN addgroup -g ${GROUP_ID} ${USER} \
+    && adduser -D -G ${USER} -u ${USER_ID} -s /bin/sh ${USER}
 RUN mkdir -p /var/log/supervisor /var/run/supervisor \
     && chown -R ${USER}:${USER} ${ROOT} /var/log /var/run \
     && chmod -R a+rw ${ROOT} /var/log /var/run
-
 RUN cp ${PHP_INI_DIR}/php.ini-production ${PHP_INI_DIR}/php.ini
-
-USER ${USER}
 
 COPY --link --chown=${WWWUSER}:${WWWUSER} --from=vendor /usr/bin/composer /usr/bin/composer
 
@@ -116,15 +114,7 @@ COPY --link --chown=${WWWUSER}:${WWWUSER} docker/php.ini ${PHP_INI_DIR}/conf.d/9
 COPY --link --chown=${WWWUSER}:${WWWUSER} docker/start-container /usr/local/bin/start-container
 COPY --link --chown=${WWWUSER}:${WWWUSER} docker/healthcheck /usr/local/bin/healthcheck
 
-RUN chmod +x /usr/local/bin/start-container /usr/local/bin/healthcheck
-
-###########################################
-
-FROM base AS common
-
-USER ${USER}
-
-COPY --link --chown=${WWWUSER}:${WWWUSER} . .
+COPY --link composer.* ./
 
 RUN composer i \
     --no-dev \
@@ -132,43 +122,14 @@ RUN composer i \
     --no-autoloader \
     --no-ansi \
     --no-scripts \
+    --no-progress \
     --audit
-
-###########################################
-# Build frontend assets with Node.js
-###########################################
-
-FROM node:${NODE_VERSION} AS build
-
-ARG APP_ENV
-
-ENV ROOT=/var/www/html \
-    APP_ENV=${APP_ENV} \
-    NODE_ENV=${APP_ENV:-production}
-
-WORKDIR ${ROOT}
 
 COPY --link package.json package-lock.json* ./
 
 RUN npm ci
 
 COPY --link . .
-COPY --link --from=common ${ROOT}/vendor vendor
-
-RUN npm run build
-
-###########################################
-
-FROM common AS runner
-
-USER ${USER}
-
-ENV WITH_HORIZON=false \
-    WITH_SCHEDULER=false \
-    WITH_REVERB=false
-
-COPY --link --chown=${WWWUSER}:${WWWUSER} . .
-COPY --link --chown=${WWWUSER}:${WWWUSER} --from=build ${ROOT}/public public
 
 RUN mkdir -p \
     storage/framework/sessions \
@@ -176,18 +137,26 @@ RUN mkdir -p \
     storage/framework/cache \
     storage/framework/testing \
     storage/logs \
-    bootstrap/cache && chmod -R a+rw storage
+    bootstrap/cache \
+    && chown -R ${USER_ID}:${GROUP_ID} ${ROOT} \
+    && chmod +x /usr/local/bin/start-container /usr/local/bin/healthcheck
 
 RUN composer dump-autoload \
+    --optimize \
+    --apcu \
     --classmap-authoritative \
     --no-interaction \
     --no-ansi \
     --no-dev \
     && composer clear-cache
 
+RUN npm run build
+
+USER ${USER}
+
 EXPOSE 8000
 EXPOSE 8080
 
 ENTRYPOINT ["start-container"]
 
-HEALTHCHECK --start-period=5s --interval=2s --timeout=5s --retries=8 CMD healthcheck || exit 1
+HEALTHCHECK --start-period=5s --interval=1s --timeout=3s --retries=10 CMD healthcheck || exit 1
