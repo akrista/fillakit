@@ -137,16 +137,16 @@ RUN composer i \
     --no-dev \
     --no-interaction \
     --no-ansi \
-    --classmap-authoritative \
-    && php artisan wayfinder:generate --with-form || true
+    --classmap-authoritative
 
 ###########################################
 # Build frontend assets with Node.js
 ###########################################
 
-FROM node:${NODE_VERSION} AS build
+FROM common AS build
 
 ARG APP_ENV
+ARG NODE_VERSION=24
 
 ENV ROOT=/var/www/html \
     APP_ENV=${APP_ENV} \
@@ -154,17 +154,10 @@ ENV ROOT=/var/www/html \
 
 WORKDIR ${ROOT}
 
-RUN echo "@edge https://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories \
-    && apk add --no-cache php84@edge php84-cli@edge php84-json@edge php84-mbstring@edge php84-xml@edge php84-tokenizer@edge php84-openssl@edge php84-fileinfo@edge \
-    && ln -s /usr/bin/php84 /usr/bin/php
-
-COPY --link package.json package-lock.json* ./
+# Install Node.js from Alpine repositories
+RUN apk add --no-cache nodejs npm
 
 RUN npm ci
-
-COPY --link . .
-COPY --link --from=common ${ROOT}/vendor vendor
-COPY --link --from=common /usr/bin/composer /usr/bin/composer
 
 RUN npm run build
 
