@@ -1,25 +1,28 @@
 {
     "$schema": "https://json.schemastore.org/package.json",
-    "private": true,
-    "type": "module",
     "name": "akrista/fillakit",
     "version": "0.0.1",
+    "type": "module",
+    "private": true,
     "author": "Jorge Thomas (akrista) <info@notakrista.com> (https://notakrista.com/)",
     "license": "MIT",
     "licenseUrl": "http://github.com/akrista/fillakit",
+    "homepage": "https://github.com/akrista/fillakit",
     "bugs": {
         "url": "https://github.com/akrista/fillakit/issues"
     },
-    "homepage": "https://github.com/akrista/fillakit",
     "keywords": [
-        "vite",
-        "typescript",
+        "filamentphp",
         "laravel",
-        "filamentphp"
+        "typescript",
+        "vite"
     ],
     "scripts": {
         "build": "vite build",
         "dev": "vite"
+    },
+    "dependencies": {
+        "driver.js": "^1.4.0"
     },
     "devDependencies": {
         "@tailwindcss/vite": "^4.0.0",
@@ -31,8 +34,5 @@
         "pusher-js": "^8.4.0",
         "tailwindcss": "^4.0.0",
         "vite": "^7.0.7"
-    },
-    "dependencies": {
-        "driver.js": "^1.4.0"
     }
 }
