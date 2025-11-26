@@ -12,7 +12,6 @@
     },
     "homepage": "https://github.com/akrista/fillakit",
     "keywords": [
-        "react",
         "vite",
         "typescript",
         "laravel",
