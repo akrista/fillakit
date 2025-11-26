@@ -28,6 +28,7 @@ yarn-error.log
 /.nova
 /.vscode
 !/.vscode/extensions.json
+/.claude
 /.zed
 /.vagrant
 /.junie/mcp
@@ -35,6 +36,7 @@ yarn-error.log
 /public_html/storage
 /public/manifest.json
 /public/service-worker.js
+/public/vendor
 app/storage/
 bootstrap/compiled.php
 .phpstorm.meta.php

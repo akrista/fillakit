@@ -1,7 +1,16 @@
 <?php
 
-declare(strict_types=1);
+namespace Tests\Unit;
 
-test('that true is true', function (): void {
-    expect(true)->toBeTrue();
-});
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class ExampleTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function test_that_true_is_true()
+    {
+        $this->assertTrue(true);
+    }
+}

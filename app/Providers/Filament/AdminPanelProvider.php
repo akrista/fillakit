@@ -8,6 +8,7 @@ use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
 use App\Settings\GeneralSettings;
+use Exception;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
 use Filament\Http\Middleware\Authenticate;
@@ -25,6 +26,7 @@ use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
@@ -32,17 +34,19 @@ final class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
+        $settings = $this->getSettings();
+
         return $panel
             ->default()
             ->id(config('fillakit.panel_route'))
-            ->path(config('fillakit.only_filament') ? '/' : '/' . config('fillakit.panel_route'))
+            ->path(config('fillakit.panel_route'))
             ->profile(
                 // page: EditProfile::class,
                 isSimple: false
             )
             ->multiFactorAuthentication([
                 AppAuthentication::make()
-                    ->brandName(app(GeneralSettings::class)->brand_name ?? config('app.name'))
+                    ->brandName($settings?->brand_name ?? config('app.name'))
                     ->codeWindow(6)
                     ->recoverable()
                     ->regenerableRecoveryCodes(),
@@ -68,18 +72,66 @@ final class AdminPanelProvider extends PanelProvider
             // brisk theme
             // ->font('Kumbh Sans')
             ->viteTheme('resources/css/filament/admin/theme.css')
-            ->colors(fn(GeneralSettings $settings): array => array_filter(array_map(
-                Color::generateV3Palette(...),
-                array_filter($settings->site_theme)
-            )))
-            ->brandName(fn(GeneralSettings $settings): string => $settings->brand_name ?? config('app.name'))
-            ->brandLogo(fn(GeneralSettings $settings) => $settings->brand_logo && Storage::disk('public')->exists($settings->brand_logo) ? Storage::url($settings->brand_logo) : false)
-            ->favicon(fn(GeneralSettings $settings) => in_array($settings->site_favicon, [null, '', '0'], true) ? null : Storage::url($settings->site_favicon))
-            ->brandLogoHeight(
-                fn(GeneralSettings $settings): string => ($settings->brand_logo_height && $settings->brand_logo_height_unit)
-                    ? $settings->brand_logo_height . $settings->brand_logo_height_unit
-                    : '2rem'
-            )
+            ->colors(function (): array {
+                try {
+                    $settings = $this->getSettings();
+                    if (!$settings instanceof GeneralSettings) {
+                        return [];
+                    }
+
+                    return array_filter(array_map(
+                        Color::generateV3Palette(...),
+                        array_filter($settings->site_theme ?? [])
+                    ));
+                } catch (Exception) {
+                    return [];
+                }
+            })
+            ->brandName(function (): string {
+                try {
+                    $settings = $this->getSettings();
+
+                    return $settings?->brand_name ?? config('app.name');
+                } catch (Exception) {
+                    return config('app.name');
+                }
+            })
+            ->brandLogo(function () {
+                try {
+                    $settings = $this->getSettings();
+                    if (! $settings || ! $settings->brand_logo) {
+                        return false;
+                    }
+
+                    return Storage::disk('public')->exists($settings->brand_logo) ? Storage::url($settings->brand_logo) : false;
+                } catch (Exception) {
+                    return false;
+                }
+            })
+            ->favicon(function () {
+                try {
+                    $settings = $this->getSettings();
+                    if (! $settings || in_array($settings->site_favicon ?? null, [null, '', '0'], true)) {
+                        return null;
+                    }
+
+                    return Storage::url($settings->site_favicon);
+                } catch (Exception) {
+                    return null;
+                }
+            })
+            ->brandLogoHeight(function (): string {
+                try {
+                    $settings = $this->getSettings();
+                    if (! $settings || ! $settings->brand_logo_height || ! $settings->brand_logo_height_unit) {
+                        return '2rem';
+                    }
+
+                    return $settings->brand_logo_height . $settings->brand_logo_height_unit;
+                } catch (Exception) {
+                    return '2rem';
+                }
+            })
             ->globalSearchKeyBindings(['command+shift+f', 'ctrl+shift+f'])
             ->globalSearchFieldSuffix(
                 fn(): string => match (Platform::detect()) {
@@ -89,17 +141,21 @@ final class AdminPanelProvider extends PanelProvider
                     default => 'Ctrl+Shift+F',
                 }
             )
-            ->topbar(true)
+            ->topbar(config('fillakit.topbar_enabled'))
             ->topNavigation(config('fillakit.top_nav_enabled'))
             ->sidebarCollapsibleOnDesktop(!config('fillakit.top_nav_enabled'))
             ->spa(condition: true, hasPrefetching: true)
             ->renderHook(
-                PanelsRenderHook::HEAD_START,
-                fn (): View => view('components.seo.meta'),
+                name: PanelsRenderHook::HEAD_START,
+                hook: fn (): View => view('components.seo.meta'),
             )
             ->renderHook(
                 name: PanelsRenderHook::BODY_END,
                 hook: fn (): View => view('filament.switcher.switcher'),
+            )
+            ->renderHook(
+                name: PanelsRenderHook::FOOTER,
+                hook: fn (): View => view('filament.footer.footer'),
             )
             ->renderHook(
                 PanelsRenderHook::GLOBAL_SEARCH_BEFORE,
@@ -132,7 +188,28 @@ final class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->plugins([]);
+            ]);
+    }
+
+    private function getSettings(): ?GeneralSettings
+    {
+        try {
+            if (! $this->hasSettingsTable()) {
+                return null;
+            }
+
+            return app(GeneralSettings::class);
+        } catch (Exception) {
+            return null;
+        }
+    }
+
+    private function hasSettingsTable(): bool
+    {
+        try {
+            return DB::connection()->getSchemaBuilder()->hasTable('settings');
+        } catch (Exception) {
+            return false;
+        }
     }
 }
