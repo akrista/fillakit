@@ -39,7 +39,7 @@ final class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->id(config('fillakit.panel_route'))
-            ->path(config('fillakit.only_filament') ? '/' : '/' . config('fillakit.panel_route'))
+            ->path(config('fillakit.panel_route'))
             ->profile(
                 // page: EditProfile::class,
                 isSimple: false
