@@ -12,7 +12,17 @@ export default defineConfig({
             ssr: 'resources/js/ssr.ts',
             refresh: true,
         }),
-        svelte(),
+        svelte({
+            compilerOptions: (filename) => ({
+                runes: !filename.includes('node_modules'),
+            }),
+            onwarn: (warning, handler) => {
+                if (warning.code === 'legacy_export_invalid' && warning.filename?.includes('node_modules')) {
+                    return;
+                }
+                handler(warning);
+            },
+        }),
         tailwindcss(),
         wayfinder({
             formVariants: true,
