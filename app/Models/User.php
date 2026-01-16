@@ -247,7 +247,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
     private static function getCurrentUserId(): ?string
     {
         /** @var Guard $guard */
-        $guard = app(\Illuminate\Contracts\Auth\Factory::class);
+        $guard = resolve(\Illuminate\Contracts\Auth\Factory::class);
 
         if ($guard->check()) {
             /** @var User $user */

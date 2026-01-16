@@ -24,7 +24,6 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Facades\FilamentView;
 use Filament\Support\Icons\Heroicon;
-use Illuminate\Support\Facades\URL;
 use Throwable;
 
 final class General extends SettingsPage
@@ -250,7 +249,7 @@ final class General extends SettingsPage
         try {
             $data = $this->mutateFormDataBeforeSave($this->form->getState());
 
-            $settings = app(self::getSettings());
+            $settings = resolve(self::getSettings());
 
             $settings->fill($data);
             $settings->save();
@@ -264,7 +263,7 @@ final class General extends SettingsPage
                 ->success()
                 ->send();
 
-            $this->redirect(self::getUrl(), navigate: FilamentView::hasSpaMode() && URL::isAppUrl(self::getUrl()));
+            $this->redirect(self::getUrl(), navigate: FilamentView::hasSpaMode());
         } catch (Throwable $throwable) {
             Notification::make()
                 ->title('Error saving settings')
@@ -278,7 +277,7 @@ final class General extends SettingsPage
 
     protected function fillForm(): void
     {
-        $settings = app(self::getSettings());
+        $settings = resolve(self::getSettings());
 
         $data = $this->mutateFormDataBeforeFill($settings->toArray());
 

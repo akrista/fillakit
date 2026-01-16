@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Roles;
 
-use App\Filament\Resources\Roles\Pages\ManageRoles;
+use App\Filament\Concerns\HasPermissionFormComponents;
+use App\Filament\Resources\Roles\Pages\CreateRole;
+use App\Filament\Resources\Roles\Pages\EditRole;
+use App\Filament\Resources\Roles\Pages\ListRoles;
 use BackedEnum;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
@@ -15,21 +18,22 @@ use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Actions\ViewAction;
-use Filament\Forms\Components\CheckboxList;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Support\Enums\FontWeight;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
 final class RoleResource extends Resource
 {
+    use HasPermissionFormComponents;
+
     protected static ?string $model = Role::class;
 
     protected static ?string $recordTitleAttribute = 'name';
@@ -47,52 +51,33 @@ final class RoleResource extends Resource
     {
         return $schema
             ->components([
-                Section::make('Role Details')
-                    ->description('Configure the basic details of the role')
-                    ->icon(Heroicon::OutlinedShieldExclamation)
-                    ->columns(2)
-                    ->columnSpanFull()
-                    ->collapsible()
+                Grid::make()
                     ->schema([
-                        TextInput::make('name')
-                            ->label('Role')
-                            ->required()
-                            ->trim()
-                            ->maxLength(255)
-                            ->unique(ignoreRecord: true)
-                            ->placeholder('e.g. admin, editor, user'),
-                        TextInput::make('guard_name')
-                            ->label('Guard')
-                            ->default('web')
-                            ->required()
-                            ->trim()
-                            ->maxLength(255)
-                            ->helperText('The authentication guard for this role (see more in the documentation)'),
-                        Textarea::make('description')
-                            ->columnSpanFull()
-                            ->autosize()
-                            ->trim()
-                            ->maxLength(255)
-                            ->helperText('A short description of the role'),
-                    ]),
-                Section::make('Permissions')
-                    ->description('Assign specific permissions to this role')
-                    ->icon(Heroicon::OutlinedShieldCheck)
-                    ->compact()
-                    ->columnSpanFull()
-                    ->collapsible()
-                    ->schema([
-                        CheckboxList::make('permissions')
-                            ->searchable()
-                            ->required()
-                            ->bulkToggleable()
-                            ->columns(max(1, ceil(Permission::query()->count() / 8)))
-                            ->label('')
-                            ->gridDirection('row')
-                            ->relationship('permissions', 'name')
-                            ->options(Permission::query()->pluck('description', 'id'))
-                            ->descriptions(Permission::query()->pluck('name', 'id')),
-                    ]),
+                        Section::make()
+                            ->schema([
+                                TextInput::make('name')
+                                    ->label(__('Role Name'))
+                                    ->required()
+                                    ->trim()
+                                    ->maxLength(255)
+                                    ->unique(ignoreRecord: true)
+                                    ->placeholder('e.g. admin, editor, user'),
+                                TextInput::make('guard_name')
+                                    ->label(__('Guard'))
+                                    ->default('web')
+                                    ->nullable()
+                                    ->trim()
+                                    ->maxLength(255),
+                                self::getSelectAllToggle(),
+                            ])
+                            ->columns([
+                                'sm' => 2,
+                                'lg' => 3,
+                            ])
+                            ->columnSpanFull(),
+                    ])
+                    ->columnSpanFull(),
+                self::getPermissionFormComponents(),
             ]);
     }
 
@@ -106,30 +91,22 @@ final class RoleResource extends Resource
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('name')
-                    ->label('Role')
-                    ->weight('font-medium')
-                    ->formatStateUsing(Str::headline(...))
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('description')
+                    ->label(__('Role'))
+                    ->weight(FontWeight::Medium)
+                    ->formatStateUsing(fn (string $state): string => Str::headline($state))
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('guard_name')
-                    ->label('Guard')
+                    ->label(__('Guard'))
                     ->badge()
                     ->color('warning'),
-                TextColumn::make('permissions.description')
-                    ->label('Permissions')
-                    ->searchable()
+                TextColumn::make('permissions_count')
+                    ->label(__('Permissions'))
                     ->badge()
-                    ->colors(['success'])
-                    ->separator(',')
-                    ->limitList(3),
-                TextColumn::make('created_at')
-                    ->dateTime('d/m/Y h:i A')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->counts('permissions')
+                    ->color('primary'),
                 TextColumn::make('updated_at')
+                    ->label(__('Updated At'))
                     ->dateTime('d/m/Y h:i A')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -163,7 +140,9 @@ final class RoleResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => ManageRoles::route('/'),
+            'index' => ListRoles::route('/'),
+            'create' => CreateRole::route('/create'),
+            'edit' => EditRole::route('/{record}/edit'),
         ];
     }
 

@@ -1,7 +1,6 @@
 {
     "$schema": "https://json.schemastore.org/package.json",
     "name": "akrista/fillakit",
-    "version": "0.0.1",
     "type": "module",
     "private": true,
     "author": "Jorge Thomas (akrista) <info@notakrista.com> (https://notakrista.com/)",

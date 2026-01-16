@@ -8,42 +8,47 @@
     "authors": [
         {
             "name": "Jorge Thomas (akrista)",
-            "email": "info@notakrista.com"
+            "role": "Maintainer",
+            "email": "info@notakrista.com",
+            "homepage": "https://notakrista.com/fillakit"
         }
     ],
     "require": {
-        "php": "^8.4",
-        "filament/filament": "^4.2.3",
-        "filament/spatie-laravel-media-library-plugin": "^4.2.3",
-        "filament/spatie-laravel-settings-plugin": "^4.2.3",
-        "laravel/framework": "^12.40.1",
-        "laravel/octane": "^2.13.1",
-        "laravel/reverb": "^1.6.2",
-        "laravel/sanctum": "^4.2.1",
-        "laravel/tinker": "^2.10.2",
-        "mallardduck/blade-lucide-icons": "^1.24",
+        "php": "^8.5",
+        "convergephp/blade-components": "^1.0",
+        "convergephp/converge": "^1.0.2",
+        "filament/filament": "^v5.0.0-beta9",
+        "filament/spatie-laravel-media-library-plugin": "^v5.0.0-beta9",
+        "filament/spatie-laravel-settings-plugin": "^v5.0.0-beta9",
+        "flowframe/laravel-trend": "^0.4.0",
+        "laravel/framework": "^12.47.0",
+        "laravel/octane": "^2.13.4",
+        "laravel/reverb": "^1.7.0",
+        "laravel/sanctum": "^4.2.3",
+        "laravel/tinker": "^2.11.0",
         "silviolleite/laravelpwa": "^2.0.3",
-        "spatie/laravel-permission": "^6.23",
-        "spatie/laravel-settings": "^3.5.0",
+        "spatie/laravel-activitylog": "^4.10.2",
+        "spatie/laravel-permission": "^6.24",
+        "spatie/laravel-settings": "^3.6.0",
         "spatie/laravel-translation-loader": "^2.8.2"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.16.1",
-        "barryvdh/laravel-ide-helper": "^3.6",
-        "driftingly/rector-laravel": "^2.1.3",
+        "akrista/laravel-extra-boost": "^1.3.3",
+        "barryvdh/laravel-debugbar": "^3.16.3",
+        "barryvdh/laravel-ide-helper": "^3.6.1",
+        "driftingly/rector-laravel": "^2.1.9",
         "fakerphp/faker": "^1.24.1",
-        "larastan/larastan": "^3.8.0",
-        "laravel/boost": "^1.8.2",
+        "larastan/larastan": "^3.8.1",
         "laravel/pail": "^1.2.4",
-        "laravel/pint": "^1.26.0",
+        "laravel/pint": "^1.27.0",
         "mockery/mockery": "^1.6.12",
         "nunomaduro/collision": "^8.8.3",
-        "pestphp/pest": "^4.1.5",
-        "pestphp/pest-plugin-browser": "^4.1.1",
+        "pestphp/pest": "^4.3.1",
+        "pestphp/pest-plugin-browser": "^4.2.1",
         "pestphp/pest-plugin-laravel": "^4.0",
         "pestphp/pest-plugin-type-coverage": "^4.0.3",
-        "phpunit/phpunit": "^12.4.4",
-        "rector/rector": "^2.2.8"
+        "phpunit/phpunit": "^12.5.4",
+        "rector/rector": "^2.3.1"
     },
     "autoload": {
         "psr-4": {
@@ -111,7 +116,7 @@
             "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",  "@php artisan boost:update --ansi",
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",  "@php artisan extra-boost:update --ansi",
             "@php artisan ide-helper:generate",
             "@php artisan ide-helper:models -NR",
             "@php artisan ide-helper:meta"
@@ -143,6 +148,6 @@
             "php-http/discovery": true
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "beta",
     "prefer-stable": true
 }

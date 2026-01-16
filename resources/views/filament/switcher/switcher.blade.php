@@ -1,11 +1,12 @@
 @php
     $alignment = 'top-right';
         $currentRoute = request()->route()?->getName();
+    $panelId = filament()->getCurrentPanel()->getId();
     $enabledRoutes = [
-        'filament.admin.auth.login',
-        'filament.admin.auth.register',
-        'filament.admin.auth.password-reset.request',
-        'filament.admin.auth.password-reset.reset',
+        "filament.{$panelId}.auth.login",
+        "filament.{$panelId}.auth.register",
+        "filament.{$panelId}.auth.password-reset.request",
+        "filament.{$panelId}.auth.password-reset.reset",
     ];
     $shouldShow = $currentRoute && collect($enabledRoutes)->contains(fn($route) => str_contains($currentRoute, $route));
 @endphp

@@ -1,5 +1,7 @@
 ---
-alwaysApply: true
+trigger: always_on
+glob:
+description: Laravel Boost development guidelines for this project
 ---
 <laravel-boost-guidelines>
 === .ai/fillakit rules ===

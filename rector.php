@@ -11,7 +11,7 @@ use RectorLaravel\Set\LaravelSetList;
 use RectorLaravel\Set\LaravelSetProvider;
 
 return RectorConfig::configure()
-    ->withPhpVersion(PhpVersion::PHP_84)
+    ->withPhpVersion(PhpVersion::PHP_85)
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
     ])

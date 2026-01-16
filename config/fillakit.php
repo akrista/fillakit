@@ -14,4 +14,5 @@ return [
     'topbar_enabled' => env('TOPBAR_ENABLED', true),
     'github_url' => env('GITHUB_URL', 'https://github.com/akrista/fillakit'),
     'docs_url' => env('DOCS_URL', 'https://fillakit.notakrista.com/docs'),
+    'locales' => [['code' => env('APP_LOCALE', 'en')]],
 ];

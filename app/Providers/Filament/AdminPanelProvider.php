@@ -7,7 +7,9 @@ namespace App\Providers\Filament;
 use App\Filament\Pages\Auth\Login;
 use App\Filament\Pages\Auth\Register;
 use App\Filament\Pages\Dashboard;
+use App\Http\Middleware\SetLocale;
 use App\Settings\GeneralSettings;
+use App\Support\LanguageSwitcher;
 use Exception;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
 use Filament\Auth\MultiFactor\Email\EmailAuthentication;
@@ -184,7 +186,12 @@ final class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->middleware([SetLocale::class], isPersistent: true)
+            ->renderHook(
+                name: PanelsRenderHook::USER_MENU_PROFILE_AFTER,
+                hook: fn (): View => view('filament.language-switcher.language-switcher', LanguageSwitcher::getViewData()),
+            );
     }
 
     private function getSettings(): ?GeneralSettings
@@ -194,7 +201,7 @@ final class AdminPanelProvider extends PanelProvider
                 return null;
             }
 
-            return app(GeneralSettings::class);
+            return resolve(GeneralSettings::class);
         } catch (Exception) {
             return null;
         }

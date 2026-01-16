@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Filament\Pages\Auth;
 
 use Filament\Forms\Components\TextInput;
-use Filament\Schemas\Components\Component;
 use Filament\Schemas\Schema;
 
 final class Register extends \Filament\Auth\Pages\Register
@@ -23,7 +22,7 @@ final class Register extends \Filament\Auth\Pages\Register
             ]);
     }
 
-    protected function getEmailFormComponent(): Component
+    protected function getEmailFormComponent(): TextInput
     {
         return TextInput::make('email')
             ->label(__('filament-panels::auth/pages/register.form.email.label'))
