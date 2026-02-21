@@ -7,6 +7,7 @@ namespace App\Filament\Resources\LanguageLines;
 use App\Filament\Resources\LanguageLines\Pages\ManageLanguageLines;
 use App\Models\LanguageLine;
 use BackedEnum;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -18,23 +19,30 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Enums\FontWeight;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\Layout\Split;
-use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
+use Override;
 
 final class LanguageLineResource extends Resource
 {
+    #[Override]
     protected static ?string $model = LanguageLine::class;
 
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLanguage;
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'key';
 
-    protected static ?string $modelLabel = 'Translation';
+    #[Override]
+    protected static ?int $navigationSort = 1003;
 
-    protected static ?string $pluralModelLabel = 'Translations';
+    #[Override]
+    protected static ?string $modelLabel = 'Traducción';
+
+    #[Override]
+    protected static ?string $pluralModelLabel = 'Traducciones';
 
     public static function getNavigationGroup(): ?string
     {
@@ -66,43 +74,11 @@ final class LanguageLineResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return $table
-            ->paginated([12, 24, 48, 'all'])
-            ->recordTitleAttribute('key')
-            ->columns([
-                Stack::make([
-                    Split::make([
-                        TextColumn::make('group')
-                            ->badge()
-                            ->color('primary')
-                            ->searchable()
-                            ->sortable()
-                            ->grow(false),
-                        TextColumn::make('key')
-                            ->weight(FontWeight::Bold)
-                            ->searchable()
-                            ->sortable()
-                            ->limit(50),
-                    ]),
-                    TextColumn::make('text')
-                        ->formatStateUsing(function ($state): string {
-                            if (is_array($state)) {
-                                return collect($state)
-                                    ->map(fn ($value, string $key): string => sprintf('%s: %s', $key, $value))
-                                    ->implode(' | ');
-                            }
+        $table->getLivewire();
 
-                            return (string) $state;
-                        })
-                        ->color('gray')
-                        ->limit(100)
-                        ->wrap(),
-                ])->space(2),
-            ])
-            ->contentGrid([
-                'md' => 2,
-                'xl' => 3,
-            ])
+        return $table
+            ->recordTitleAttribute('key')
+            ->columns(self::getTableColumns())
             ->filters([
                 SelectFilter::make('group')
                     ->label('Group')
@@ -111,10 +87,13 @@ final class LanguageLineResource extends Resource
                         ->pluck('group', 'group')
                         ->toArray()),
             ])
+            ->recordActionsAlignment('center')
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                ViewAction::make()->iconButton(),
+                EditAction::make()->iconButton(),
+                ActionGroup::make([
+                    DeleteAction::make(),
+                ])->iconButton(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -127,6 +106,43 @@ final class LanguageLineResource extends Resource
     {
         return [
             'index' => ManageLanguageLines::route('/'),
+        ];
+    }
+
+    /**
+     * @return array<int, \Filament\Tables\Columns\Column|\Filament\Tables\Columns\Layout\Component>
+     */
+    private static function getTableColumns(): array
+    {
+        return [
+            TextColumn::make('group')
+                ->badge()
+                ->limit(30)
+                ->color('primary')
+                ->searchable()
+                ->sortable(),
+            TextColumn::make('key')
+                ->weight(FontWeight::Bold)
+                ->searchable()
+                ->sortable()
+                ->limit(30)
+                ->tooltip(fn ($record): string => $record->key),
+            TextColumn::make('text')
+                ->formatStateUsing(function ($state): string {
+                    if (is_array($state)) {
+                        return collect($state)
+                            ->map(fn ($value, string $key): string => sprintf('%s: %s', $key, $value))
+                            ->implode(' | ');
+                    }
+
+                    return (string) $state;
+                })
+                ->color('gray')
+                ->size('sm')
+                ->limit(60)
+                ->tooltip(fn ($record): ?string => is_array($record->text)
+                    ? collect($record->text)->map(fn ($v, string $k): string => sprintf('%s: %s', $k, $v))->implode(' | ')
+                    : $record->text),
         ];
     }
 }

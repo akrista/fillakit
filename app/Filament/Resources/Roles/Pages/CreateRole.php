@@ -9,12 +9,14 @@ use App\Services\PermissionRegistry;
 use Filament\Resources\Pages\CreateRecord;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Override;
 use Spatie\Permission\Models\Permission;
 
 final class CreateRole extends CreateRecord
 {
     public Collection $permissions;
 
+    #[Override]
     protected static string $resource = RoleResource::class;
 
     protected function mutateFormDataBeforeCreate(array $data): array

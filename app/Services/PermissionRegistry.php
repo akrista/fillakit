@@ -189,7 +189,7 @@ final class PermissionRegistry
         // Custom permissions
         $permissions = $permissions->merge(array_keys($this->customPermissions));
 
-        return $permissions->unique()->values()->toArray();
+        return $permissions->unique()->values()->all();
     }
 
     /**

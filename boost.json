@@ -21,8 +21,6 @@
         "vscode",
         "windsurf"
     ],
-    "guidelines": [
-        "filament/filament"
-    ],
+    "guidelines": true,
     "herd_mcp": true
 }

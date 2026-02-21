@@ -10,12 +10,14 @@ use Filament\Actions\DeleteAction;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Override;
 use Spatie\Permission\Models\Permission;
 
 final class EditRole extends EditRecord
 {
     public Collection $permissions;
 
+    #[Override]
     protected static string $resource = RoleResource::class;
 
     protected function getHeaderActions(): array

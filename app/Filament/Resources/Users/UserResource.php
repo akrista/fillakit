@@ -37,17 +37,23 @@ use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Override;
 
 final class UserResource extends Resource
 {
+    #[Override]
     protected static ?string $model = User::class;
 
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
 
+    #[Override]
     protected static ?int $navigationSort = 11;
 
+    #[Override]
     protected static int $globalSearchResultsLimit = 3;
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'email';
 
     public static function getGlobalSearchResultTitle(Model $record): string|Htmlable

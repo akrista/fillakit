@@ -24,6 +24,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Facades\FilamentView;
 use Filament\Support\Icons\Heroicon;
+use Override;
 use Throwable;
 
 final class General extends SettingsPage
@@ -31,14 +32,18 @@ final class General extends SettingsPage
     /**
      * @var array<string, mixed> | null
      */
+    #[Override]
     public ?array $data = [];
 
     public string $theme = '';
 
+    #[Override]
     protected static string $settings = GeneralSettings::class;
 
+    #[Override]
     protected static ?int $navigationSort = 10;
 
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
     public static function canAccess(): bool

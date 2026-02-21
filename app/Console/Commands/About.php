@@ -6,13 +6,16 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Laravel\Prompts\Concerns\Colors;
+use Override;
 
 final class About extends Command
 {
     use Colors;
 
+    #[Override]
     protected $signature = 'fillakit:about';
 
+    #[Override]
     protected $description = 'Display information about Fillakit.';
 
     public function handle(): void

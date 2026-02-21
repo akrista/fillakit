@@ -22,6 +22,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Str;
 use Laravel\Sanctum\HasApiTokens;
+use Override;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Permission\Traits\HasRoles;
@@ -37,12 +38,16 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
     use Notifiable;
     use SoftDeletes;
 
+    #[Override]
     public $incrementing = false;
 
+    #[Override]
     protected $table = 'users';
 
+    #[Override]
     protected $primaryKey = 'id';
 
+    #[Override]
     protected $keyType = 'string';
 
     /**
@@ -50,6 +55,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
      *
      * @var list<string>
      */
+    #[Override]
     protected $fillable = [
         'id',
         'username',
@@ -72,6 +78,7 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
      *
      * @var list<string>
      */
+    #[Override]
     protected $hidden = [
         'password',
         'filament_authentication_secret',

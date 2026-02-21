@@ -8,18 +8,22 @@ use Composer\InstalledVersions;
 use Filament\Widgets\Widget;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\DB;
+use Override;
 use PDO;
 use Throwable;
 
 final class FillakitInfo extends Widget
 {
+    #[Override]
     protected static ?int $sort = -2;
 
+    #[Override]
     protected static bool $isLazy = false;
 
     /**
      * @var view-string
      */
+    #[Override]
     protected string $view = 'filament.widgets.fillakit-info-widget';
 
     /**

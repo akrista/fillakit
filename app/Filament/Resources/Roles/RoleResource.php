@@ -28,18 +28,23 @@ use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Support\Str;
+use Override;
 use Spatie\Permission\Models\Role;
 
 final class RoleResource extends Resource
 {
     use HasPermissionFormComponents;
 
+    #[Override]
     protected static ?string $model = Role::class;
 
+    #[Override]
     protected static ?string $recordTitleAttribute = 'name';
 
+    #[Override]
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShieldExclamation;
 
+    #[Override]
     protected static ?int $navigationSort = 12;
 
     public static function getNavigationGroup(): ?string
