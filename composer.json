@@ -72,21 +72,21 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
             "@php artisan key:generate",
             "@php artisan migrate --force",
-            "npm install",
-            "npm run build"
+            "bun install",
+            "bun run build"
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"bun run dev\" --names='server,queue,vite'"
         ],
         "dev:ssr": [
-            "npm run build:ssr",
+            "bun run build:ssr",
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
         ],
         "prod": [
             "Composer\\Config::disableProcessTimeout",
-            "npm run build",
+            "bun run build",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs,vite --kill-others"
         ],
         "build": [
@@ -97,7 +97,7 @@
             "@php artisan icons:cache",
             "@php artisan filament:cache-components",
             "@php artisan optimize",
-            "npm run build"
+            "bun run build"
         ],
         "ide": [
             "Composer\\Config::disableProcessTimeout",
@@ -108,22 +108,22 @@
         "update:requirements": [
             "Composer\\Config::disableProcessTimeout",
             "composer bump",
-            "npx npm-check-updates -u"
+            "bunx bun-check-updates -u"
         ],
         "lint": [
             "Composer\\Config::disableProcessTimeout",
             "rector",
             "pint --parallel",
             "pint --parallel --config=pint.filament.json app/Filament",
-            "npm run format",
-            "npm run lint"
+            "bun run format",
+            "bun run lint"
         ],
         "test:lint": [
             "Composer\\Config::disableProcessTimeout",
             "pint --parallel --test",
             "pint --parallel --test --config=pint.filament.json app/Filament",
             "rector --dry-run",
-            "npm run test:lint"
+            "bun run test:lint"
         ],
         "test:unit": "@php -d xdebug.mode=coverage vendor/bin/pest --parallel --coverage --exactly=100.0",
         "test:types": "phpstan",
