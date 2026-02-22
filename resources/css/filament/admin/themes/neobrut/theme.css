@@ -167,26 +167,14 @@ p,
 .fi-btn.fi-disabled,
 .fi-input-wrp.fi-disabled,
 .fi-select.fi-disabled {
-    background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 8px,
-        var(--gray-100) 8px,
-        var(--gray-200) 16px
-    ) !important;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 8px, var(--gray-100) 8px, var(--gray-200) 16px) !important;
     background-size: 100% 100%;
 }
 
 .dark .fi-btn.fi-disabled,
 .dark .fi-input-wrp.fi-disabled,
 .dark .fi-select.fi-disabled {
-    background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 8px,
-        var(--gray-600) 8px,
-        var(--gray-700) 16px
-    ) !important;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 8px, var(--gray-600) 8px, var(--gray-700) 16px) !important;
 }
 
 /* ============================================
@@ -220,36 +208,30 @@ body,
 @keyframes neo-shimmer {
     0% {
         background-position: -200% center;
-        box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-            var(--gray-950);
+        box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
     }
     50% {
         background-position: 200% center;
-        box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-            var(--gray-950);
+        box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
     }
     100% {
         background-position: -200% center;
-        box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-            var(--gray-950);
+        box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
     }
 }
 
 @keyframes neo-shimmer-dark {
     0% {
         background-position: -200% center;
-        box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-            var(--gray-600);
+        box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
     }
     50% {
         background-position: 200% center;
-        box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-            var(--gray-600);
+        box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
     }
     100% {
         background-position: -200% center;
-        box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-            var(--gray-600);
+        box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
     }
 }
 
@@ -261,62 +243,36 @@ body,
     border-radius: var(--neo-radius-md);
     position: relative;
     overflow: hidden;
-    background: linear-gradient(
-        90deg,
-        var(--gray-200) 0%,
-        var(--gray-100) 20%,
-        var(--gray-200) 40%,
-        var(--gray-200) 100%
-    );
+    background: linear-gradient(90deg, var(--gray-200) 0%, var(--gray-100) 20%, var(--gray-200) 40%, var(--gray-200) 100%);
     background-size: 200% 100%;
-    animation: neo-shimmer var(--neo-animation-duration-loading) ease-in-out
-        infinite;
+    animation: neo-shimmer var(--neo-animation-duration-loading) ease-in-out infinite;
 }
 
 .dark .fi-loading-section,
 .dark .fi-section.fi-loading {
     border-color: var(--gray-600);
-    background: linear-gradient(
-        90deg,
-        var(--gray-800) 0%,
-        var(--gray-700) 20%,
-        var(--gray-800) 40%,
-        var(--gray-800) 100%
-    );
+    background: linear-gradient(90deg, var(--gray-800) 0%, var(--gray-700) 20%, var(--gray-800) 40%, var(--gray-800) 100%);
     background-size: 200% 100%;
-    animation: neo-shimmer-dark var(--neo-animation-duration-loading)
-        ease-in-out infinite;
+    animation: neo-shimmer-dark var(--neo-animation-duration-loading) ease-in-out infinite;
 }
 
 /* Diagonal stripe pattern overlay */
 .fi-loading-section::before,
 .fi-section.fi-loading::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(0, 0, 0, 0.03) 10px,
-        rgba(0, 0, 0, 0.03) 20px
-    );
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.03) 10px, rgba(0, 0, 0, 0.03) 20px);
     pointer-events: none;
     z-index: 1;
 }
 
 .dark .fi-loading-section::before,
 .dark .fi-section.fi-loading::before {
-    background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(255, 255, 255, 0.03) 10px,
-        rgba(255, 255, 255, 0.03) 20px
-    );
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px);
 }
 
 /* Widget Loading States */
@@ -328,61 +284,35 @@ body,
     border-radius: var(--neo-radius-md);
     position: relative;
     overflow: hidden;
-    background: linear-gradient(
-        90deg,
-        var(--gray-200) 0%,
-        var(--gray-100) 20%,
-        var(--gray-200) 40%,
-        var(--gray-200) 100%
-    );
+    background: linear-gradient(90deg, var(--gray-200) 0%, var(--gray-100) 20%, var(--gray-200) 40%, var(--gray-200) 100%);
     background-size: 200% 100%;
-    animation: neo-shimmer var(--neo-animation-duration-loading) ease-in-out
-        infinite;
+    animation: neo-shimmer var(--neo-animation-duration-loading) ease-in-out infinite;
 }
 
 .dark .fi-wi-stats-overview-stat.fi-loading,
 .dark .fi-widget.fi-loading {
     border-color: var(--gray-600);
-    background: linear-gradient(
-        90deg,
-        var(--gray-800) 0%,
-        var(--gray-700) 20%,
-        var(--gray-800) 40%,
-        var(--gray-800) 100%
-    );
+    background: linear-gradient(90deg, var(--gray-800) 0%, var(--gray-700) 20%, var(--gray-800) 40%, var(--gray-800) 100%);
     background-size: 200% 100%;
-    animation: neo-shimmer-dark var(--neo-animation-duration-loading)
-        ease-in-out infinite;
+    animation: neo-shimmer-dark var(--neo-animation-duration-loading) ease-in-out infinite;
 }
 
 .fi-wi-stats-overview-stat.fi-loading::before,
 .fi-widget.fi-loading::before {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(0, 0, 0, 0.03) 10px,
-        rgba(0, 0, 0, 0.03) 20px
-    );
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.03) 10px, rgba(0, 0, 0, 0.03) 20px);
     pointer-events: none;
     z-index: 1;
 }
 
 .dark .fi-wi-stats-overview-stat.fi-loading::before,
 .dark .fi-widget.fi-loading::before {
-    background-image: repeating-linear-gradient(
-        45deg,
-        transparent,
-        transparent 10px,
-        rgba(255, 255, 255, 0.03) 10px,
-        rgba(255, 255, 255, 0.03) 20px
-    );
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255, 255, 255, 0.03) 10px, rgba(255, 255, 255, 0.03) 20px);
 }
 
 /* ============================================
@@ -406,43 +336,29 @@ body,
 /* Filled Buttons - No Color (Gray) */
 .fi-btn:not(.fi-outlined):not(.fi-color) {
     border-color: var(--gray-950);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
 }
 
 .dark .fi-btn:not(.fi-outlined):not(.fi-color) {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
-.fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled):not(
-        .fi-processing
-    ) {
+.fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled):not(.fi-processing) {
     transform: translateY(var(--neo-transform-offset-xs));
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
-.dark
-    .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled):not(
-        .fi-processing
-    ) {
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+.dark .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled):not(.fi-processing) {
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
-.fi-btn:not(.fi-outlined):not(.fi-color):active:not(.fi-disabled):not(
-        .fi-processing
-    ) {
+.fi-btn:not(.fi-outlined):not(.fi-color):active:not(.fi-disabled):not(.fi-processing) {
     transform: translateY(var(--neo-transform-offset-sm));
     box-shadow: 0px 0px 0px var(--gray-950);
 }
 
-.dark
-    .fi-btn:not(.fi-outlined):not(.fi-color):active:not(.fi-disabled):not(
-        .fi-processing
-    ) {
+.dark .fi-btn:not(.fi-outlined):not(.fi-color):active:not(.fi-disabled):not(.fi-processing) {
     box-shadow: 0px 0px 0px var(--gray-600);
 }
 
@@ -450,8 +366,7 @@ body,
 .fi-btn:not(.fi-outlined).fi-color {
     background-color: var(--color-600);
     border-color: var(--color-700);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--color-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--color-700);
 }
 
 .fi-btn:not(.fi-outlined).fi-color,
@@ -462,13 +377,10 @@ body,
 
 .fi-btn:not(.fi-outlined).fi-color:hover:not(.fi-disabled):not(.fi-processing) {
     transform: translateY(var(--neo-transform-offset-xs));
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--color-700);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--color-700);
 }
 
-.fi-btn:not(.fi-outlined).fi-color:active:not(.fi-disabled):not(
-        .fi-processing
-    ) {
+.fi-btn:not(.fi-outlined).fi-color:active:not(.fi-disabled):not(.fi-processing) {
     transform: translateY(var(--neo-transform-offset-sm));
     box-shadow: 0px 0px 0px var(--color-700);
 }
@@ -476,22 +388,14 @@ body,
 .dark .fi-btn:not(.fi-outlined).fi-color {
     background-color: var(--color-500);
     border-color: var(--color-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--color-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--color-400);
 }
 
-.dark
-    .fi-btn:not(.fi-outlined).fi-color:hover:not(.fi-disabled):not(
-        .fi-processing
-    ) {
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--color-400);
+.dark .fi-btn:not(.fi-outlined).fi-color:hover:not(.fi-disabled):not(.fi-processing) {
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--color-400);
 }
 
-.dark
-    .fi-btn:not(.fi-outlined).fi-color:active:not(.fi-disabled):not(
-        .fi-processing
-    ) {
+.dark .fi-btn:not(.fi-outlined).fi-color:active:not(.fi-disabled):not(.fi-processing) {
     box-shadow: 0px 0px 0px var(--color-400);
 }
 
@@ -499,41 +403,29 @@ body,
 .fi-btn.fi-outlined:not(.fi-color) {
     border-width: var(--neo-border-width);
     border-color: var(--gray-950);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
 }
 
 .dark .fi-btn.fi-outlined:not(.fi-color) {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
 .fi-btn.fi-outlined:not(.fi-color):hover:not(.fi-disabled):not(.fi-processing) {
     transform: translateY(var(--neo-transform-offset-xs));
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
-.dark
-    .fi-btn.fi-outlined:not(.fi-color):hover:not(.fi-disabled):not(
-        .fi-processing
-    ) {
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+.dark .fi-btn.fi-outlined:not(.fi-color):hover:not(.fi-disabled):not(.fi-processing) {
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
-.fi-btn.fi-outlined:not(.fi-color):active:not(.fi-disabled):not(
-        .fi-processing
-    ) {
+.fi-btn.fi-outlined:not(.fi-color):active:not(.fi-disabled):not(.fi-processing) {
     transform: translateY(var(--neo-transform-offset-sm));
     box-shadow: 0px 0px 0px var(--gray-950);
 }
 
-.dark
-    .fi-btn.fi-outlined:not(.fi-color):active:not(.fi-disabled):not(
-        .fi-processing
-    ) {
+.dark .fi-btn.fi-outlined:not(.fi-color):active:not(.fi-disabled):not(.fi-processing) {
     box-shadow: 0px 0px 0px var(--gray-600);
 }
 
@@ -541,14 +433,12 @@ body,
 .fi-btn.fi-outlined.fi-color {
     border-width: var(--neo-border-width);
     border-color: var(--color-700);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--color-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--color-700);
 }
 
 .fi-btn.fi-outlined.fi-color:hover:not(.fi-disabled):not(.fi-processing) {
     transform: translateY(var(--neo-transform-offset-xs));
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--color-700);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--color-700);
 }
 
 .fi-btn.fi-outlined.fi-color:active:not(.fi-disabled):not(.fi-processing) {
@@ -558,17 +448,14 @@ body,
 
 .dark .fi-btn.fi-outlined.fi-color {
     border-color: var(--color-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--color-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--color-400);
 }
 
 .dark .fi-btn.fi-outlined.fi-color:hover:not(.fi-disabled):not(.fi-processing) {
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--color-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--color-400);
 }
 
-.dark
-    .fi-btn.fi-outlined.fi-color:active:not(.fi-disabled):not(.fi-processing) {
+.dark .fi-btn.fi-outlined.fi-color:active:not(.fi-disabled):not(.fi-processing) {
     box-shadow: 0px 0px 0px var(--color-400);
 }
 
@@ -599,15 +486,13 @@ body,
     border-style: solid;
     border-color: var(--gray-950);
     background-color: var(--primary-100);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .fi-section:not(.fi-section-not-contained):not(.fi-aside) {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-section > .fi-section-header {
@@ -635,11 +520,7 @@ body,
     border-color: var(--gray-950);
 }
 
-.dark
-    .fi-section.fi-divided
-    > .fi-section-content-ctn
-    > .fi-section-content
-    > * {
+.dark .fi-section.fi-divided > .fi-section-content-ctn > .fi-section-content > * {
     border-color: var(--gray-600);
 }
 
@@ -668,15 +549,13 @@ body,
     transition-property: all;
     transition-duration: var(--neo-transition-duration);
     background-color: white;
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
 }
 
 .dark .fi-input-wrp {
     border-color: var(--gray-600);
     background-color: var(--gray-800);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
 .fi-input-wrp-prefix,
@@ -699,160 +578,132 @@ body,
 
 .fi-input-wrp:not(.fi-disabled):not(:has(.fi-ac-action:focus)):focus-within {
     border-color: var(--primary-700, var(--gray-950));
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-700, var(--gray-950));
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-700, var(--gray-950));
 }
 
-.dark
-    .fi-input-wrp:not(.fi-disabled):not(
-        :has(.fi-ac-action:focus)
-    ):focus-within {
+.dark .fi-input-wrp:not(.fi-disabled):not(:has(.fi-ac-action:focus)):focus-within {
     border-color: var(--primary-400, var(--gray-500));
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-400, var(--gray-500));
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-400, var(--gray-500));
 }
 
 .fi-input-wrp.fi-invalid {
     border-color: var(--danger-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--danger-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--danger-600);
 }
 
 .dark .fi-input-wrp.fi-invalid {
     border-color: var(--danger-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--danger-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--danger-400);
 }
 
-.fi-input-wrp:not(.fi-disabled):not(
-        :has(.fi-ac-action:focus)
-    ).fi-invalid:focus-within {
+.fi-input-wrp:not(.fi-disabled):not(:has(.fi-ac-action:focus)).fi-invalid:focus-within {
     border-color: var(--danger-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--danger-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--danger-600);
 }
 
-.dark
-    .fi-input-wrp:not(.fi-disabled):not(
-        :has(.fi-ac-action:focus)
-    ).fi-invalid:focus-within {
+.dark .fi-input-wrp:not(.fi-disabled):not(:has(.fi-ac-action:focus)).fi-invalid:focus-within {
     border-color: var(--danger-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--danger-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--danger-400);
 }
 
 .fi-input-wrp.fi-disabled {
     opacity: var(--neo-opacity-disabled);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-400);
 }
 
 .dark .fi-input-wrp.fi-disabled {
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
 /* Checkbox Inputs */
-input[type="checkbox"].fi-checkbox-input {
+input[type='checkbox'].fi-checkbox-input {
     border-width: var(--neo-border-width);
     border-style: solid;
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-sm);
     transition-property: all;
     transition-duration: var(--neo-transition-duration);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
-.dark input[type="checkbox"].fi-checkbox-input {
+.dark input[type='checkbox'].fi-checkbox-input {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
-input[type="checkbox"].fi-checkbox-input:checked {
+input[type='checkbox'].fi-checkbox-input:checked {
     border-color: var(--primary-700);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--primary-700);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--primary-700);
 }
 
-.dark input[type="checkbox"].fi-checkbox-input:checked {
+.dark input[type='checkbox'].fi-checkbox-input:checked {
     border-color: var(--primary-400);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--primary-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--primary-400);
 }
 
-input[type="checkbox"].fi-checkbox-input:focus {
+input[type='checkbox'].fi-checkbox-input:focus {
     outline-width: var(--neo-outline-width);
     outline-offset: var(--neo-outline-offset);
     outline-color: var(--primary-700);
 }
 
-.dark input[type="checkbox"].fi-checkbox-input:focus {
+.dark input[type='checkbox'].fi-checkbox-input:focus {
     outline-color: var(--primary-400);
 }
 
-input[type="checkbox"].fi-checkbox-input.fi-invalid {
+input[type='checkbox'].fi-checkbox-input.fi-invalid {
     border-color: var(--danger-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--danger-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--danger-600);
 }
 
-.dark input[type="checkbox"].fi-checkbox-input.fi-invalid {
+.dark input[type='checkbox'].fi-checkbox-input.fi-invalid {
     border-color: var(--danger-400);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--danger-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--danger-400);
 }
 
 /* Radio Button Inputs */
-input[type="radio"].fi-radio-input {
+input[type='radio'].fi-radio-input {
     border-width: var(--neo-border-width);
     border-style: solid;
     border-color: var(--gray-950);
     transition-property: all;
     transition-duration: var(--neo-transition-duration);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
-.dark input[type="radio"].fi-radio-input {
+.dark input[type='radio'].fi-radio-input {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
-input[type="radio"].fi-radio-input:checked {
+input[type='radio'].fi-radio-input:checked {
     border-color: var(--primary-700);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--primary-700);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--primary-700);
 }
 
-.dark input[type="radio"].fi-radio-input:checked {
+.dark input[type='radio'].fi-radio-input:checked {
     border-color: var(--primary-400);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--primary-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--primary-400);
 }
 
-input[type="radio"].fi-radio-input:focus {
+input[type='radio'].fi-radio-input:focus {
     outline-width: var(--neo-outline-width);
     outline-offset: var(--neo-outline-offset);
     outline-color: var(--primary-700);
 }
 
-.dark input[type="radio"].fi-radio-input:focus {
+.dark input[type='radio'].fi-radio-input:focus {
     outline-color: var(--primary-400);
 }
 
-input[type="radio"].fi-radio-input.fi-invalid {
+input[type='radio'].fi-radio-input.fi-invalid {
     border-color: var(--danger-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--danger-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--danger-600);
 }
 
-.dark input[type="radio"].fi-radio-input.fi-invalid {
+.dark input[type='radio'].fi-radio-input.fi-invalid {
     border-color: var(--danger-400);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--danger-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--danger-400);
 }
 
 /* ============================================
@@ -865,28 +716,24 @@ input[type="radio"].fi-radio-input.fi-invalid {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: var(--primary-100);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .fi-wi-stats-overview-stat {
     border-color: var(--gray-600);
     background-color: var(--gray-800);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-wi-stats-overview-stat.fi-color {
     border-color: var(--color-600);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--color-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--color-600);
     background-color: var(--color-100);
 }
 
 .dark .fi-wi-stats-overview-stat.fi-color {
     border-color: var(--color-400);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--color-400);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--color-400);
     background-color: var(--gray-800);
 }
 
@@ -935,15 +782,13 @@ input[type="radio"].fi-radio-input.fi-invalid {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: var(--warning-50);
-    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px var(--gray-950);
 }
 
 .dark .fi-modal > .fi-modal-window-ctn > .fi-modal-window {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px var(--gray-600);
 }
 
 .fi-modal-header,
@@ -984,26 +829,22 @@ input[type="radio"].fi-radio-input.fi-invalid {
     border-style: solid;
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-sm);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
 .dark .fi-modal-icon-bg {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 .fi-modal-icon-bg.fi-color {
     border-color: var(--color-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--color-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--color-600);
 }
 
 .dark .fi-modal-icon-bg.fi-color {
     border-color: var(--color-400);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--color-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--color-400);
 }
 
 /* ============================================
@@ -1016,15 +857,13 @@ input[type="radio"].fi-radio-input.fi-invalid {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: var(--gray-100);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .fi-dropdown-panel {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-dropdown-header {
@@ -1112,14 +951,12 @@ form.fi-dropdown-list-item:focus-within * {
     border-style: solid;
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
-    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px var(--gray-950);
 }
 
 .dark .fi-fo-file-upload-editor-window {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px var(--gray-600);
 }
 
 .fi-fo-file-upload-editor-control-panel-footer {
@@ -1142,15 +979,13 @@ form.fi-dropdown-list-item:focus-within * {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: white;
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .fi-ta-ctn {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-ta-header-toolbar {
@@ -1172,14 +1007,12 @@ form.fi-dropdown-list-item:focus-within * {
     border-width: var(--neo-border-width);
     border-style: solid;
     border-color: var(--gray-950);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
 }
 
 .dark .fi-ta-header .fi-input-wrp {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
 .fi-ta-header .fi-btn {
@@ -1192,14 +1025,12 @@ form.fi-dropdown-list-item:focus-within * {
     border-style: solid;
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-sm);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
 .dark .fi-ta-header .fi-badge {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 .fi-ta-table > thead,
@@ -1341,28 +1172,24 @@ form.fi-dropdown-list-item:focus-within * {
     border-radius: var(--neo-radius-sm);
     transition-property: all;
     transition-duration: var(--neo-transition-duration);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
 .dark .fi-pagination-item-btn {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 .fi-pagination-item.fi-active .fi-pagination-item-btn {
     background-color: var(--primary-600);
     border-color: var(--primary-700);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--primary-700);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--primary-700);
 }
 
 .dark .fi-pagination-item.fi-active .fi-pagination-item-btn {
     background-color: var(--primary-500);
     border-color: var(--primary-400);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--primary-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--primary-400);
 }
 
 .fi-pagination-item.fi-active .fi-pagination-item-btn,
@@ -1371,15 +1198,12 @@ form.fi-dropdown-list-item:focus-within * {
     color: white;
 }
 
-.fi-pagination-item:not(.fi-active):not(.fi-disabled)
-    .fi-pagination-item-btn:hover {
+.fi-pagination-item:not(.fi-active):not(.fi-disabled) .fi-pagination-item-btn:hover {
     transform: translateY(var(--neo-transform-offset-xs));
     box-shadow: 1px 1px 0px var(--gray-950);
 }
 
-.dark
-    .fi-pagination-item:not(.fi-active):not(.fi-disabled)
-    .fi-pagination-item-btn:hover {
+.dark .fi-pagination-item:not(.fi-active):not(.fi-disabled) .fi-pagination-item-btn:hover {
     box-shadow: 1px 1px 0px var(--gray-600);
 }
 
@@ -1394,15 +1218,13 @@ form.fi-dropdown-list-item:focus-within * {
     border-style: solid;
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-sm);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
 .dark .fi-ta-pagination .fi-select,
 .dark .fi-ta-footer .fi-select {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 /* ============================================
@@ -1422,15 +1244,13 @@ form.fi-dropdown-list-item:focus-within * {
 .fi-badge:not(.fi-color) {
     border-color: var(--gray-950);
     background-color: var(--primary-100);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
 .dark .fi-badge:not(.fi-color) {
     border-color: var(--gray-600);
     background-color: var(--gray-700);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 .fi-ta-text-item {
@@ -1439,15 +1259,13 @@ form.fi-dropdown-list-item:focus-within * {
 
 .fi-badge.fi-color {
     border-color: var(--color-700);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--color-700);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--color-700);
     background-color: var(--color-100);
 }
 
 .dark .fi-badge.fi-color {
     border-color: var(--color-400);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--color-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--color-400);
     background-color: var(--gray-700);
 }
 
@@ -1503,34 +1321,22 @@ form.fi-dropdown-list-item:focus-within * {
     transition-duration: var(--neo-transition-duration);
 }
 
-.fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active)
-    > .fi-sidebar-item-btn:hover,
-.fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active)
-    > .fi-sidebar-item-btn:focus-visible {
+.fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover,
+.fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:focus-visible {
     background-color: var(--primary-600);
     border-color: var(--primary-700);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-700);
 }
 
-.dark
-    .fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active)
-    > .fi-sidebar-item-btn:hover,
-.dark
-    .fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active)
-    > .fi-sidebar-item-btn:focus-visible {
+.dark .fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover,
+.dark .fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:focus-visible {
     background-color: var(--primary-500);
     border-color: var(--primary-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-400);
 }
 
-.fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active)
-    > .fi-sidebar-item-btn:hover
-    > .fi-icon,
-.fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active)
-    > .fi-sidebar-item-btn:hover
-    > .fi-sidebar-item-label {
+.fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover > .fi-icon,
+.fi-sidebar-item.fi-sidebar-item-has-url:not(.fi-active) > .fi-sidebar-item-btn:hover > .fi-sidebar-item-label {
     color: white;
 }
 
@@ -1548,15 +1354,13 @@ form.fi-dropdown-list-item:focus-within * {
     border-width: var(--neo-border-width);
     background-color: var(--primary-600);
     border-color: var(--primary-700);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-700);
 }
 
 .dark .fi-sidebar-item.fi-active > .fi-sidebar-item-btn {
     background-color: var(--primary-500);
     border-color: var(--primary-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-400);
 }
 
 .fi-sidebar-item.fi-active > .fi-sidebar-item-btn > .fi-icon {
@@ -1576,30 +1380,26 @@ form.fi-dropdown-list-item:focus-within * {
     transition-property: all;
     transition-duration: var(--neo-transition-duration);
     background-color: rgba(255, 255, 255, 0.05);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-700);
 }
 
 .dark .fi-sidebar .fi-user-menu-trigger {
     border-color: var(--gray-600);
     background-color: rgba(255, 255, 255, 0.03);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
 .fi-sidebar .fi-user-menu-trigger:hover {
     border-color: white;
     transform: translateX(var(--neo-transform-offset-xs));
     background-color: rgba(255, 255, 255, 0.1);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        white;
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px white;
 }
 
 .dark .fi-sidebar .fi-user-menu-trigger:hover {
     border-color: var(--gray-400);
     background-color: rgba(255, 255, 255, 0.08);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-400);
 }
 
 .fi-sidebar .fi-user-menu .fi-dropdown-panel {
@@ -1608,8 +1408,7 @@ form.fi-dropdown-list-item:focus-within * {
     border-color: var(--gray-700);
     border-radius: var(--neo-radius-md);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-700);
 }
 
 .fi-sidebar .fi-user-menu .fi-dropdown-header,
@@ -1625,13 +1424,13 @@ form.fi-dropdown-list-item:focus-within * {
     color: white;
 }
 
-.fi-sidebar .fi-user-menu [role="tablist"] button,
-.fi-sidebar .fi-user-menu [role="tablist"] button * {
+.fi-sidebar .fi-user-menu [role='tablist'] button,
+.fi-sidebar .fi-user-menu [role='tablist'] button * {
     color: var(--gray-400);
 }
 
-.fi-sidebar .fi-user-menu [role="tablist"] button[aria-selected="true"],
-.fi-sidebar .fi-user-menu [role="tablist"] button[aria-selected="true"] * {
+.fi-sidebar .fi-user-menu [role='tablist'] button[aria-selected='true'],
+.fi-sidebar .fi-user-menu [role='tablist'] button[aria-selected='true'] * {
     color: white;
 }
 
@@ -1648,10 +1447,7 @@ form.fi-dropdown-list-item:focus-within * {
     background-color: var(--primary-500);
 }
 
-.fi-sidebar
-    .fi-user-menu
-    .fi-dropdown-list-item:hover
-    .fi-dropdown-list-item-label,
+.fi-sidebar .fi-user-menu .fi-dropdown-list-item:hover .fi-dropdown-list-item-label,
 .fi-sidebar .fi-user-menu .fi-dropdown-list-item:hover .fi-icon {
     color: white;
 }
@@ -1666,15 +1462,13 @@ form.fi-dropdown-list-item:focus-within * {
     margin: 0.75rem;
     margin-right: 1rem;
     border-color: var(--primary-700);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--primary-700);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--primary-700);
 }
 
 .dark .fi-topbar {
     background-color: var(--primary-500);
     border-color: var(--primary-400);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--primary-400);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--primary-400);
 }
 
 .fi-topbar .fi-topbar-start .fi-icon,
@@ -1695,15 +1489,13 @@ form.fi-dropdown-list-item:focus-within * {
     transform: translateY(calc(-1 * var(--neo-transform-offset-xs)));
     background-color: var(--primary-700);
     border-color: var(--primary-800);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-800);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-800);
 }
 
 .dark .fi-topbar-item-btn:hover {
     background-color: var(--primary-400);
     border-color: var(--primary-300);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-300);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-300);
 }
 
 .fi-topbar-item-btn:hover > .fi-icon,
@@ -1714,15 +1506,13 @@ form.fi-dropdown-list-item:focus-within * {
 .fi-topbar-item.fi-active .fi-topbar-item-btn {
     background-color: var(--primary-700);
     border-color: var(--primary-800);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-800);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-800);
 }
 
 .dark .fi-topbar-item.fi-active .fi-topbar-item-btn {
     background-color: var(--primary-400);
     border-color: var(--primary-300);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-300);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-300);
 }
 
 .fi-topbar-item.fi-active .fi-topbar-item-btn > .fi-icon,
@@ -1743,26 +1533,22 @@ form.fi-dropdown-list-item:focus-within * {
     transition-property: all;
     transition-timing-function: var(--neo-transition-timing);
     transition-duration: var(--neo-transition-duration);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
 .dark .fi-global-search-field .fi-input-wrapper {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 .fi-global-search-field .fi-input-wrapper:focus-within {
     transform: translateY(calc(-1 * var(--neo-transform-offset-xs)));
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
 }
 
 .dark .fi-global-search-field .fi-input-wrapper:focus-within {
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
 .fi-global-search-field .fi-input {
@@ -1793,14 +1579,12 @@ form.fi-dropdown-list-item:focus-within * {
 .fi-global-search-results-ctn {
     border: var(--neo-border-width) solid var(--gray-950);
     border-radius: var(--neo-radius-lg);
-    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px var(--gray-950);
 }
 
 .dark .fi-global-search-results-ctn {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-xl) var(--neo-shadow-offset-xl) 0px var(--gray-600);
 }
 
 /* No results message */
@@ -1873,15 +1657,13 @@ form.fi-dropdown-list-item:focus-within * {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: var(--success-100);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .fi-fieldset {
     border-color: var(--gray-600);
     background-color: var(--gray-800);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-fieldset-legend,
@@ -1921,50 +1703,42 @@ form.fi-dropdown-list-item:focus-within * {
     transition-property: all;
     transition-duration: var(--neo-transition-duration);
     background-color: white;
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
 }
 
 .dark .fi-select {
     border-color: var(--gray-600);
     background-color: var(--gray-800);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
 .fi-select:focus-within {
     border-color: var(--primary-700, var(--gray-950));
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-700, var(--gray-950));
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-700, var(--gray-950));
 }
 
 .dark .fi-select:focus-within {
     border-color: var(--primary-400, var(--gray-500));
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-400, var(--gray-500));
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-400, var(--gray-500));
 }
 
 .fi-select.fi-invalid {
     border-color: var(--danger-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--danger-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--danger-600);
 }
 
 .dark .fi-select.fi-invalid {
     border-color: var(--danger-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--danger-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--danger-400);
 }
 
 .fi-select.fi-disabled {
     opacity: var(--neo-opacity-disabled);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-400);
 }
 
 .dark .fi-select.fi-disabled {
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }
 
 /* ============================================
@@ -1979,15 +1753,13 @@ form.fi-dropdown-list-item:focus-within * {
     background-color: var(--gray-50);
     transition-property: all;
     transition-duration: var(--neo-transition-duration);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .filepond--root {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-fo-file-upload-editor-control-panel {
@@ -2011,7 +1783,7 @@ form.fi-dropdown-list-item:focus-within * {
    Rich Editor Custom Block Styles
    ============================================ */
 
-.fi-fo-rich-editor div[data-type="customBlock"] {
+.fi-fo-rich-editor div[data-type='customBlock'] {
     border-width: var(--neo-border-width);
     border-style: solid;
     border-color: var(--gray-950);
@@ -2021,15 +1793,13 @@ form.fi-dropdown-list-item:focus-within * {
     margin-bottom: 0.75rem;
     transition-property: all;
     transition-duration: var(--neo-transition-duration);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
-.dark .fi-fo-rich-editor div[data-type="customBlock"] {
+.dark .fi-fo-rich-editor div[data-type='customBlock'] {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-fo-rich-editor .fi-fo-rich-editor-custom-block-header {
@@ -2050,15 +1820,13 @@ form.fi-dropdown-list-item:focus-within * {
     border-style: solid;
     border-color: var(--gray-950);
     background-color: var(--primary-100);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .fi-sc-wizard-header {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 /* ============================================
@@ -2071,15 +1839,13 @@ form.fi-dropdown-list-item:focus-within * {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: white;
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .fi-tabs {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-tabs-nav,
@@ -2108,15 +1874,13 @@ form.fi-dropdown-list-item:focus-within * {
 .fi-tabs-item:hover {
     background-color: var(--gray-200);
     border-color: var(--gray-400);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-400);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-400);
 }
 
 .dark .fi-tabs-item:hover {
     background-color: var(--gray-700);
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 .fi-tabs-item.fi-active {
@@ -2124,15 +1888,13 @@ form.fi-dropdown-list-item:focus-within * {
     font-weight: var(--neo-font-weight-bold);
     background-color: var(--primary-600);
     border-color: var(--primary-700);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-700);
 }
 
 .dark .fi-tabs-item.fi-active {
     background-color: var(--primary-500);
     border-color: var(--primary-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--primary-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--primary-400);
 }
 
 .fi-tabs-item.fi-active .fi-tabs-item-label,
@@ -2150,15 +1912,13 @@ form.fi-dropdown-list-item:focus-within * {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: var(--success-50);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
 }
 
 .dark .fi-in-list {
     border-color: var(--gray-600);
     background-color: var(--gray-800);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 .fi-in-list-item {
@@ -2192,42 +1952,27 @@ form.fi-dropdown-list-item:focus-within * {
    ============================================ */
 
 /* Unchecked toggle buttons - outlined/light style */
-.fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined):not(.fi-color) {
+.fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined):not(.fi-color) {
     background-color: transparent;
     border-color: var(--gray-950);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
     color: var(--gray-950);
 }
 
-.fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined):not(.fi-color)
-    .fi-btn-label,
-.fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined):not(.fi-color)
-    .fi-icon {
+.fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined):not(.fi-color) .fi-btn-label,
+.fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined):not(.fi-color) .fi-icon {
     color: var(--gray-950);
 }
 
-.dark
-    .fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined):not(.fi-color) {
+.dark .fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined):not(.fi-color) {
     background-color: transparent;
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
     color: white;
 }
 
-.dark
-    .fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined):not(.fi-color)
-    .fi-btn-label,
-.dark
-    .fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined):not(.fi-color)
-    .fi-icon {
+.dark .fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined):not(.fi-color) .fi-btn-label,
+.dark .fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined):not(.fi-color) .fi-icon {
     color: white;
 }
 
@@ -2235,96 +1980,64 @@ form.fi-dropdown-list-item:focus-within * {
 .fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined):not(.fi-color) {
     background-color: var(--gray-950);
     border-color: var(--gray-950);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
     color: white;
 }
 
-.fi-fo-toggle-buttons-input:checked
-    + .fi-btn:not(.fi-outlined):not(.fi-color)
-    .fi-btn-label,
-.fi-fo-toggle-buttons-input:checked
-    + .fi-btn:not(.fi-outlined):not(.fi-color)
-    .fi-icon {
+.fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined):not(.fi-color) .fi-btn-label,
+.fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined):not(.fi-color) .fi-icon {
     color: white;
 }
 
-.dark
-    .fi-fo-toggle-buttons-input:checked
-    + .fi-btn:not(.fi-outlined):not(.fi-color) {
+.dark .fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined):not(.fi-color) {
     background-color: var(--gray-600);
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
     color: white;
 }
 
 /* Hover states for unchecked toggle buttons */
-.fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled) {
+.fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled) {
     transform: translateY(var(--neo-transform-offset-xs));
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
-.dark
-    .fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled) {
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+.dark .fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled) {
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 /* Hover states for checked toggle buttons */
-.fi-fo-toggle-buttons-input:checked
-    + .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled) {
+.fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled) {
     transform: translateY(var(--neo-transform-offset-xs));
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
 }
 
-.dark
-    .fi-fo-toggle-buttons-input:checked
-    + .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled) {
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+.dark .fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined):not(.fi-color):hover:not(.fi-disabled) {
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 /* Colored toggle buttons - unchecked */
 .fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined).fi-color {
     background-color: transparent;
     border-color: var(--color-700);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--color-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--color-700);
     color: var(--color-700);
 }
 
-.fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined).fi-color
-    .fi-btn-label,
-.fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined).fi-color
-    .fi-icon {
+.fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined).fi-color .fi-btn-label,
+.fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined).fi-color .fi-icon {
     color: var(--color-700);
 }
 
-.dark
-    .fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined).fi-color {
+.dark .fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined).fi-color {
     background-color: transparent;
     border-color: var(--color-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--color-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--color-400);
     color: var(--color-400);
 }
 
-.dark
-    .fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined).fi-color
-    .fi-btn-label,
-.dark
-    .fi-fo-toggle-buttons-input:not(:checked)
-    + .fi-btn:not(.fi-outlined).fi-color
-    .fi-icon {
+.dark .fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined).fi-color .fi-btn-label,
+.dark .fi-fo-toggle-buttons-input:not(:checked) + .fi-btn:not(.fi-outlined).fi-color .fi-icon {
     color: var(--color-400);
 }
 
@@ -2332,25 +2045,19 @@ form.fi-dropdown-list-item:focus-within * {
 .fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined).fi-color {
     background-color: var(--color-600);
     border-color: var(--color-700);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--color-700);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--color-700);
     color: white;
 }
 
-.fi-fo-toggle-buttons-input:checked
-    + .fi-btn:not(.fi-outlined).fi-color
-    .fi-btn-label,
-.fi-fo-toggle-buttons-input:checked
-    + .fi-btn:not(.fi-outlined).fi-color
-    .fi-icon {
+.fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined).fi-color .fi-btn-label,
+.fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined).fi-color .fi-icon {
     color: white;
 }
 
 .dark .fi-fo-toggle-buttons-input:checked + .fi-btn:not(.fi-outlined).fi-color {
     background-color: var(--color-500);
     border-color: var(--color-400);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--color-400);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--color-400);
     color: white;
 }
 
@@ -2382,8 +2089,7 @@ form.fi-dropdown-list-item:focus-within * {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: white;
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
     overflow: hidden;
     transition: all var(--neo-transition-duration) var(--neo-transition-timing);
 }
@@ -2391,8 +2097,7 @@ form.fi-dropdown-list-item:focus-within * {
 .dark .fi-fo-repeater .fi-fo-repeater-item {
     border-color: var(--gray-600);
     background-color: var(--gray-800);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 /* Dragging state - reduce visual emphasis */
@@ -2423,17 +2128,14 @@ form.fi-dropdown-list-item:focus-within * {
 .fi-fo-repeater.fi-fo-repeater-collapsible .fi-fo-repeater-item-header {
     cursor: pointer;
     user-select: none;
-    transition: background-color var(--neo-transition-duration)
-        var(--neo-transition-timing);
+    transition: background-color var(--neo-transition-duration) var(--neo-transition-timing);
 }
 
 .fi-fo-repeater.fi-fo-repeater-collapsible .fi-fo-repeater-item-header:hover {
     background-color: var(--gray-100);
 }
 
-.dark
-    .fi-fo-repeater.fi-fo-repeater-collapsible
-    .fi-fo-repeater-item-header:hover {
+.dark .fi-fo-repeater.fi-fo-repeater-collapsible .fi-fo-repeater-item-header:hover {
     background-color: var(--gray-700);
 }
 
@@ -2478,16 +2180,14 @@ form.fi-dropdown-list-item:focus-within * {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: white;
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
     padding: 1rem;
 }
 
 .dark .fi-fo-simple-repeater .fi-fo-simple-repeater-item {
     border-color: var(--gray-600);
     background-color: var(--gray-800);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 /* ============================================
@@ -2501,8 +2201,7 @@ form.fi-dropdown-list-item:focus-within * {
     border-color: var(--gray-950);
     border-radius: var(--neo-radius-md);
     background-color: white;
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-950);
     overflow: hidden;
     padding-bottom: 10px;
 }
@@ -2510,8 +2209,7 @@ form.fi-dropdown-list-item:focus-within * {
 .dark .fi-fo-table-repeater {
     border-color: var(--gray-600);
     background-color: var(--gray-900);
-    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-lg) var(--neo-shadow-offset-lg) 0px var(--gray-600);
 }
 
 /* Table Element */
@@ -2606,15 +2304,13 @@ form.fi-dropdown-list-item:focus-within * {
     border-width: var(--neo-border-width);
     border-style: solid;
     border-color: var(--gray-950);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-950);
     transition: all var(--neo-transition-duration) var(--neo-transition-timing);
 }
 
 .dark .fi-toggle {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px var(--gray-600);
 }
 
 /* ============================================
@@ -2635,13 +2331,11 @@ form.fi-dropdown-list-item:focus-within * {
     border-width: var(--neo-border-width);
     border-style: solid;
     border-color: var(--gray-950);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-950);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-950);
     transition: all var(--neo-transition-duration) var(--neo-transition-timing);
 }
 
 .dark .fi-no-notification {
     border-color: var(--gray-600);
-    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px
-        var(--gray-600);
+    box-shadow: var(--neo-shadow-offset-md) var(--neo-shadow-offset-md) 0px var(--gray-600);
 }

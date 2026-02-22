@@ -4,6 +4,7 @@
         "EditorConfig.EditorConfig",
         "laravel.vscode-laravel",
         "bmewburn.vscode-intelephense-client",
-        "DEVSENSE.phptools-vscode"
+        "DEVSENSE.phptools-vscode",
+        "svelte.svelte-vscode"
     ]
 }

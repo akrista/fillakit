@@ -19,8 +19,10 @@
     ],
     "sail": false,
     "skills": [
+        "wayfinder-development",
         "livewire-development",
         "pest-testing",
+        "inertia-svelte-development",
         "tailwindcss-development"
     ]
 }
