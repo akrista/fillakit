@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Pages\Settings;
 
 use App\Services\FileService;
+use App\Services\PwaIconService;
 use App\Settings\GeneralSettings;
 use BackedEnum;
 use Filament\Forms\Components\CodeEditor;
@@ -24,6 +25,7 @@ use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Schema;
 use Filament\Support\Facades\FilamentView;
 use Filament\Support\Icons\Heroicon;
+use Illuminate\Support\Facades\Storage;
 use Override;
 use Throwable;
 
@@ -169,7 +171,7 @@ final class General extends SettingsPage
 
                                     FileUpload::make('site_favicon')
                                         ->label(fn(): string | array | null => __('page.general_settings.fields.site_favicon'))
-                                        ->helperText('Supports .ico, .png, .jpg, and .svg formats (optional)')
+                                        ->helperText('Supports .ico, .png, .jpg, and .svg formats. PWA icons will be regenerated when you save.')
                                         ->image()
                                         ->disk('public')
                                         ->previewable(true)
@@ -243,6 +245,26 @@ final class General extends SettingsPage
                                             ->columnSpanFull(),
                                     ])->columns(2),
                             ]),
+                        Tab::make('PWA')
+                            ->icon(Heroicon::OutlinedDevicePhoneMobile)
+                            ->schema([
+                                Section::make('PWA Colors')
+                                    ->description('Customize PWA theme and background colors')
+                                    ->icon(Heroicon::OutlinedPaintBrush)
+                                    ->compact()
+                                    ->collapsible()
+                                    ->schema([
+                                        ColorPicker::make('pwa_theme_color')
+                                            ->label('Theme Color')
+                                            ->helperText('Browser toolbar color on mobile devices'),
+                                        ColorPicker::make('pwa_background_color')
+                                            ->label('Background Color')
+                                            ->helperText('App background color'),
+                                        ColorPicker::make('pwa_splash_background_color')
+                                            ->label('Splash Screen Background')
+                                            ->helperText('Background color for iOS splash screens. Leave empty for transparent background.'),
+                                    ])->columns(3),
+                            ]),
                     ]),
             ])
             ->columns(3)
@@ -261,6 +283,10 @@ final class General extends SettingsPage
 
             $fileService = new FileService;
             $fileService->writeFile($this->theme, $data['theme-editor']);
+
+            if (isset($data['site_favicon']) && $data['site_favicon']) {
+                $this->regeneratePwaIcons($data['site_favicon']);
+            }
 
             Notification::make()
                 ->title('Settings updated successfully!')
@@ -291,5 +317,33 @@ final class General extends SettingsPage
         $data['theme-editor'] = $fileService->readfile($this->theme);
 
         $this->form->fill($data);
+    }
+
+    protected function regeneratePwaIcons(?string $uploadedPath): void
+    {
+        if (!$uploadedPath) {
+            return;
+        }
+
+        $pwaService = new PwaIconService;
+        $backgroundColor = $this->data['pwa_splash_background_color'] ?? '#0000';
+
+        try {
+            $fullPath = Storage::disk('public')->path($uploadedPath);
+
+            $pwaService->generateFromUpload($fullPath, $backgroundColor);
+
+            Notification::make()
+                ->title('PWA icons generated successfully')
+                ->body('All icon sizes and splash screens have been created.')
+                ->success()
+                ->send();
+        } catch (Throwable $throwable) {
+            Notification::make()
+                ->title('Error generating PWA icons')
+                ->body($throwable->getMessage())
+                ->danger()
+                ->send();
+        }
     }
 }

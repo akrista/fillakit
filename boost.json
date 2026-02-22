@@ -11,7 +11,7 @@
         "windsurf"
     ],
     "guidelines": true,
-    "herd_mcp": true,
+    "herd_mcp": false,
     "mcp": true,
     "nightwatch_mcp": false,
     "packages": [

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Settings\GeneralSettings;
 use Carbon\CarbonImmutable;
+use Exception;
 use Filament\Notifications\Notification;
 use Filament\Pages\Page;
 use Filament\Tables\Table;
@@ -55,6 +57,19 @@ final class AppServiceProvider extends ServiceProvider
                 ->danger()
                 ->send();
         };
+
+        $this->app->booted(function (): void {
+            try {
+                $settings = resolve(GeneralSettings::class);
+
+                config([
+                    'laravelpwa.manifest.theme_color' => $settings->pwa_theme_color,
+                    'laravelpwa.manifest.background_color' => $settings->pwa_background_color,
+                ]);
+            } catch (Exception) {
+                // Settings not available yet (e.g., during migrations)
+            }
+        });
     }
 
     /**

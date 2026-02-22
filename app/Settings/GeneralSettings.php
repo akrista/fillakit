@@ -22,6 +22,12 @@ final class GeneralSettings extends Settings
 
     public bool $search_engine_indexing;
 
+    public string $pwa_theme_color;
+
+    public string $pwa_background_color;
+
+    public ?string $pwa_splash_background_color = null;
+
     public static function group(): string
     {
         return 'general';

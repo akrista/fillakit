@@ -23,5 +23,8 @@ return new class extends SettingsMigration
             'info' => '#3B82F6',
             'warning' => '#F59E0B',
         ]);
+        $this->migrator->add('general.pwa_theme_color', '#F22B02');
+        $this->migrator->add('general.pwa_background_color', '#0000');
+        $this->migrator->add('general.pwa_splash_background_color');
     }
 };

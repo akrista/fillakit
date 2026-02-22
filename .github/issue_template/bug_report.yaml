@@ -1,0 +1,50 @@
+name: 🐞 Bug report
+description: File a bug/issue report to help us improve.
+title: "[Bug]: "
+labels: ["bug"]
+assignees: ["Akrista"]
+projects: ["Akrista/18"]
+body:
+  - type: markdown
+    attributes:
+      value: >
+        **Thanks :heart: for taking the time to fill out this bug report!** We kindly ask that you search to see if an issue [already exists](https://github.com/Akrista/avhome/issues?q=sort%3Aupdated-desc+is%3Aissue+is%3Aopen) for your bug.
+  - type: textarea
+    id: current-behavior
+    attributes:
+      label: Current Behavior
+      description: |
+        A concise description of what you're experiencing.
+
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected Behavior
+      description: |
+        A concise description of what you expected to happen.
+
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Anything else?
+      description: |
+        Links? References? Anything that will give us more context about the issue you are encountering!
+
+        Tip: You can attach images or log files by clicking this area to highlight it and then dragging files in.
+    validations:
+      required: false
+  - type: checkboxes
+    id: browser
+    attributes:
+      label: What browsers are you seeing the problem on?
+      options:
+        - label: Chrome
+        - label: Safari
+        - label: Firefox
+        - label: Other
