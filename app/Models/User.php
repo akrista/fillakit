@@ -145,11 +145,18 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
         $this->save();
     }
 
-    public function getFilamentAvatarUrl(): ?string
+    public function getFilamentAvatarUrl(): string
     {
         $media = $this->getFirstMedia('avatars');
 
-        return $media?->getUrl() ?? $this->avatar_url;
+        return $media?->getUrl() ?? $this->avatar_url ?? $this->getDefaultAvatarUrl();
+    }
+
+    public function getDefaultAvatarUrl(): string
+    {
+        $name = urlencode($this->getFilamentName());
+
+        return sprintf('https://ui-avatars.com/api/?name=%s&color=FFFFFF&background=09090b', $name);
     }
 
     public function getFilamentName(): string
@@ -209,6 +216,18 @@ final class User extends Authenticatable implements FilamentUser, HasAppAuthenti
     public function deletedUsers(): HasMany
     {
         return $this->hasMany(self::class, 'deleted_by');
+    }
+
+    /**
+     * Get the user's initials
+     */
+    public function initials(): string
+    {
+        return Str::of($this->name)
+            ->explode(' ')
+            ->take(2)
+            ->map(fn ($word) => Str::substr($word, 0, 1))
+            ->implode('');
     }
 
     protected static function boot(): void

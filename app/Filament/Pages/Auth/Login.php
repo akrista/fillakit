@@ -60,7 +60,7 @@ final class Login extends \Filament\Auth\Pages\Login
     private function getLoginFormComponent(): TextInput
     {
         return TextInput::make('login')
-            ->label(__('Email or Username'))
+            ->label(__('filament-panels::auth/pages/login.form.email.label'))
             ->required()
             ->autocomplete()
             ->autofocus()

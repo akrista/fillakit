@@ -3,10 +3,10 @@
 declare(strict_types=1);
 
 return [
-    'name' => 'LaravelPWA',
+    'name' => env('APP_NAME', 'Fillakit'),
     'manifest' => [
-        'name' => env('APP_NAME', 'My PWA App'),
-        'short_name' => 'PWA',
+        'name' => env('APP_NAME', 'Fillakit'),
+        'short_name' => env('APP_NAME', 'Fillakit'),
         'start_url' => '/',
         'background_color' => '#ffffff',
         'theme_color' => '#000000',

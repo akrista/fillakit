@@ -1,7 +1,7 @@
 @extends('errors::illustrated-layout')
 
 @section('code', '503')
-@section('title', __('Service Unavailable'))
+@section('title', __('errors.503.title'))
 
 @section('image')
     <div style="background-image: url({{ asset('/svg/503.svg') }});"
@@ -9,4 +9,4 @@
     </div>
 @endsection
 
-@section('message', __($exception->getMessage() ?: __('Sorry, we are doing some maintenance. Please check back soon.')))
+@section('message', __($exception->getMessage() ?: __('errors.503.title')))

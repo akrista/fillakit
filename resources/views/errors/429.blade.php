@@ -1,7 +1,7 @@
 @extends('errors::illustrated-layout')
 
 @section('code', '429')
-@section('title', __('Too Many Requests'))
+@section('title', __('errors.429.title'))
 
 @section('image')
     <div style="background-image: url({{ asset('/svg/403.svg') }});"
@@ -9,4 +9,4 @@
     </div>
 @endsection
 
-@section('message', __('Sorry, you are making too many requests to our servers.'))
+@section('message', __('errors.429.message'))

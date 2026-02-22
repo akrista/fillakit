@@ -153,7 +153,7 @@ trait HasPermissionFormComponents
         string $name,
         array $options,
         bool $searchable = true,
-        int|array|null $columns = null,
+        int | array | null $columns = null,
     ): Component {
         return CheckboxList::make($name)
             ->hiddenLabel()

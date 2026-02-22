@@ -26,8 +26,6 @@ yarn-error.log
 /.fleet
 /.idea
 /.nova
-/.vscode
-!/.vscode/extensions.json
 /.zed
 /.vagrant
 /.junie/mcp
@@ -42,4 +40,5 @@ _ide_helper.php
 _ide_helper_models.php
 mcp.json
 .mcp.json
+opencode.json
 compose.yml

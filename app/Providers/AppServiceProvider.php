@@ -35,15 +35,15 @@ final class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->configureEssentials();
+        $this->configureDefaults();
         Table::configureUsing(function (Table $table): void {
             $table
                 ->emptyStateHeading('No data yet')
                 ->emptyStateDescription('Once there is data it will show up here')
                 ->striped()
                 ->poll('10s')
-                ->defaultPaginationPageOption(10)
-                ->paginated([10, 25, 50, 100, 'all'])
+                ->defaultPaginationPageOption(6)
+                ->paginated([6, 24, 64, 86, 'all'])
                 ->extremePaginationLinks()
                 ->deferLoading()
                 ->persistFiltersInSession()
@@ -57,14 +57,24 @@ final class AppServiceProvider extends ServiceProvider
         };
     }
 
-    private function configureEssentials(): void
+    /**
+     * Configure default behaviors for production-ready applications.
+     */
+    private function configureDefaults(): void
     {
         Sleep::fake();
         Model::shouldBeStrict();
         Model::automaticallyEagerLoadRelationships();
         Date::use(CarbonImmutable::class);
-        Password::defaults(Password::min(12)->max(21)->uncompromised(3)->mixedCase()->letters()->numbers()->symbols());
-
+        Password::defaults(
+            Password::min(12)
+                ->max(21)
+                ->mixedCase()
+                ->letters()
+                ->numbers()
+                ->symbols()
+                ->uncompromised(3)
+        );
         if (config('app.env') === 'production') {
             URL::forceHttps();
             DB::prohibitDestructiveCommands();

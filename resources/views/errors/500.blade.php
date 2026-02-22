@@ -1,7 +1,7 @@
 @extends('errors::illustrated-layout')
 
 @section('code', '500')
-@section('title', __('Server Error'))
+@section('title', __('errors.500.title'))
 
 @section('image')
     <div style="background-image: url({{ asset('/svg/500.svg') }});"
@@ -9,5 +9,4 @@
     </div>
 @endsection
 
-@section('message', __('Whoops, something went wrong on our servers. If you are an admin, please check the exception
-    logs for more details.'))
+@section('message', __('errors.500.message'))

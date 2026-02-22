@@ -3,24 +3,24 @@
         "antigravity",
         "claude_code",
         "codex",
+        "cursor",
+        "gemini",
         "copilot",
-        "cursor",
-        "gemini",
+        "junie",
         "opencode",
-        "phpstorm",
-        "windsurf"
-    ],
-    "editors": [
-        "antigravity",
-        "claude_code",
-        "codex",
-        "cursor",
-        "gemini",
-        "opencode",
-        "phpstorm",
-        "vscode",
         "windsurf"
     ],
     "guidelines": true,
-    "herd_mcp": true
+    "herd_mcp": true,
+    "mcp": true,
+    "nightwatch_mcp": false,
+    "packages": [
+        "filament/filament"
+    ],
+    "sail": false,
+    "skills": [
+        "livewire-development",
+        "pest-testing",
+        "tailwindcss-development"
+    ]
 }

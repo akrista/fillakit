@@ -54,7 +54,7 @@
     /* Effects */
     --neo-blur: 4px;
     --neo-blur-sm: 2px;
-    
+
     /* Typography */
     --neo-font-weight-normal: 400;
     --neo-font-weight-semibold: 600;
@@ -269,7 +269,8 @@ body,
         var(--gray-200) 100%
     );
     background-size: 200% 100%;
-    animation: neo-shimmer var(--neo-animation-duration-loading) ease-in-out infinite;
+    animation: neo-shimmer var(--neo-animation-duration-loading) ease-in-out
+        infinite;
 }
 
 .dark .fi-loading-section,
@@ -283,7 +284,8 @@ body,
         var(--gray-800) 100%
     );
     background-size: 200% 100%;
-    animation: neo-shimmer-dark var(--neo-animation-duration-loading) ease-in-out infinite;
+    animation: neo-shimmer-dark var(--neo-animation-duration-loading)
+        ease-in-out infinite;
 }
 
 /* Diagonal stripe pattern overlay */
@@ -334,7 +336,8 @@ body,
         var(--gray-200) 100%
     );
     background-size: 200% 100%;
-    animation: neo-shimmer var(--neo-animation-duration-loading) ease-in-out infinite;
+    animation: neo-shimmer var(--neo-animation-duration-loading) ease-in-out
+        infinite;
 }
 
 .dark .fi-wi-stats-overview-stat.fi-loading,
@@ -348,7 +351,8 @@ body,
         var(--gray-800) 100%
     );
     background-size: 200% 100%;
-    animation: neo-shimmer-dark var(--neo-animation-duration-loading) ease-in-out infinite;
+    animation: neo-shimmer-dark var(--neo-animation-duration-loading)
+        ease-in-out infinite;
 }
 
 .fi-wi-stats-overview-stat.fi-loading::before,
@@ -2419,7 +2423,8 @@ form.fi-dropdown-list-item:focus-within * {
 .fi-fo-repeater.fi-fo-repeater-collapsible .fi-fo-repeater-item-header {
     cursor: pointer;
     user-select: none;
-    transition: background-color var(--neo-transition-duration) var(--neo-transition-timing);
+    transition: background-color var(--neo-transition-duration)
+        var(--neo-transition-timing);
 }
 
 .fi-fo-repeater.fi-fo-repeater-collapsible .fi-fo-repeater-item-header:hover {
@@ -2611,7 +2616,6 @@ form.fi-dropdown-list-item:focus-within * {
     box-shadow: var(--neo-shadow-offset-sm) var(--neo-shadow-offset-sm) 0px
         var(--gray-600);
 }
-
 
 /* ============================================
    Notification Styles

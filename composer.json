@@ -30,14 +30,15 @@
         "spatie/laravel-activitylog": "^4.12.0",
         "spatie/laravel-permission": "^6.24.1",
         "spatie/laravel-settings": "^3.7.0",
-        "spatie/laravel-translation-loader": "^2.8.2"
+        "spatie/laravel-translation-loader": "^2.8.3",
+        "livewire/livewire": "^4.0"
     },
     "require-dev": {
         "akrista/laravel-extra-boost": "^2.0.2",
-        "barryvdh/laravel-debugbar": "^3.16.5",
         "barryvdh/laravel-ide-helper": "^3.6.1",
         "driftingly/rector-laravel": "^2.1.9",
         "fakerphp/faker": "^1.24.1",
+        "fruitcake/laravel-debugbar": "^4.0.9",
         "larastan/larastan": "^3.9.2",
         "laravel/pail": "^1.2.6",
         "laravel/pint": "^1.27.1",
@@ -76,24 +77,23 @@
             "Composer\\Config::disableProcessTimeout",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"npm run dev\" --names='server,queue,vite'"
         ],
+        "dev:ssr": [
+            "npm run build:ssr",
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"php artisan inertia:start-ssr\" --names=server,queue,logs,ssr --kill-others"
+        ],
         "prod": [
             "Composer\\Config::disableProcessTimeout",
             "npm run build",
             "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs,vite --kill-others"
         ],
-        "migrate": ["@php artisan migrate --ansi --graceful"],
-        "migrate:fresh": ["@php artisan migrate:fresh --seed --force --ansi"],
         "build": [
             "Composer\\Config::disableProcessTimeout",
             "@php artisan storage:link",
-            "@php artisan icons:cache",
-            "@php artisan event:cache",
-            "@php artisan config:cache",
-            "@php artisan view:cache",
-            "@php artisan route:cache",
-            "@php artisan filament:cache-components",
             "@php artisan filament:upgrade",
             "@php artisan optimize:clear",
+            "@php artisan icons:cache",
+            "@php artisan filament:cache-components",
             "@php artisan optimize",
             "npm run build"
         ],
@@ -103,12 +103,33 @@
             "@php artisan ide-helper:models -NR",
             "@php artisan ide-helper:meta"
         ],
-        "lint": ["pint --ansi"],
-        "refactor": [
-            "rector"
+        "update:requirements": [
+            "Composer\\Config::disableProcessTimeout",
+            "composer bump",
+            "npx npm-check-updates -u"
         ],
+        "lint": [
+            "Composer\\Config::disableProcessTimeout",
+            "rector",
+            "pint --parallel",
+            "pint --parallel --config=pint.filament.json app/Filament",
+            "npm run lint"
+        ],
+        "test:lint": [
+            "Composer\\Config::disableProcessTimeout",
+            "pint --parallel --test",
+            "pint --parallel --test --config=pint.filament.json app/Filament",
+            "rector --dry-run",
+            "npm run test:lint"
+        ],
+        "test:unit": "XDEBUG_MODE=\"coverage\" pest --parallel --coverage --exactly=100.0",
+        "test:types": "phpstan",
         "test": [
             "@php artisan config:clear --ansi",
+            "@test:type-coverage",
+            "@test:unit",
+            "@test:lint",
+            "@test:types",
             "@php artisan test"
         ],
         "post-autoload-dump": [
@@ -127,7 +148,7 @@
         ],
         "post-create-project-cmd": [
             "@php artisan key:generate --ansi",
-            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php -r \"file_exists('storage/sqlite/fillakit.sqlite') || touch('storage/sqlite/fillakit.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
         "pre-package-uninstall": [
@@ -140,7 +161,6 @@
         }
     },
     "config": {
-        "bump-after-update": true,
         "optimize-autoloader": true,
         "preferred-install": "dist",
         "sort-packages": true,

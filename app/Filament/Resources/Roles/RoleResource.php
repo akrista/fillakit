@@ -42,10 +42,18 @@ final class RoleResource extends Resource
     protected static ?string $recordTitleAttribute = 'name';
 
     #[Override]
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedShieldExclamation;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedShieldCheck;
 
     #[Override]
-    protected static ?int $navigationSort = 12;
+    protected static ?int $navigationSort = 1001;
+
+    #[Override]
+    protected static ?string $modelLabel = 'Perfil';
+
+    #[Override]
+    protected static ?string $pluralModelLabel = 'Perfiles';
+
+    private ?string $subheading = 'Aquí puedes gestionar los perfiles de usuario de tu organización';
 
     public static function getNavigationGroup(): ?string
     {
@@ -92,6 +100,8 @@ final class RoleResource extends Resource
             ->columns([
                 TextColumn::make('id')
                     ->label('Id')
+                    ->alignCenter()
+                    ->verticallyAlignCenter()
                     ->searchable()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
@@ -99,20 +109,28 @@ final class RoleResource extends Resource
                     ->label(__('Role'))
                     ->weight(FontWeight::Medium)
                     ->formatStateUsing(fn (string $state): string => Str::headline($state))
+                    ->alignCenter()
+                    ->verticallyAlignCenter()
                     ->searchable()
                     ->sortable(),
                 TextColumn::make('guard_name')
                     ->label(__('Guard'))
                     ->badge()
+                    ->alignCenter()
+                    ->verticallyAlignCenter()
                     ->color('warning'),
                 TextColumn::make('permissions_count')
                     ->label(__('Permissions'))
                     ->badge()
+                    ->alignCenter()
+                    ->verticallyAlignCenter()
                     ->counts('permissions')
                     ->color('primary'),
                 TextColumn::make('updated_at')
                     ->label(__('Updated At'))
                     ->dateTime('d/m/Y h:i A')
+                    ->alignCenter()
+                    ->verticallyAlignCenter()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])

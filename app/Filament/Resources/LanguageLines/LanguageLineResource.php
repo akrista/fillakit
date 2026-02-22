@@ -30,7 +30,7 @@ final class LanguageLineResource extends Resource
     protected static ?string $model = LanguageLine::class;
 
     #[Override]
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedLanguage;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedLanguage;
 
     #[Override]
     protected static ?string $recordTitleAttribute = 'key';
@@ -117,12 +117,16 @@ final class LanguageLineResource extends Resource
         return [
             TextColumn::make('group')
                 ->badge()
+                ->alignCenter()
+                ->verticallyAlignCenter()
                 ->limit(30)
                 ->color('primary')
                 ->searchable()
                 ->sortable(),
             TextColumn::make('key')
                 ->weight(FontWeight::Bold)
+                ->alignCenter()
+                ->verticallyAlignCenter()
                 ->searchable()
                 ->sortable()
                 ->limit(30)
@@ -137,6 +141,8 @@ final class LanguageLineResource extends Resource
 
                     return (string) $state;
                 })
+                ->alignCenter()
+                ->verticallyAlignCenter()
                 ->color('gray')
                 ->size('sm')
                 ->limit(60)

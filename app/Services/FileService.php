@@ -29,6 +29,7 @@ final readonly class FileService
 
         if (!File::exists($path)) {
             Log::error('File does not exist: ' . $path);
+
             throw new FileException('The file does not exist.');
         }
 
@@ -41,6 +42,7 @@ final readonly class FileService
 
         if (!File::put($path, $content)) {
             Log::error('Unable to write to file: ' . $path);
+
             throw new FileException('Unable to write to file.');
         }
 
@@ -56,6 +58,7 @@ final readonly class FileService
 
         if (!$isAllowed) {
             Log::warning('Attempt to access a path not allowed: ' . $path);
+
             throw new InvalidArgumentException('Access to this path is not allowed.');
         }
 

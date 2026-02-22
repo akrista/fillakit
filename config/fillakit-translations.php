@@ -14,6 +14,81 @@ return [
     |--------------------------------------------------------------------------
     */
     [
+        'group' => 'errors',
+        'key' => 'go_home',
+        'text' => ['en' => 'Go Home', 'es' => 'Ir al Inicio'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '503.title',
+        'text' => ['en' => 'Service Unavailable', 'es' => 'Servicio No Disponible'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '503.message',
+        'text' => ['en' => 'Sorry, we are doing some maintenance. Please check back soon.', 'es' => 'Lo sentimos, estamos haciendo mantenimiento. Por favor, vuelva pronto.'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '500.title',
+        'text' => ['en' => 'Server Error', 'es' => 'Error del Servidor'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '500.message',
+        'text' => ['en' => 'Whoops, something went wrong on our servers. If you are an admin, please check the exception logs for more details.', 'es' => 'Lo sentimos, algo salió mal en nuestros servidores. Si eres un administrador, por favor, verifica los registros de excepción para obtener más detalles.'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '429.title',
+        'text' => ['en' => 'Too Many Requests', 'es' => 'Demasiados Requisitos'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '429.message',
+        'text' => ['en' => 'Too many requests. Please try again later.', 'es' => 'Demasiados requisitos. Por favor, inténtelo de nuevo más tarde.'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '419.title',
+        'text' => ['en' => 'Page Expired', 'es' => 'Página Expirada'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '419.message',
+        'text' => ['en' => 'Sorry, your session has expired. Please refresh and try again.', 'es' => 'Lo sentimos, su sesión ha expirado. Por favor, refresque y vuelva a intentarlo.'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '404.title',
+        'text' => ['en' => 'Page Not Found', 'es' => 'Página No Encontrada'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '404.message',
+        'text' => ['en' => 'Sorry, the page you are looking for could not be found.', 'es' => 'Lo sentimos, la página que está buscando no se pudo encontrar.'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '403.title',
+        'text' => ['en' => 'Forbidden', 'es' => 'Prohibido'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '403.message',
+        'text' => ['en' => 'Sorry, you are forbidden from accessing this page.', 'es' => 'Lo sentimos, no tienes permiso para acceder a esta página.'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '401.title',
+        'text' => ['en' => 'Unauthorized', 'es' => 'No autorizado'],
+    ],
+    [
+        'group' => 'errors',
+        'key' => '401.message',
+        'text' => ['en' => 'Sorry, you are not authorized to access this page.', 'es' => 'Lo sentimos, no tienes permiso para acceder a esta página.'],
+    ],
+    [
         'group' => 'menu',
         'key' => 'nav_group.settings',
         'text' => ['en' => 'Settings', 'es' => 'Configuraciones'],
@@ -865,6 +940,21 @@ return [
     ],
     /*
     |--------------------------------------------------------------------------
+    | Validation Exception Messages (JSON translations)
+    |--------------------------------------------------------------------------
+    */
+    [
+        'group' => '*',
+        'key' => '(and :count more error)',
+        'text' => ['en' => '(and :count more error)', 'es' => '(y :count error más)'],
+    ],
+    [
+        'group' => '*',
+        'key' => '(and :count more errors)',
+        'text' => ['en' => '(and :count more errors)', 'es' => '(y :count errores más)'],
+    ],
+    /*
+    |--------------------------------------------------------------------------
     |  _____ ___ _        _    __  __ _____ _   _ _____
     | |  ___|_ _| |      / \  |  \/  | ____| \ | |_   _|
     | | |_   | || |     / _ \ | |\/| |  _| |  \| | | |
@@ -1660,7 +1750,7 @@ return [
     ],
     [
         'group' => 'filament-panels::widgets/account-widget', 'key' => 'welcome', 'text' => [
-            'en' => 'Welcome', 'es' => 'Bienvenida/o'],
+            'en' => 'Welcome', 'es' => 'Bienvenido/a'],
     ],
     [
         'group' => 'filament-panels::widgets/filament-info-widget', 'key' => 'actions.open_documentation.label', 'text' => [
@@ -1677,7 +1767,7 @@ return [
     ],
     [
         'group' => 'filament-panels::auth/pages/login', 'key' => 'heading', 'text' => [
-            'en' => 'Sign in', 'es' => 'Entre a su cuenta'],
+            'en' => 'Sign in', 'es' => 'Iniciar sesión'],
     ],
     [
         'group' => 'filament-panels::auth/pages/login', 'key' => 'actions.register.before', 'text' => [
@@ -1685,7 +1775,7 @@ return [
     ],
     [
         'group' => 'filament-panels::auth/pages/login', 'key' => 'actions.register.label', 'text' => [
-            'en' => 'sign up for an account', 'es' => 'Abrir una cuenta'],
+            'en' => 'sign up for an account', 'es' => 'Crear un usuario'],
     ],
     [
         'group' => 'filament-panels::auth/pages/login', 'key' => 'actions.request_password_reset.label', 'text' => [
@@ -1693,7 +1783,7 @@ return [
     ],
     [
         'group' => 'filament-panels::auth/pages/login', 'key' => 'form.email.label', 'text' => [
-            'en' => 'Email address', 'es' => 'Correo electrónico'],
+            'en' => 'Email address', 'es' => 'Correo electrónico o Usuario'],
     ],
     [
         'group' => 'filament-panels::auth/pages/login', 'key' => 'form.password.label', 'text' => [
@@ -1705,7 +1795,7 @@ return [
     ],
     [
         'group' => 'filament-panels::auth/pages/login', 'key' => 'form.actions.authenticate.label', 'text' => [
-            'en' => 'Sign in', 'es' => 'Entrar'],
+            'en' => 'Sign in', 'es' => 'Iniciar sesión'],
     ],
     [
         'group' => 'filament-panels::auth/pages/login', 'key' => 'messages.failed', 'text' => [
@@ -1771,7 +1861,7 @@ return [
     ],
     [
         'group' => 'filament-panels::auth/pages/edit-profile', 'key' => 'form.email.label', 'text' => [
-            'en' => 'Email address', 'es' => 'Dirección Email'],
+            'en' => 'Email address', 'es' => 'Correo electrónico'],
     ],
     [
         'group' => 'filament-panels::auth/pages/edit-profile', 'key' => 'form.name.label', 'text' => [

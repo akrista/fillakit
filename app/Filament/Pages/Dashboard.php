@@ -17,7 +17,7 @@ final class Dashboard extends PagesDashboard
     protected static ?string $navigationLabel = 'Dashboard';
 
     #[Override]
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedHome;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedHome;
 
     #[Override]
     protected static ?int $navigationSort = -2;

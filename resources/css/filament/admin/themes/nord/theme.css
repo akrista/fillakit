@@ -1,29 +1,29 @@
-@import '../../../../../vendor/filament/filament/resources/css/theme.css';
+@import "../../../../../vendor/filament/filament/resources/css/theme.css";
 
 @theme {
-  --color-secondary-50: rgba(var(--secondary-50), <alpha-value>);
-  --color-secondary-100: rgba(var(--secondary-100), <alpha-value>);
-  --color-secondary-200: rgba(var(--secondary-200), <alpha-value>);
-  --color-secondary-300: rgba(var(--secondary-300), <alpha-value>);
-  --color-secondary-400: rgba(var(--secondary-400), <alpha-value>);
-  --color-secondary-500: rgba(var(--secondary-500), <alpha-value>);
-  --color-secondary-600: rgba(var(--secondary-600), <alpha-value>);
-  --color-secondary-700: rgba(var(--secondary-700), <alpha-value>);
-  --color-secondary-800: rgba(var(--secondary-800), <alpha-value>);
-  --color-secondary-900: rgba(var(--secondary-900), <alpha-value>);
-  --color-secondary-950: rgba(var(--secondary-950), <alpha-value>);
+    --color-secondary-50: rgba(var(--secondary-50), <alpha-value>);
+    --color-secondary-100: rgba(var(--secondary-100), <alpha-value>);
+    --color-secondary-200: rgba(var(--secondary-200), <alpha-value>);
+    --color-secondary-300: rgba(var(--secondary-300), <alpha-value>);
+    --color-secondary-400: rgba(var(--secondary-400), <alpha-value>);
+    --color-secondary-500: rgba(var(--secondary-500), <alpha-value>);
+    --color-secondary-600: rgba(var(--secondary-600), <alpha-value>);
+    --color-secondary-700: rgba(var(--secondary-700), <alpha-value>);
+    --color-secondary-800: rgba(var(--secondary-800), <alpha-value>);
+    --color-secondary-900: rgba(var(--secondary-900), <alpha-value>);
+    --color-secondary-950: rgba(var(--secondary-950), <alpha-value>);
 
-  --color-polarnight-50: #e5e9f0;  /* Lightest (pale version of #2E3440) */
-  --color-polarnight-100: #d1d7e0; /* Light shade of #2E3440 */
-  --color-polarnight-200: #a7b1c5; /* Lighter shade of #3B4252 */
-  --color-polarnight-300: #8c9ab3; /* Lighter shade of #3B4252 */
-  --color-polarnight-400: #71829b; /* Lighter shade of #434C5E */
-  --color-polarnight-500: #4c566a; /* Base color (#4C566A) */
-  --color-polarnight-600: #434c5e; /* Darker shade of #434C5E */
-  --color-polarnight-700: #3b4252; /* Darker shade of #3B4252 */
-  --color-polarnight-800: #2e3440; /* Base color (#2E3440) */
-  --color-polarnight-900: #232831; /* Darker shade of #2E3440 */
-  --color-polarnight-950: #1b2027; /* Darkest shade, almost black */
+    --color-polarnight-50: #e5e9f0; /* Lightest (pale version of #2E3440) */
+    --color-polarnight-100: #d1d7e0; /* Light shade of #2E3440 */
+    --color-polarnight-200: #a7b1c5; /* Lighter shade of #3B4252 */
+    --color-polarnight-300: #8c9ab3; /* Lighter shade of #3B4252 */
+    --color-polarnight-400: #71829b; /* Lighter shade of #434C5E */
+    --color-polarnight-500: #4c566a; /* Base color (#4C566A) */
+    --color-polarnight-600: #434c5e; /* Darker shade of #434C5E */
+    --color-polarnight-700: #3b4252; /* Darker shade of #3B4252 */
+    --color-polarnight-800: #2e3440; /* Base color (#2E3440) */
+    --color-polarnight-900: #232831; /* Darker shade of #2E3440 */
+    --color-polarnight-950: #1b2027; /* Darkest shade, almost black */
 }
 
 /* ===========================
@@ -244,7 +244,11 @@
 
 /* Gradient backgrounds for dark mode */
 .dark {
-    & .fi-wi-widget:not(.fi-wi-stats-overview):not(.fi-wi-chart):not(.fi-wi-table) .fi-section,
+    &
+        .fi-wi-widget:not(.fi-wi-stats-overview):not(.fi-wi-chart):not(
+            .fi-wi-table
+        )
+        .fi-section,
     & .fi-wi-stats-overview-stat,
     & .fi-wi-widget.fi-wi-chart .fi-section,
     & .fi-wi-widget.fi-wi-table .fi-ta-ctn,

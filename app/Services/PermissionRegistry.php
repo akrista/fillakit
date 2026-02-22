@@ -138,12 +138,12 @@ final class PermissionRegistry
     public function getWidgets(): array
     {
         return once(fn (): array => $this->discoverWidgets()
-            ->reject(fn (string|WidgetConfiguration $widget): bool => in_array(
+            ->reject(fn (string | WidgetConfiguration $widget): bool => in_array(
                 $this->getWidgetClass($widget),
                 $this->excludedWidgets,
                 true
             ))
-            ->mapWithKeys(fn (string|WidgetConfiguration $widget): array => [
+            ->mapWithKeys(fn (string | WidgetConfiguration $widget): array => [
                 $this->getWidgetClass($widget) => [
                     'widgetFqcn' => $this->getWidgetClass($widget),
                     'permissions' => $this->getWidgetPermissions($widget),
@@ -242,7 +242,7 @@ final class PermissionRegistry
      *
      * @return array<string, string>
      */
-    private function getWidgetPermissions(string|WidgetConfiguration $widget): array
+    private function getWidgetPermissions(string | WidgetConfiguration $widget): array
     {
         $widgetClass = $this->getWidgetClass($widget);
         $widgetName = Str::of(class_basename($widgetClass))->snake()->toString();
@@ -275,7 +275,7 @@ final class PermissionRegistry
         return collect(Filament::getWidgets());
     }
 
-    private function getWidgetClass(string|WidgetConfiguration $widget): string
+    private function getWidgetClass(string | WidgetConfiguration $widget): string
     {
         return $widget instanceof WidgetConfiguration
             ? $widget->widget

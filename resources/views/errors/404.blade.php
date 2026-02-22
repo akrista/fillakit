@@ -1,7 +1,7 @@
 @extends('errors::illustrated-layout')
 
 @section('code', '404')
-@section('title', __('Page Not Found'))
+@section('title', __('errors.404.title'))
 
 @section('image')
     <div style="background-image: url({{ asset('/svg/404.svg') }});"
@@ -9,4 +9,4 @@
     </div>
 @endsection
 
-@section('message', __('Sorry, the page you are looking for could not be found.'))
+@section('message', __('errors.404.message'))

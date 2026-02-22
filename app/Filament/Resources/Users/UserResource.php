@@ -8,6 +8,7 @@ use App\Filament\Resources\Users\Pages\ManageUsers;
 use App\Models\User;
 use BackedEnum;
 use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -29,7 +30,8 @@ use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
@@ -45,18 +47,24 @@ final class UserResource extends Resource
     protected static ?string $model = User::class;
 
     #[Override]
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUserGroup;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedUserGroup;
 
     #[Override]
-    protected static ?int $navigationSort = 11;
+    protected static ?int $navigationSort = 901;
 
     #[Override]
-    protected static int $globalSearchResultsLimit = 3;
+    protected static ?string $modelLabel = 'Usuario';
+
+    #[Override]
+    protected static ?string $pluralModelLabel = 'Usuarios';
 
     #[Override]
     protected static ?string $recordTitleAttribute = 'email';
 
-    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    #[Override]
+    protected static int $globalSearchResultsLimit = 3;
+
+    public static function getGlobalSearchResultTitle(Model $record): string | Htmlable
     {
         return $record->email;
     }
@@ -187,78 +195,41 @@ final class UserResource extends Resource
 
     public static function table(Table $table): Table
     {
+        $livewire = $table->getLivewire();
+
         return $table
-            ->columns([
-                TextColumn::make('id')
-                    ->searchable()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                SpatieMediaLibraryImageColumn::make('avatar_url')
-                    ->circular()
-                    ->label('Avatar')
-                    ->collection('avatars')
-                    ->disk('public')
-                    ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('username')
-                    ->toggleable(isToggledHiddenByDefault: false)
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('firstname')
-                    ->label('Name')
-                    ->formatStateUsing(fn($record): string => $record->firstname . ' ' . $record->lastname)
-                    ->searchable(['firstname', 'lastname'])
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: false),
-                TextColumn::make('email')
-                    ->toggleable(isToggledHiddenByDefault: false)
-                    ->searchable()
-                    ->sortable(),
-                TextColumn::make('roles.name')
-                    ->toggleable(isToggledHiddenByDefault: false)
-                    ->badge()
-                    ->separator(',')
-                    ->limitList(3),
-                TextColumn::make('email_verified_at')
-                    ->label('Verified at')
-                    ->dateTime('d/m/Y h:i A')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('created_at')
-                    ->dateTime('d/m/Y h:i A')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('updated_at')
-                    ->dateTime('d/m/Y h:i A')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                TextColumn::make('deleted_at')
-                    ->dateTime('d/m/Y h:i A')
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
+            ->columns(self::getTableColumns($livewire))
+            ->contentGrid(fn (): ?array => $livewire->isGridLayout() ? [
+                'md' => 2,
+                'lg' => 3,
+                'xl' => 3,
+            ] : null)
             ->filters([
                 TrashedFilter::make(),
             ])
+            ->recordActionsAlignment('center')
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
-                Action::make('resend_verification_email')
-                    ->label('Resend Email')
-                    ->icon(Heroicon::OutlinedEnvelope)
-                    ->authorize(fn(User $record): bool => !$record->hasVerifiedEmail())
-                    ->action(function (User $record): void {
-                        $notification = new VerifyEmail();
-                        $notification->url = filament()->getVerifyEmailUrl($record);
+                ViewAction::make()->iconButton(),
+                EditAction::make()->iconButton(),
+                ActionGroup::make([
+                    DeleteAction::make(),
+                    Action::make('resend_verification_email')
+                        ->label('Resend Email')
+                        ->icon(Heroicon::OutlinedEnvelope)
+                        ->authorize(fn(User $record): bool => !$record->hasVerifiedEmail())
+                        ->action(function (User $record): void {
+                            $notification = new VerifyEmail();
+                            $notification->url = filament()->getVerifyEmailUrl($record);
 
-                        $record->notify($notification);
-                        Notification::make()
-                            ->title('Verification email has been resent.')
-                            ->send();
-                    })
-                    ->requiresConfirmation(),
-                ForceDeleteAction::make(),
-                RestoreAction::make(),
+                            $record->notify($notification);
+                            Notification::make()
+                                ->title('Verification email has been resent.')
+                                ->send();
+                        })
+                        ->requiresConfirmation(),
+                    ForceDeleteAction::make(),
+                    RestoreAction::make(),
+                ])->iconButton(),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
@@ -282,5 +253,59 @@ final class UserResource extends Resource
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
+    }
+
+    /**
+     * @return array<int, \Filament\Tables\Columns\Column|\Filament\Tables\Columns\Layout\Component>
+     */
+    private static function getTableColumns(ManageUsers $livewire): array
+    {
+        $columns = [
+            ImageColumn::make('avatar')
+                ->circular()
+                ->label('Avatar')
+                ->imageSize(64)
+                ->alignCenter()
+                ->verticallyAlignCenter()
+                ->getStateUsing(fn (User $record): string => $record->getFilamentAvatarUrl()),
+            TextColumn::make('firstname')
+                ->label('Name')
+                ->formatStateUsing(fn ($record): string => $record->firstname . ' ' . $record->lastname)
+                ->searchable(['firstname', 'lastname'])
+                ->sortable()
+                ->weight('bold')
+                ->alignCenter()
+                ->verticallyAlignCenter()
+                ->limit(30)
+                ->tooltip(fn (User $record): string => $record->firstname . ' ' . $record->lastname),
+            TextColumn::make('email')
+                ->searchable()
+                ->sortable()
+                ->icon(Heroicon::OutlinedEnvelope)
+                ->size('sm')
+                ->alignCenter()
+                ->verticallyAlignCenter()
+                ->limit(30)
+                ->tooltip(fn (User $record): string => $record->email),
+            TextColumn::make('roles.name')
+                ->badge()
+                ->separator(',')
+                ->alignCenter()
+                ->verticallyAlignCenter()
+                ->limitList(3),
+        ];
+
+        if ($livewire->isGridLayout()) {
+            return [
+                Stack::make([
+                    $columns[0]->alignCenter()->verticallyAlignCenter(),
+                    $columns[1]->alignCenter()->verticallyAlignCenter(),
+                    $columns[2]->alignCenter()->verticallyAlignCenter(),
+                    $columns[3]->alignCenter()->verticallyAlignCenter(),
+                ])->space(3),
+            ];
+        }
+
+        return $columns;
     }
 }

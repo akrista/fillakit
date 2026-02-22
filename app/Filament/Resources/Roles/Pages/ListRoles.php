@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources\Roles\Pages;
 
+use App\Filament\Resources\Pages\ListRecords;
 use App\Filament\Resources\Roles\RoleResource;
 use Filament\Actions\CreateAction;
-use Filament\Resources\Pages\ListRecords;
 use Override;
 
 final class ListRoles extends ListRecords

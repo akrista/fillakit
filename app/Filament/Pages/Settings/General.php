@@ -44,7 +44,7 @@ final class General extends SettingsPage
     protected static ?int $navigationSort = 10;
 
     #[Override]
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedCog6Tooth;
+    protected static string | BackedEnum | null $navigationIcon = Heroicon::OutlinedCog6Tooth;
 
     public static function canAccess(): bool
     {
@@ -104,7 +104,7 @@ final class General extends SettingsPage
                             ->schema([
                                 Grid::make()->schema([
                                     TextInput::make('brand_name')
-                                        ->label(fn(): string|array|null => __('page.general_settings.fields.brand_name'))
+                                        ->label(fn(): string | array | null => __('page.general_settings.fields.brand_name'))
                                         ->required(),
                                     Toggle::make('search_engine_indexing')
                                         ->label('App Indexing')
@@ -118,7 +118,7 @@ final class General extends SettingsPage
                             ->schema([
                                 Grid::make()->schema([
                                     TextInput::make('brand_logo_height')
-                                        ->label(fn(): string|array|null => __('page.general_settings.fields.brand_logo_height'))
+                                        ->label(fn(): string | array | null => __('page.general_settings.fields.brand_logo_height'))
                                         ->numeric()
                                         ->suffix(fn(Get $get): mixed => $get('brand_logo_height_unit'))
                                         ->required(),
@@ -148,7 +148,7 @@ final class General extends SettingsPage
 
                                 Grid::make()->schema([
                                     FileUpload::make('brand_logo')
-                                        ->label(fn(): string|array|null => __('page.general_settings.fields.brand_logo'))
+                                        ->label(fn(): string | array | null => __('page.general_settings.fields.brand_logo'))
                                         ->helperText('Upload your site logo (optional)')
                                         ->image()
                                         ->disk('public')
@@ -168,7 +168,7 @@ final class General extends SettingsPage
                                         ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml']),
 
                                     FileUpload::make('site_favicon')
-                                        ->label(fn(): string|array|null => __('page.general_settings.fields.site_favicon'))
+                                        ->label(fn(): string | array | null => __('page.general_settings.fields.site_favicon'))
                                         ->helperText('Supports .ico, .png, .jpg, and .svg formats (optional)')
                                         ->image()
                                         ->disk('public')
@@ -199,13 +199,13 @@ final class General extends SettingsPage
                                     ->collapsible()
                                     ->schema([
                                         ColorPicker::make('site_theme.primary')
-                                            ->label(fn(): string|array|null => __('page.general_settings.fields.primary'))
+                                            ->label(fn(): string | array | null => __('page.general_settings.fields.primary'))
                                             ->helperText('Used for primary buttons and links'),
                                         ColorPicker::make('site_theme.secondary')
-                                            ->label(fn(): string|array|null => __('page.general_settings.fields.secondary'))
+                                            ->label(fn(): string | array | null => __('page.general_settings.fields.secondary'))
                                             ->helperText('Used for secondary elements'),
                                         ColorPicker::make('site_theme.gray')
-                                            ->label(fn(): string|array|null => __('page.general_settings.fields.gray'))
+                                            ->label(fn(): string | array | null => __('page.general_settings.fields.gray'))
                                             ->helperText('Used for neutral backgrounds and text'),
                                     ])->columns(3),
                                 Section::make('Status Colors')
@@ -215,19 +215,19 @@ final class General extends SettingsPage
                                     ->collapsible()
                                     ->schema([
                                         ColorPicker::make('site_theme.success')
-                                            ->label(fn(): string|array|null => __('page.general_settings.fields.success'))
+                                            ->label(fn(): string | array | null => __('page.general_settings.fields.success'))
                                             ->regex('/^#([A-F0-9]{6}|[A-F0-9]{3})\b$/')
                                             ->helperText('Used for success states and confirmations'),
                                         ColorPicker::make('site_theme.danger')
-                                            ->label(fn(): string|array|null => __('page.general_settings.fields.danger'))
+                                            ->label(fn(): string | array | null => __('page.general_settings.fields.danger'))
                                             ->regex('/^#([A-F0-9]{6}|[A-F0-9]{3})\b$/')
                                             ->helperText('Used for errors and dangerous actions'),
                                         ColorPicker::make('site_theme.info')
-                                            ->label(fn(): string|array|null => __('page.general_settings.fields.info'))
+                                            ->label(fn(): string | array | null => __('page.general_settings.fields.info'))
                                             ->regex('/^#([A-F0-9]{6}|[A-F0-9]{3})\b$/')
                                             ->helperText('Used for informational notifications'),
                                         ColorPicker::make('site_theme.warning')
-                                            ->label(fn(): string|array|null => __('page.general_settings.fields.warning'))
+                                            ->label(fn(): string | array | null => __('page.general_settings.fields.warning'))
                                             ->regex('/^#([A-F0-9]{6}|[A-F0-9]{3})\b$/')
                                             ->helperText('Used for warnings and cautions'),
                                     ])->columns(2),

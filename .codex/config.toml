@@ -1,0 +1,12 @@
+[mcp_servers.laravel-boost]
+command = "php"
+args = ["artisan", "boost:mcp"]
+cwd = "C:\\Users\\akrista\\Documents\\GitHub\\Vepagos\\fillakit"
+
+[mcp_servers.herd]
+command = "php"
+args = ["C:/Users/akrista/.config/herd/bin/herd-mcp.phar"]
+cwd = "C:\\Users\\akrista\\Documents\\GitHub\\Vepagos\\fillakit"
+
+[mcp_servers.herd.env]
+SITE_PATH = "C:\\Users\\akrista\\Documents\\GitHub\\Vepagos\\fillakit"

@@ -3,6 +3,7 @@
         "mikestead.dotenv",
         "EditorConfig.EditorConfig",
         "laravel.vscode-laravel",
-        "bmewburn.vscode-intelephense-client"
+        "bmewburn.vscode-intelephense-client",
+        "DEVSENSE.phptools-vscode"
     ]
 }

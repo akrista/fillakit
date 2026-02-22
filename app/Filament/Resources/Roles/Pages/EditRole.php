@@ -57,7 +57,8 @@ final class EditRole extends EditRecord
         $resourceKeys = collect($registry->getResources())->keys()->all();
 
         return collect($data)
-            ->filter(fn (mixed $value, string $key): bool => ! in_array($key, $excludedKeys, true)
+            ->filter(
+                fn (mixed $value, string $key): bool => ! in_array($key, $excludedKeys, true)
                 && (in_array($key, $resourceKeys, true) || in_array($key, ['pages_tab', 'widgets_tab', 'custom_permissions_tab'], true))
             )
             ->values()
