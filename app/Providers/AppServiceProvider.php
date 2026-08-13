@@ -92,12 +92,12 @@ final class AppServiceProvider extends ServiceProvider
         );
         if (config('app.env') === 'production') {
             URL::forceHttps();
+            Http::preventStrayRequests();
             DB::prohibitDestructiveCommands();
             DB::reconnect();
             Octane::tick('reconnect-database', DB::reconnect(...), 300);
         }
 
-        Http::preventStrayRequests();
         Vite::useAggressivePrefetching();
     }
 }

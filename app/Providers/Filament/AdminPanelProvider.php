@@ -164,7 +164,7 @@ final class AdminPanelProvider extends PanelProvider
             ->databaseNotificationsPolling('60s')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->navigationGroups([])
-            ->resources([])
+            // ->resources([])
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([
                 Dashboard::class,

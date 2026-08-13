@@ -86,7 +86,7 @@
         "prod": [
             "Composer\\Config::disableProcessTimeout",
             "npm run build",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs,vite --kill-others"
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#10b981,#fb7185,#fdba74\" \"php artisan octane:start --host=0.0.0.0\" \"php artisan horizon\" \"php artisan reverb:start\" \"php artisan pail --timeout=0\" --names=server,queue,broadcast,logs --kill-others"
         ],
         "build": [
             "Composer\\Config::disableProcessTimeout",
